@@ -1,5 +1,4 @@
-# NOTE: Draft
-# Project plan
+# Project plan (NOTE: Draft)
 ----
 ## Team
 
@@ -9,11 +8,41 @@
 
 ## Goal
 
-In this project, our goal is to make a game store for game developers to offer their games for sale and for players to buy those games. In addition, the games can be playable in an iframe element in the same store. The game store offers multiple different games and in our case the games are different versions of the same game that resembles flappy bird. What makes these games different from each other are the small details such as the changing player icon, background, degree of difficulty and possibly control keys.
+In this project, our goal is to make a game store for game developers to offer their games for sale and for players to buy those games. In addition, the games can be playable in an iframe element in the same store. The game store offers multiple different games and in our case the games are different versions of the same game that resembles flappy bird. What makes these games different from each other are the small details such as the changing player icon, background, degree of difficulty and possible control keys.
+
+### Additional features
+
+- Save/load and resolution feature
+- 3rd party login
+- RESTful API
+- Own game
+- Responsiveness
+- Social media sharing
 
 ![Draft of the game design](https://git.niksula.hut.fi/palomar1/csc3170/raw/master/plan/game_screenshot.png)
 
 ----
+
+##  Schedule and communication (started by Eppu, in progress...)
+
+Our development process is divided into a period of 8 weeks. The schedule for those 8 weeks, which starts after Christmas, is as follows:
+
+- Weeks 1-2:
+    - Finalize schemas, layout sketches and other initial design.
+    - Divide work.
+    - Set and test Heroku environment(?)
+
+- Weeks 3-4:
+    -
+
+- Weeks 5-6:
+
+- Weeks 7-8:
+    - Testing
+
+
+
+## Process
 
 ### Views
 
