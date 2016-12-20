@@ -33,7 +33,7 @@ Our development process is divided into a period of 8 weeks. The schedule for th
     - Set and test Heroku environment(?)
 
 - Weeks 3-4:
-    -
+
 
 - Weeks 5-6:
 
