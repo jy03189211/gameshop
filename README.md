@@ -3,7 +3,7 @@
 ----
 ### Views
 
-![views](plan/views.png)
+![views](https://git.niksula.hut.fi/palomar1/csc3170/raw/master/plan/views.png)
 
 The site has the following views:
 
@@ -47,6 +47,10 @@ The site has the following views:
 
   A list of games added by a developer, for developers
 
+- User (new game)
+
+  Inserting the information for a new game, for developers
+
 - User (sales) (dev only)
 
   Sales history and statistics, for developers
@@ -75,7 +79,7 @@ The site has the following views:
 ----
 ### Models
 
-![models](plan/models.png)
+![models](https://git.niksula.hut.fi/palomar1/csc3170/raw/master/plan/models.png)
 
 The backend includes the following object models:
 
