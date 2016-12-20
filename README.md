@@ -40,6 +40,7 @@ Our development process is divided into a period of 8 weeks. The schedule for th
 - Weeks 7-8:
     - Testing
 
+Communication between team members is handled mainly through Slack.
 
 
 ## Process
