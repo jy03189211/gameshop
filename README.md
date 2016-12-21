@@ -52,9 +52,6 @@ Our development process is divided into a period of 8 weeks. The schedule for th
 Communication between team members is handled mainly through Slack.
 
 ----
-## Process
-
-----
 ## Views
 
 ![views](https://git.niksula.hut.fi/palomar1/csc3170/raw/master/plan/views.png)
