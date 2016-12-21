@@ -28,7 +28,7 @@ Generally, our goal is to implement all features mentioned on the project descri
 	- A user can search game by name.
 
 - Developer
-	- A developer can submit his game by providing an URL and set up a price for it and remove it from the store. 
+	- A developer can submit his game by providing an URL and set up a price for it and remove it from the store.
 	- Each developer has his own inventory and sales statistics. A developer can modify their inventory by adding or removing games from it.
 	- A developer can only add games to their own inventory.
 
@@ -36,12 +36,10 @@ Generally, our goal is to implement all features mentioned on the project descri
 	- When player has finished playing a game (or presses submit score), the game sends a postMessage to the parent window containing the current score. The score will be recorded to that player's scores and golobal top score
 	- When a saved gamed state is detected for a player, the service will send a message to the game so the state will be loaded.
 
-- Mobile Friendly 
-	- the website works with devices with varying screen width and is usable with touch based devices 
+- Mobile Friendly
+	- the website works with devices with varying screen width and is usable with touch based devices
 - Social media sharing
 	- share games and player's score on facebook with a sensible description and an image
-		
-### Additional features
 
 - Save/load and resolution feature
     - IFrame passes information to its parent in JSON, which is parsed and added to the database.
