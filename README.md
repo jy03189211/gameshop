@@ -55,6 +55,14 @@ The site has the following views:
 
   Featured games, suggestions, etc.
 
+- Register
+
+  Register a new user by making a new user or using e.g. Facebook account
+
+- Login
+
+  Login to the service
+
 - Search
 
   Search based on game properties, e.g. price, category
@@ -129,7 +137,7 @@ The backend includes the following object models:
 
 - User
 
-  Represents a user of the system. All users are players, but also developers.
+  Represents a user of the system. All users are players, but also developers. This model extends the default Django User model which already includes the basic authentication-related things, and the naming of this model is also thus likely to change a bit to not conflict with Django.
 
 - Game
 
