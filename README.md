@@ -11,7 +11,8 @@
 
 In this project, our goal is to make a game store for game developers to offer their games for sale and for players to buy those games. In addition, the games can be playable in an iframe element in the same store. The game store offers multiple different games and in our case the games are different versions of the same game that resembles flappy bird. What makes these games different from each other are the small details such as the changing player icon, background, degree of difficulty and possible control keys.
 
-----
+### Features
+
 ### Additional features
 
 - Save/load and resolution feature
@@ -19,7 +20,9 @@ In this project, our goal is to make a game store for game developers to offer t
     - Our plan is to implement Google login provided by the Django social authentication mechanism.
 - RESTful API
 - Own game
+    - A game similar to flappy bird which has different variations, so-called "games" in our store.
 - Responsiveness
+
 - Social media sharing
 
 ![Draft of the game design](https://git.niksula.hut.fi/palomar1/csc3170/raw/master/plan/game_screenshot.png)
@@ -39,7 +42,7 @@ Our development process is divided into a period of 8 weeks. The schedule for th
 
 - Weeks 3-4:
     - Continue with our own parts and set a meeting to check our progress
-    
+
 
 - Weeks 5-6:
 
