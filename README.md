@@ -62,6 +62,11 @@ Our development process is divided into a period of 8 weeks. The schedule for th
 Communication between team members is handled mainly through Slack.
 
 ----
+## Testing
+
+To test the application we will do both systematic testing based on test cases as well as free form testing by using the service randomly as a normal user would. For this, we will define a list of test cases in the early phase of the project based on the expected features, and will test through the cases at the time of finishing development of the relevant features. In addition, we will have a User Acceptance Test at the time of completing development of the features, although the UAT will be performed by ourselves.
+
+----
 ## Views
 
 ![views](https://git.niksula.hut.fi/palomar1/csc3170/raw/master/plan/views.png)
