@@ -11,6 +11,8 @@
 
 In this project, our goal is to make a game store for game developers to offer their games for sale and for players to buy those games. In addition, the games can be playable in an iframe element in the same store. The game store offers multiple different games and in our case the games are different versions of the same game that resembles flappy bird. What makes these games different from each other are the small details such as the changing player icon, background, degree of difficulty and possible control keys.
 
+Generally, our goal is to implement all features mentioned on the project description page in A+, including the mandatory features and those mentioned in the "More Features" section.
+
 ### Features
 
 ### Additional features
