@@ -16,6 +16,7 @@ In this project, our goal is to make a game store for game developers to offer t
 
 - Save/load and resolution feature
 - 3rd party login
+    - Our plan is to implement Google login provided by the Django social authentication mechanism.
 - RESTful API
 - Own game
 - Responsiveness
@@ -29,12 +30,16 @@ In this project, our goal is to make a game store for game developers to offer t
 Our development process is divided into a period of 8 weeks. The schedule for those 8 weeks, which starts after Christmas, is as follows:
 
 - Weeks 1-2:
-    - Finalize schemas, layout sketches and other initial design.
-    - Divide work.
-    - Set and test Heroku environment(?)
+    - Finalize schemas, layout sketches and other initial design
+    - Set up our Django app
+    - Create a skeleton site with placeholders for views
+    - Build basic models and create sample data
+    - Deploy and test Heroku environment
+    - Divide work
 
 - Weeks 3-4:
-
+    - Continue with our own parts and set a meeting to check our progress
+    
 
 - Weeks 5-6:
 
