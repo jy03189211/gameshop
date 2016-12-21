@@ -22,8 +22,9 @@ In this project, our goal is to make a game store for game developers to offer t
 - Own game
     - A game similar to flappy bird which has different variations, so-called "games" in our store.
 - Responsiveness
-
+    - In addition to using Bootstrap, we will add needed code to make app fully responsive.
 - Social media sharing
+    - 
 
 ![Draft of the game design](https://git.niksula.hut.fi/palomar1/csc3170/raw/master/plan/game_screenshot.png)
 
@@ -42,9 +43,11 @@ Our development process is divided into a period of 8 weeks. The schedule for th
 
 - Weeks 3-4:
     - Continue with our own parts and set a meeting to check our progress
-
+    - At the end of week 4, the basic functions should be ready
 
 - Weeks 5-6:
+    - Enhancing responsiveness of the app
+    - Implementing login feature
 
 - Weeks 7-8:
     - Testing
