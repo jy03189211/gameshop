@@ -1,4 +1,4 @@
-# Project plan (NOTE: Draft)
+# Project plan
 ----
 ## Team
 
@@ -16,11 +16,12 @@ In this project, our goal is to make a game store for game developers to offer t
 ### Additional features
 
 - Save/load and resolution feature
+    - IFrame passes information to its parent in JSON, which is parsed and added to the database.
 - 3rd party login
     - Our plan is to implement Google login provided by the Django social authentication mechanism.
 - RESTful API
 - Own game
-    - A game similar to flappy bird which has different variations, so-called "games" in our store.
+    - A game similar to flappy bird which has different variations, so-called "games", in our store.
 - Responsiveness
     - In addition to using Bootstrap, we will make needed adjustments to styling to make app fully responsive.
 - Social media sharing
@@ -38,17 +39,18 @@ Our development process is divided into a period of 8 weeks. The schedule for th
     - Set up our Django app
     - Create a skeleton site with placeholders for views
     - Build basic models and create sample data
+    - Implementing login feature and 3rd party
     - Deploy and test the Heroku environment
     - Divide work
 
 - Weeks 3-4:
     - Continue with our own parts and set a meeting to check our progress
     - Implement game and its variations
+    - Add save/load feature
     - At the end of week 4, all the basic functions should be ready
 
 - Weeks 5-6:
     - Enhancing responsiveness of the app
-    - Implementing login feature
     -
 
 - Weeks 7-8:
