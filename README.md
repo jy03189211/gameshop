@@ -25,7 +25,7 @@ In this project, our goal is to make a game store for game developers to offer t
 - Responsiveness
     - In addition to using Bootstrap, we will make needed adjustments to styling to make app fully responsive.
 - Social media sharing
-    -
+    - Implementing social media sharing feature for Facebook
 
 ![Draft of the game design](https://git.niksula.hut.fi/palomar1/csc3170/raw/master/plan/game_screenshot.png)
 
@@ -50,11 +50,12 @@ Our development process is divided into a period of 8 weeks. The schedule for th
     - At the end of week 4, all the basic functions should be ready
 
 - Weeks 5-6:
+    - Meeting to check progress
     - Enhancing responsiveness of the app
-    -
+    - Implementing social media sharing (metadata)
 
 - Weeks 7-8:
-    - Testing and finalizing
+    - Testing and polishing
 
 Communication between team members is handled mainly through Slack.
 
