@@ -14,7 +14,6 @@ In this project, our goal is to make a game store for game developers to offer t
 
 - Save/load and resolution feature
 - 3rd party login
-    - Our plan is to implement Google login provided by the Django social authentication mechanism
 - RESTful API
 - Own game
 - Responsiveness
@@ -159,3 +158,58 @@ The backend includes the following object models:
 - Savegame
 
   Represents a saved game state. Is created based on the information sent by the game when played. Can contain any data as determined by the game.
+
+  ----
+  #### API endpoints
+
+  Everything below is prefixed with `/api/v1` and the endpoints requiring authorization will use token-based authentication.
+
+  Optional parts of paths or parameters denoted with `[]`.
+
+  ##### Primarily user-related endpoints
+
+  `GET /user/[:userid]`
+
+    Users
+
+  `GET /user/:userid/inventory/[:gameid]`
+
+    Games the user has added
+
+  `POST /user/:userid/inventory`
+
+    Add a new game or update an existing game. (Game ID not known before creation.)
+
+  `GET /user/:userid/puchased/[:gameid]`
+
+    The user's purchased games
+
+  `GET /user/:userid/sale/[:saleid][?q=...]`
+
+    The sale history of the user's added games. Possible query filters `gameid`, `year`, `month`, `day`.
+
+  `GET /user/:userid/order/[:orderid][?q=...]`
+
+    The order history of the user Possible query filters `gameid`, `year`, `month`, `day`.
+
+  `GET /user/:userid/savegame/[/:gameid][/:savegameid][?q=...]`
+
+    The savegames of the user. Possible query filters `gameid`, `year`, `month`, `day`.
+
+  `POST /user/:userid/savegame/`
+
+    Add a new savegame
+
+  `GET /user/:userid/score[?q=...]`
+
+    The user's high scores. Possible query filter `gameid`.
+
+  ##### Primarily game-related endpoints
+
+  `GET /game/[:gameid][?q=...]`
+
+    Games. Possible query filters `developer`, `priceMin`, `priceMax`, `available`, `category`, `year`, `month`, `day`.
+
+  `GET /game/:gameid/score/`
+
+    High scores for the game
