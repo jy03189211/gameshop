@@ -46,6 +46,7 @@ Our development process is divided into a period of 8 weeks. The schedule for th
     - Divide work
 
 - Weeks 3-4:
+    - Define test cases
     - Continue with our own parts and set a meeting to check our progress
     - Implement game and its variations
     - Add save/load feature
