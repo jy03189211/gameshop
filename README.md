@@ -168,9 +168,9 @@ The backend includes the following object models:
 
   #### Primarily user-related endpoints
 
-  `GET /user/[:userid]`
+  `GET /user/[:userid][?q=...]`
 
-    Users
+    Users. Possible query filter `isDeveloper`.
 
   `GET /user/:userid/inventory/[:gameid]`
 
@@ -208,7 +208,7 @@ The backend includes the following object models:
 
   `GET /game/[:gameid][?q=...]`
 
-    Games. Possible query filters `developer`, `priceMin`, `priceMax`, `available`, `category`, `year`, `month`, `day`.
+    Games. Possible query filters `createdBy`, `priceMin`, `priceMax`, `available`, `category`, `year`, `month`, `day`.
 
   `GET /game/:gameid/score/`
 
