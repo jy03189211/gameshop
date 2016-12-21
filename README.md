@@ -160,13 +160,13 @@ The backend includes the following object models:
   Represents a saved game state. Is created based on the information sent by the game when played. Can contain any data as determined by the game.
 
   ----
-  #### API endpoints
+  ### API endpoints
 
   Everything below is prefixed with `/api/v1` and the endpoints requiring authorization will use token-based authentication.
 
   Optional parts of paths or parameters denoted with `[]`.
 
-  ##### Primarily user-related endpoints
+  #### Primarily user-related endpoints
 
   `GET /user/[:userid]`
 
@@ -204,7 +204,7 @@ The backend includes the following object models:
 
     The user's high scores. Possible query filter `gameid`.
 
-  ##### Primarily game-related endpoints
+  #### Primarily game-related endpoints
 
   `GET /game/[:gameid][?q=...]`
 
