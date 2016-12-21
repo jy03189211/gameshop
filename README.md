@@ -41,8 +41,6 @@ Generally, our goal is to implement all features mentioned on the project descri
 - Social media sharing
 	- share games and player's score on facebook with a sensible description and an image
 
-### Additional features
-
 - Save/load and resolution feature
     - IFrame passes information to its parent in JSON, which is parsed and added to the database.
 - 3rd party login
