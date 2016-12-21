@@ -14,6 +14,7 @@ In this project, our goal is to make a game store for game developers to offer t
 
 - Save/load and resolution feature
 - 3rd party login
+    - Our plan is to implement Google login provided by the Django social authentication mechanism
 - RESTful API
 - Own game
 - Responsiveness
