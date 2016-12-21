@@ -6,10 +6,12 @@
 84143N Eppu Halmesaari
 240938 Roope Palomäki
 
+----
 ## Goal
 
 In this project, our goal is to make a game store for game developers to offer their games for sale and for players to buy those games. In addition, the games can be playable in an iframe element in the same store. The game store offers multiple different games and in our case the games are different versions of the same game that resembles flappy bird. What makes these games different from each other are the small details such as the changing player icon, background, degree of difficulty and possible control keys.
 
+----
 ### Additional features
 
 - Save/load and resolution feature
@@ -22,7 +24,6 @@ In this project, our goal is to make a game store for game developers to offer t
 ![Draft of the game design](https://git.niksula.hut.fi/palomar1/csc3170/raw/master/plan/game_screenshot.png)
 
 ----
-
 ##  Schedule and communication (started by Eppu, in progress...)
 
 Our development process is divided into a period of 8 weeks. The schedule for those 8 weeks, which starts after Christmas, is as follows:
@@ -42,10 +43,11 @@ Our development process is divided into a period of 8 weeks. The schedule for th
 
 Communication between team members is handled mainly through Slack.
 
-
+----
 ## Process
 
-### Views
+----
+## Views
 
 ![views](https://git.niksula.hut.fi/palomar1/csc3170/raw/master/plan/views.png)
 
@@ -129,7 +131,7 @@ The site has the following views:
 
 
 ----
-### Models
+## Models
 
 ![models](https://git.niksula.hut.fi/palomar1/csc3170/raw/master/plan/models.png)
 
@@ -159,57 +161,57 @@ The backend includes the following object models:
 
   Represents a saved game state. Is created based on the information sent by the game when played. Can contain any data as determined by the game.
 
-  ----
-  ### API endpoints
+----
+## API endpoints
 
-  Everything below is prefixed with `/api/v1` and the endpoints requiring authorization will use token-based authentication.
+Everything below is prefixed with `/api/v1` and the endpoints requiring authorization will use token-based authentication.
 
-  Optional parts of paths or parameters denoted with `[]`.
+Optional parts of paths or parameters denoted with `[]`.
 
-  #### Primarily user-related endpoints
+### Primarily user-related endpoints
 
-  `GET /user/[:userid][?q=...]`
+`GET /user/[:userid][?q=...]`
 
-    Users. Possible query filter `isDeveloper`.
+  Users. Possible query filter `isDeveloper`.
 
-  `GET /user/:userid/inventory/[:gameid]`
+`GET /user/:userid/inventory/[:gameid]`
 
-    Games the user has added
+  Games the user has added
 
-  `POST /user/:userid/inventory`
+`POST /user/:userid/inventory`
 
-    Add a new game or update an existing game. (Game ID not known before creation.)
+  Add a new game or update an existing game. (Game ID not known before creation.)
 
-  `GET /user/:userid/puchased/[:gameid]`
+`GET /user/:userid/puchased/[:gameid]`
 
-    The user's purchased games
+  The user's purchased games
 
-  `GET /user/:userid/sale/[:saleid][?q=...]`
+`GET /user/:userid/sale/[:saleid][?q=...]`
 
-    The sale history of the user's added games. Possible query filters `gameid`, `year`, `month`, `day`.
+  The sale history of the user's added games. Possible query filters `gameid`, `year`, `month`, `day`.
 
-  `GET /user/:userid/order/[:orderid][?q=...]`
+`GET /user/:userid/order/[:orderid][?q=...]`
 
-    The order history of the user Possible query filters `gameid`, `year`, `month`, `day`.
+  The order history of the user Possible query filters `gameid`, `year`, `month`, `day`.
 
-  `GET /user/:userid/savegame/[/:gameid][/:savegameid][?q=...]`
+`GET /user/:userid/savegame/[/:gameid][/:savegameid][?q=...]`
 
-    The savegames of the user. Possible query filters `gameid`, `year`, `month`, `day`.
+  The savegames of the user. Possible query filters `gameid`, `year`, `month`, `day`.
 
-  `POST /user/:userid/savegame/`
+`POST /user/:userid/savegame/`
 
-    Add a new savegame
+  Add a new savegame
 
-  `GET /user/:userid/score[?q=...]`
+`GET /user/:userid/score[?q=...]`
 
-    The user's high scores. Possible query filter `gameid`.
+  The user's high scores. Possible query filter `gameid`.
 
-  #### Primarily game-related endpoints
+### Primarily game-related endpoints
 
-  `GET /game/[:gameid][?q=...]`
+`GET /game/[:gameid][?q=...]`
 
-    Games. Possible query filters `createdBy`, `priceMin`, `priceMax`, `available`, `category`, `year`, `month`, `day`.
+  Games. Possible query filters `createdBy`, `priceMin`, `priceMax`, `available`, `category`, `year`, `month`, `day`.
 
-  `GET /game/:gameid/score/`
+`GET /game/:gameid/score/`
 
-    High scores for the game
+  High scores for the game
