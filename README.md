@@ -16,7 +16,7 @@ Generally, our goal is to implement all features mentioned on the project descri
 ### Features
 - Authentication
 
-	- A user will be able to register both as a developer or a player. Email validation will be integrated as a sub-feature. A user will be able to login and logout with their registered account. (Django authentication)
+	- A user will be able to register both as a developer or a player. Every user is a player, but in addition a user can be a developer. This allows developers to play games also. Email validation will be integrated as a sub-feature. A user will be able to login and logout with their registered account. (Django authentication)
 
 	- A user will be able to login and logout using their Gmail or Facebook ID.(third pary api)
 
@@ -24,8 +24,8 @@ Generally, our goal is to implement all features mentioned on the project descri
 
 	- A player will be able to buy games (mockup payment) by adding a game to the shopping basket and checkout.
 	- A player can play the game they bought. (sample game such as flappy bird will be used for demo)
-	- A player is resticted to play the games only from their library (a list of games they bought).
-	- A user can search game by name.
+	- A player is restricted to play the games only from their library (a list of games they bought).
+	- A user can search games by the games' properties such as name, category, or price.
 
 - Developer
 	- A developer can submit his game by providing an URL and set up a price for it and remove it from the store.
