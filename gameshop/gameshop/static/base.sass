@@ -1,0 +1,179 @@
+// compile...
+
+@function col($base)
+  @if $base > 253
+    @return rgb(255, 255, 255)
+  @else
+    @return rgb($base, $base+1, $base+2)
+
+$font-size: 14px
+$font-size-s: 12px
+
+$blue: rgb(50, 115, 220)
+$green: rgb(35, 209, 96)
+$green-l: rgb(55, 229, 116)
+$red: rgb(255, 56, 96)
+$yellow: rgb(255, 221, 87)
+
+$navy-d: rgb(10, 12, 15)
+$grey: col(20)
+$grey-d: col(10)
+$grey-l: col(30)
+
+body
+  font-family: 'Open Sans', sans-serif
+  font-size: $font-size
+  background: $grey-d
+  color: col(255)
+
+.aspect-ratio
+  position: relative
+
+  &::before
+    display: block
+    content: ""
+    padding-bottom: 62.5%
+
+  &.aspect-ratio-50
+    &::before
+      padding-bottom: 50%
+
+  > div:first-child
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+
+.navbar-custom
+  $navbar-hover-col: $blue
+  $navbar-hover-bg: $grey-l
+  $navbar-active-col: col(255)
+  $navbar-active-bg: $blue
+  $navbar-pad: 20px
+  $navbar-h: 50px
+
+  height: $navbar-h
+  margin: $navbar-pad 0
+  border: 0
+
+  a
+    color: col(255)
+    text-transform: uppercase
+
+  .navbar-brand
+    margin-right: 30px
+
+  .navbar-nav
+    > li
+      > a
+        font-size: $font-size-s
+
+        &:hover
+          background: $navbar-hover-bg
+
+      &.active
+        a
+          background: $navbar-active-bg
+          color: $navbar-active-col
+
+  .navbar-right
+    padding-right: 15px
+
+    > div
+      float: left
+      padding: 13px
+      cursor: pointer
+
+      .material-icons
+        line-height: 24px
+        vertical-align: top
+
+      &:hover
+        background: $navbar-hover-bg
+
+      &.active
+        background: $navbar-active-bg
+        color: $navbar-active-col
+
+.jumbotron
+  padding: 0
+  background: none
+
+.component
+  padding: 30px
+  margin-bottom: 15px
+  background: $grey
+
+  .component-title
+    padding-bottom: 15px
+    font-size: $font-size-s
+    text-transform: uppercase
+
+  .btn-wrap
+    margin-top: 30px
+
+    .btn
+      display: inline-block
+      height: 48px
+      line-height: 48px
+      padding: 0 24px
+      background: $blue
+      border-radius: 0
+
+    &.btn-right
+      text-align: right
+
+  .field-label
+    padding: 15px 0 5px
+
+  .field-value
+
+    &.categories
+      padding-top: 10px
+
+    input
+      width: 100%
+      height: 32px
+      line-height: 32px
+      padding: 0 10px
+      background: $grey-l
+      border: none
+      outline: 0
+      overflow: hidden
+
+    input[type="checkbox"]
+      display: none
+
+    input[type="checkbox"] + label
+      position: relative
+      display: inline-block
+      color: col(255)
+      font-weight: 400
+      padding-left: 34px
+      line-height: 24px
+      z-index: 1
+      cursor: pointer
+
+      &::after
+        position: absolute
+        display: block
+        content: ""
+        height: 24px
+        width: 24px
+        top: 0
+        left: 0
+        background: col(30)
+        z-index: 2
+
+    input[type="checkbox"]:checked + label::before
+      position: absolute
+      display: block
+      content: ""
+      height: 12px
+      width: 12px
+      top: 6px
+      left: 6px
+      background: $blue
+      z-index: 3
+

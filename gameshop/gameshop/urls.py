@@ -16,6 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from gameshop.views import *
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', IndexView.as_view(), name="index"),
+    url(r'^search/$', SearchView.as_view(), name="search"),
+    url(r'^categories/$', CategoriesView.as_view(), name="categories"),
+    url(r'^leaderboards/$', LeaderboardsView.as_view(), name="leaderboards"),
+    url(r'^your_games/$', LeaderboardsView.as_view(), name="your_games"),
 ]
