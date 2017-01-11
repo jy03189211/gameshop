@@ -12,5 +12,23 @@ class CategoriesView(TemplateView):
 class LeaderboardsView(TemplateView):
     template_name = "leaderboards.html"
 
-class YourGamesView(TemplateView):
-    template_name = "yourgames.html"
+class DashboardView(TemplateView):
+    template_name = "dashboard.html"
+
+class SettingsView(TemplateView):
+    template_name = "settings.html"
+
+class OwnedGamesView(TemplateView):
+    template_name = "owned_games.html"
+
+class OrdersView(TemplateView):
+    template_name = "orders.html"
+
+class ManagedGamesView(TemplateView):
+    template_name = "managed_games.html"
+
+class SalesView(TemplateView):
+    template_name = "sales.html"
+
+class NewGameView(TemplateView):
+    template_name = "new_game.html"

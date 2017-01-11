@@ -2,12 +2,12 @@
   <div class="container">
     <div class="navbar navbar-custom">
       <div class="navbar-left">
-        <a class="navbar-brand" href="#">Gameshop</a>
+        <a class="navbar-brand" href="{% url 'index' %}">Gameshop</a>
         <ul class="nav navbar-nav">
-          <li><a href="/search/">Search</a></li>
-          <li><a href="/categories/">Categories</a></li>
-          <li><a href="/leaderboards/">Leaderboards</a></li>
-          <li><a href="/your_games/">Your games</a></li>
+          <li><a href="{% url 'search' %}">Search</a></li>
+          <li><a href="{% url 'categories' %}">Categories</a></li>
+          <li><a href="{% url 'leaderboards' %}">Leaderboards</a></li>
+          <li><a href="{% url 'dashboard' %}">Your games</a></li>
         </ul>
       </div>
       <div class="navbar-right">

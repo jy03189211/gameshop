@@ -24,5 +24,13 @@ urlpatterns = [
     url(r'^search/$', SearchView.as_view(), name="search"),
     url(r'^categories/$', CategoriesView.as_view(), name="categories"),
     url(r'^leaderboards/$', LeaderboardsView.as_view(), name="leaderboards"),
-    url(r'^your_games/$', LeaderboardsView.as_view(), name="your_games"),
+    url(r'^your_games/$', DashboardView.as_view(), name="dashboard"),
+    url(r'^your_games/dashboard/$', DashboardView.as_view(), name="dashboard"),
+    url(r'^your_games/settings/$', SettingsView.as_view(), name="settings"),
+    url(r'^your_games/owned_games/$', OwnedGamesView.as_view(), name="owned_games"),
+    url(r'^your_games/orders/$', OrdersView.as_view(), name="orders"),
+    url(r'^your_games/managed_games/$', ManagedGamesView.as_view(), name="managed_games"),
+    url(r'^your_games/sales/$', SalesView.as_view(), name="sales"),
+    url(r'^your_games/new_game/$', NewGameView.as_view(), name="new_game"),
+
 ]

@@ -1,65 +1,63 @@
 {% extends "_base.html" %}
 
 {% block content %}
-<div class="jumbotron">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="component">
-          <div class="component-title">Filters</div>
-          <div class="field-label">Title</div>
-          <div class="field-value">
-            <input type="text">
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="component">
+        <div class="component-title">Filters</div>
+        <div class="field-label">Title</div>
+        <div class="field-value">
+          <input type="text">
+        </div>
+        <div class="field-label">Category</div>
+        <div class="field-value categories">
+          <div class="category">
+            <input type="checkbox" id="category1"><label for="category1">Category 1</label>
           </div>
-          <div class="field-label">Category</div>
-          <div class="field-value categories">
-            <div class="category">
-              <input type="checkbox" id="category1"><label for="category1">Category 1</label>
-            </div>
-            <div class="category">
-              <input type="checkbox" id="category2"><label for="category2">Category 2</label>
-            </div>
-            <div class="category">
-              <input type="checkbox" id="category3"><label for="category3">Category 3</label>
-            </div>
-            <div class="category">
-              <input type="checkbox" id="category4"><label for="category4">Category 4</label>
-            </div>
+          <div class="category">
+            <input type="checkbox" id="category2"><label for="category2">Category 2</label>
           </div>
-          <div class="field-label">Price min</div>
-          <div class="field-value">
-            <input type="number">
+          <div class="category">
+            <input type="checkbox" id="category3"><label for="category3">Category 3</label>
           </div>
-          <div class="field-label">Price max</div>
-          <div class="field-value">
-            <input type="number">
-          </div>
-          <div class="btn-wrap btn-right">
-            <div class="btn">Apply filters</div>
+          <div class="category">
+            <input type="checkbox" id="category4"><label for="category4">Category 4</label>
           </div>
         </div>
+        <div class="field-label">Price min</div>
+        <div class="field-value">
+          <input type="number">
+        </div>
+        <div class="field-label">Price max</div>
+        <div class="field-value">
+          <input type="number">
+        </div>
+        <div class="btn-wrap btn-right">
+          <div class="btn">Apply filters</div>
+        </div>
       </div>
-      <div class="col-md-8">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="component">
-              <div class="component-title">TODO: result</div>
-            </div>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="component">
+            <div class="component-title">TODO: result</div>
           </div>
-          <div class="col-md-12">
-            <div class="component">
-              <div class="component-title">TODO: result</div>
-            </div>
+        </div>
+        <div class="col-md-12">
+          <div class="component">
+            <div class="component-title">TODO: result</div>
           </div>
-          <div class="col-md-12">
-            <div class="component">
-              <div class="component-title">TODO: result</div>
-            </div>
+        </div>
+        <div class="col-md-12">
+          <div class="component">
+            <div class="component-title">TODO: result</div>
           </div>
-          <div class="col-md-12">
-            <div class="component">
-              <div class="component-title">TODO: result</div>
-            </div>
+        </div>
+        <div class="col-md-12">
+          <div class="component">
+            <div class="component-title">TODO: result</div>
           </div>
         </div>
       </div>
