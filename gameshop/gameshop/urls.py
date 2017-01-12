@@ -33,4 +33,5 @@ urlpatterns = [
     url(r'^your_games/sales/$', SalesView.as_view(), name="sales"),
     url(r'^your_games/new_game/$', NewGameView.as_view(), name="new_game"),
     url(r'^game/$', GameView.as_view(), name="game"),
+    url(r'^login/$', LoginView.as_view(), name="login"),
 ]

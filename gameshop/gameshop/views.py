@@ -35,3 +35,6 @@ class NewGameView(TemplateView):
 
 class GameView(TemplateView):
     template_name = "game.html"
+
+class LoginView(TemplateView):
+    template_name = "login.html"
