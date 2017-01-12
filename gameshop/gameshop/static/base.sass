@@ -8,6 +8,7 @@
 
 $font-size: 14px
 $font-size-s: 12px
+$font-size-l: 24px
 
 $blue: rgb(50, 115, 220)
 $green: rgb(35, 209, 96)
@@ -72,6 +73,7 @@ a
 
   .navbar-brand
     margin-right: 30px
+    font-size: $font-size-l
 
   .navbar-nav
     > li
@@ -150,16 +152,43 @@ a
   .btn-wrap
     margin-top: 30px
 
-    .btn
-      display: inline-block
-      height: 48px
-      line-height: 48px
-      padding: 0 24px
-      background: $blue
-      border-radius: 0
-
     &.btn-right
       text-align: right
+
+  .btn
+    display: inline-block
+    height: 48px
+    line-height: 48px
+    padding: 0 24px
+    background: $blue
+    border-radius: 0
+
+    &:hover
+      background: col(255)
+      color: $blue
+
+    &.btn-s
+      height: 36px
+      line-height: 36px
+      padding: 0 16px
+      font-size: $font-size-s
+      text-transform: uppercase
+
+  .badge
+    display: inline-block
+    height: 48px
+    line-height: 48px
+    padding: 0 24px
+    background: $grey-l
+    border-radius: 0
+    font-weight: 400
+
+    &.badge-s
+      height: 36px
+      line-height: 36px
+      padding: 0 16px
+      font-size: $font-size-s
+      text-transform: uppercase
 
   .field-label
     padding: 15px 0 5px
@@ -280,3 +309,11 @@ a
 
       &:hover
         background: $grey-l
+
+.featured
+
+  .featured-title
+    font-size: $font-size-l
+    line-height: $font-size-l
+    height: $font-size-l * 2
+    margin-bottom: 45px
