@@ -1,0 +1,17 @@
+[
+  {
+    "model": "gameshop.user",
+    "pk": 1,
+    "fields": {
+      "isDeveloper": "False",
+      "username": "user2"
+    }
+  },
+  {
+    "model": "gameshop.order",
+    "pk": 1,
+    "fields": {
+      "user": 1
+    }
+  }
+]
