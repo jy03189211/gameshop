@@ -19,15 +19,19 @@ $yellow: rgb(255, 221, 87)
 $navy-d: rgb(10, 12, 15)
 $grey: col(20)
 $grey-d: col(10)
-$grey-l: col(30)
+$grey-l: col(35)
 
 $component-bg: $grey
 
 body
   font-family: 'Open Sans', sans-serif
   font-size: $font-size
-  background: $grey-d
-  color: col(255)
+  background-color: $grey-d
+  // background-image: url('/static/img/bg.png')
+  // background-repeat: no-repeat
+  // background-position: center top
+  // background-size: 100% auto
+  color: col(205)
 
 a
   color: col(255)
@@ -109,6 +113,7 @@ a
 
 .jumbotron
   padding: 0
+  margin-bottom: 15px
   background: none
 
 .component
@@ -116,10 +121,25 @@ a
   margin-bottom: 15px
   background: $component-bg
 
+  &.component-parent
+    padding: 0
+
+    .row
+      margin-left: 0
+      margin-right: 0
+
+    .component
+      margin-bottom: 0
+
   .component-title
     padding-bottom: 15px
     font-size: $font-size-s
     text-transform: uppercase
+
+  .title
+    font-size: $font-size-l
+    text-transform: uppercase
+    color: col(255)
 
   .subtitle
     padding: 15px 0
@@ -174,11 +194,26 @@ a
       font-size: $font-size-s
       text-transform: uppercase
 
+    &.btn-green
+      background: $green
+
+      &:hover
+        background: col(255)
+        color: $green
+
+  .badge-row
+    overflow: hidden
+
+    .badge,
+    .btn
+      float: left
+
   .badge
     display: inline-block
     height: 48px
     line-height: 48px
     padding: 0 24px
+    font-size: $font-size
     background: $grey-l
     border-radius: 0
     font-weight: 400
@@ -189,6 +224,29 @@ a
       padding: 0 16px
       font-size: $font-size-s
       text-transform: uppercase
+
+  .table
+    padding: 15px 0
+    overflow: hidden
+
+    .table-label
+      float: left
+      clear: left
+      height: 36px
+      line-height: 36px
+      padding: 0 16px
+      margin-bottom: 5px
+      background: $grey-l
+      border: 1px solid $grey-l
+
+    .table-value
+      float: left
+      height: 36px
+      line-height: 36px
+      padding: 0 16px
+      margin-bottom: 5px
+      background: none
+      border: 1px solid $grey-l
 
   .field-label
     padding: 15px 0 5px
@@ -317,3 +375,8 @@ a
     line-height: $font-size-l
     height: $font-size-l * 2
     margin-bottom: 45px
+
+.game-wrap
+
+  .game
+    background: $grey-l

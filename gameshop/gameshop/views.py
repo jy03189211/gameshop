@@ -32,3 +32,6 @@ class SalesView(TemplateView):
 
 class NewGameView(TemplateView):
     template_name = "new_game.html"
+
+class GameView(TemplateView):
+    template_name = "game.html"
