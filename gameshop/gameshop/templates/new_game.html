@@ -1,5 +1,25 @@
 {% extends "_yourgames.html" %}
 
+{% load field_type %}
+
 {% block subcontent %}
   <div class="component-title">New game</div>
+  <div>
+    <form action="/your_games/new_game/" method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        {% if field|field_type:'checkboxinput' %}
+          <div class="field-value field-checkbox">
+            {{ field }}<label for="{{field.id_for_label}}">{{ field.label }}</label>
+          </div>
+        {% else %}
+          <div class="field-label">{{ field.label }}</div>
+          <div class="field-value">{{ field }}</div>
+        {% endif %}
+      {% endfor %}
+      <div class="btn-wrap">
+        <input type="submit" value="Submit" class="btn">
+      </div>
+    </form>
+  </div>
 {% endblock %}
