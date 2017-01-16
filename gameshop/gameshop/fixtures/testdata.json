@@ -4,7 +4,10 @@
     "pk": 1,
     "fields": {
       "is_developer": "True",
-      "username": "user1"
+      "username": "user1",
+      "public_name": "Some Game Studio",
+      "created_at": "2017-01-01T00:00:00+00:00",
+      "updated_at": "2017-01-01T00:00:00+00:00"
     }
   },
   {
@@ -12,7 +15,9 @@
     "pk": 2,
     "fields": {
       "is_developer": "False",
-      "username": "user2"
+      "username": "user2",
+      "created_at": "2017-01-01T00:00:00+00:00",
+      "updated_at": "2017-01-01T00:00:00+00:00"
     }
   },
   {
@@ -21,10 +26,13 @@
     "fields": {
       "url": "http://www.aalto.fi",
       "name": "Test game 1",
+      "description": "This is a game description. This is a game description. This is a game description. This is a game description. This is a game description.",
       "price": "0.99",
       "available": "True",
       "categories": "category1",
-      "created_by": 1
+      "created_by": 1,
+      "created_at": "2017-01-01T00:00:00+00:00",
+      "updated_at": "2017-01-01T00:00:00+00:00"
     }
   },
   {
@@ -33,17 +41,13 @@
     "fields": {
       "url": "http://www.aalto.fi",
       "name": "Test game 2",
+      "description": "This is a game description. This is a game description. This is a game description. This is a game description. This is a game description.",
       "price": "1.99",
       "available": "True",
       "categories": "category2",
-      "created_by": 1
-    }
-  },
-  {
-    "model": "gameshop.order",
-    "pk": 5,
-    "fields": {
-      "user": 1
+      "created_by": 1,
+      "created_at": "2017-01-01T00:00:00+00:00",
+      "updated_at": "2017-01-01T00:00:00+00:00"
     }
   }
 ]
