@@ -2,4 +2,24 @@
 
 {% block subcontent %}
   <div class="component-title">Managed games</div>
+  {% for game in games %}
+  <div class="game-list">
+    <div class="game">
+      <div class="game-image"></div>
+      <div class="game-details">
+        <div class="game-title">{{ game.name }}</div>
+        <div class="game-description">{{ game.description }}</div>
+        <div class="divider"></div>
+        <div class="game-details">
+          <div class="badge-row">
+            <div class="badge badge-s">Developed by</div>
+            <div class="badge badge-s badge-nobg">{{ game.created_by.public_name }}</div>
+          </div>
+          <a href="/game/" class="btn btn-s">Manage</a>
+          <a href="/game/" class="btn btn-s btn-secondary">Play</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 {% endblock %}

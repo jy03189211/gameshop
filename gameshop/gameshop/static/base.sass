@@ -20,6 +20,7 @@ $navy-d: rgb(10, 12, 15)
 $grey: col(20)
 $grey-d: col(10)
 $grey-l: col(35)
+$grey-el: col(50)
 
 $component-bg: $grey
 
@@ -135,7 +136,6 @@ a
     padding-bottom: 15px
     font-size: $font-size-s
     text-transform: uppercase
-    color: col(255)
 
   .title
     font-size: $font-size-l
@@ -196,6 +196,13 @@ a
       font-size: $font-size-s
       text-transform: uppercase
 
+    &.btn-secondary
+      background: $grey-el
+
+      &:hover
+        background: col(255)
+        color: $grey
+
     &.btn-green
       background: $green
 
@@ -213,16 +220,20 @@ a
   .badge
     display: inline-block
     height: 48px
-    line-height: 48px
+    line-height: 46px
     padding: 0 24px
     font-size: $font-size
     background: $grey-l
     border-radius: 0
     font-weight: 400
+    border: 1px solid $grey-l
+
+    &.badge-nobg
+      background: none
 
     &.badge-s
       height: 36px
-      line-height: 36px
+      line-height: 34px
       padding: 0 16px
       font-size: $font-size-s
       text-transform: uppercase
@@ -392,3 +403,40 @@ a
 
   .game
     background: $grey-l
+
+.game-list
+
+  .game
+    padding: 30px
+    margin-top: 15px
+    background: $grey-l
+
+    .divider
+      height: 1px
+      margin: 15px 0
+      background: $grey-el
+
+    .game-title
+      font-size: $font-size-l
+      text-transform: uppercase
+      color: col(255)
+
+    .game-description
+      padding-top: 15px
+      font-size: $font-size-s
+
+    .game-details
+      overflow: hidden
+
+      .badge-row
+        float: left
+
+        .badge
+          border-color: $grey-el
+
+        .badge:not(.badge-nobg)
+          background: $grey-el
+
+      .btn
+        float: right
+        margin-left: 15px
