@@ -12,6 +12,7 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     username = models.CharField(max_length=50, default='user_without_name')
+    public_name = models.CharField(max_length=50, null=True, blank=True)
     is_developer = models.BooleanField()
 
 
@@ -20,6 +21,7 @@ class Game(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     url = models.URLField(max_length=200)
     name = models.CharField(max_length=50)
+    description = models.CharField(max_length=250, null=True, blank=True)
     price = models.FloatField()
     available = models.BooleanField()
     categories = models.CharField(max_length=50, default='')
