@@ -3,13 +3,45 @@
     "model": "gameshop.user",
     "pk": 1,
     "fields": {
-      "isDeveloper": "False",
+      "is_developer": "True",
+      "username": "user1"
+    }
+  },
+  {
+    "model": "gameshop.user",
+    "pk": 2,
+    "fields": {
+      "is_developer": "False",
       "username": "user2"
     }
   },
   {
+    "model": "gameshop.game",
+    "pk": 3,
+    "fields": {
+      "url": "http://www.aalto.fi",
+      "name": "Test game 1",
+      "price": "0.99",
+      "available": "True",
+      "categories": "category1",
+      "created_by": 1
+    }
+  },
+  {
+    "model": "gameshop.game",
+    "pk": 4,
+    "fields": {
+      "url": "http://www.aalto.fi",
+      "name": "Test game 2",
+      "price": "1.99",
+      "available": "True",
+      "categories": "category2",
+      "created_by": 1
+    }
+  },
+  {
     "model": "gameshop.order",
-    "pk": 1,
+    "pk": 5,
     "fields": {
       "user": 1
     }
