@@ -33,6 +33,7 @@ body
   // background-position: center top
   // background-size: 100% auto
   color: col(205)
+  overflow-y: scroll
 
 a
   color: col(255)
@@ -125,11 +126,21 @@ a
   &.component-parent
     padding: 0
 
-    .row
+    > .row
       margin-left: 0
       margin-right: 0
 
     .component
+      margin-bottom: 0
+
+  > .component
+    margin: 30px 0
+    border: 1px solid $blue
+
+    &:first-child
+      margin-top: 0
+
+    &:last-child
       margin-bottom: 0
 
   .component-title
@@ -149,6 +160,14 @@ a
 
     &:first-child
       padding-top: 0
+
+  .float-right
+    float: right
+
+  .divider
+    height: 1px
+    margin: 15px 0
+    background: $grey-el
 
   ul
     padding: 0
@@ -212,10 +231,17 @@ a
 
   .badge-row
     overflow: hidden
+    padding: 5px 0
 
     .badge,
     .btn
       float: left
+
+    &:first-child
+      padding-top: 0
+
+    &:last-child
+      padding-bottom: 0
 
   .badge
     display: inline-block
@@ -238,28 +264,58 @@ a
       font-size: $font-size-s
       text-transform: uppercase
 
-  .table
-    padding: 15px 0
-    overflow: hidden
+  ul.table
+    width: 100%
+    margin: 15px 0
 
-    .table-label
-      float: left
-      clear: left
-      height: 36px
-      line-height: 36px
-      padding: 0 16px
-      margin-bottom: 5px
-      background: $grey-l
-      border: 1px solid $grey-l
+    &:first-child
+      margin-top: 0
 
-    .table-value
-      float: left
-      height: 36px
-      line-height: 36px
-      padding: 0 16px
-      margin-bottom: 5px
-      background: none
-      border: 1px solid $grey-l
+    &:last-child
+      margin-bottom: 0
+
+    a
+      &:active,
+      &:focus
+        text-decoration: none
+
+        li
+          background: $blue
+          color: col(255)
+
+          &:hover
+            color: col(255)
+
+    li
+      display: flex
+      width: 100%
+      padding: 5px 15px
+      border-bottom: 1px solid $grey-l
+
+      &.table-header
+        background: $grey-l
+        padding-top: 10px
+        padding-bottom: 10px
+
+      &.table-total
+        background: $grey-l
+
+      &:hover:not(.table-header),
+        // background: $blue
+        // color: col(255)
+        color: $blue
+
+      span
+        flex: 1
+
+        &.table-col-2
+          flex: 2
+
+    &.align-last-right
+      li
+        span:last-child
+          text-align: right
+
 
   .field-label,
   form label
@@ -274,7 +330,8 @@ a
       padding-top: 10px
 
     input[type="text"],
-    input[type="number"]
+    input[type="number"],
+    input[type="password"]
       width: 100%
       height: 32px
       line-height: 32px
@@ -410,11 +467,6 @@ a
     padding: 30px
     margin-top: 15px
     background: $grey-l
-
-    .divider
-      height: 1px
-      margin: 15px 0
-      background: $grey-el
 
     .game-title
       font-size: $font-size-l
