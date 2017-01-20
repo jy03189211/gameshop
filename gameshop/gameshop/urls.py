@@ -36,5 +36,7 @@ urlpatterns = [
     url(r'^login/$', LoginView.as_view(), name="login"),
     #third party authentication
     url(r'^accounts/', include('allauth.urls')),
+    #api
+    url(r'^api/v1/', include('api.urls')),
 
 ]
