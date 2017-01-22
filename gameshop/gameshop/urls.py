@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from gameshop.views import *
+from api.views import *
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -35,8 +36,8 @@ urlpatterns = [
     url(r'^game/$', GameView.as_view(), name="game"),
     url(r'^login/$', LoginView.as_view(), name="login"),
     #third party authentication
-    url(r'^accounts/', include('allauth.urls')),
+    #url(r'^accounts/', include('allauth.urls')),
     #api
-    url(r'^api/v1/', include('api.urls')),
+    url(r'^api/v1/', include('gameshop.api.urls')),
 
 ]

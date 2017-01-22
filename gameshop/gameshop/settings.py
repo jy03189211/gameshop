@@ -39,11 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'gameshop',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
-    'livereload',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.facebook',
+    # 'livereload',
+    'gameshop.api',
 ]
 
 MIDDLEWARE = [
@@ -146,4 +147,3 @@ STATIC_URL = '/static/'
 APPEND_SLASH = True
 
 SITE_ID=1
-
