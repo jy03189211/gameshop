@@ -97,6 +97,7 @@ def games(request):
 
         data = filters.all()
         games = {}
+        #Todo construct json
         for game in data:
             games[game.id] = game.name
         #print(games)
