@@ -2,6 +2,7 @@ from django.http import Http404
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.core import serializers
 import json
 
 from gameshop.models import *
@@ -39,21 +40,53 @@ def user_inventory(request, user_id, game_id=None):
 
     return HttpResponse('', content_type="application/json")
 
-def users(request, user_id=None):
+def users(request):
+    filters = User.objects
+    username = request.GET.get('username')
+    public_name = request.GET.get('public_name')
+    is_developer = request.GET.get('is_developer')
 
-    return HttpResponse('', content_type="application/json")
+    if username != None:
+        filters = filters.filter(username = username)
+    if public_name != None:
+        filters = filters.filter(public_name = public_name)
+    if is_developer != None:
+        filters = filters.filter(is_developer = is_developer)
 
-def user_single(request, user_id=None):
+    data = filters.all()
+    user_dict = {}
+    user_list = []
+    #Todo construct json
+    for user in data:
+        user_dict["id"]=user.pk
+        user_dict["username"]=user.username
+        user_dict["public_name"]=user.public_name
+        user_dict["is_developer"]=user.is_developer
+        user_list.append(user_dict.copy())
 
-    return HttpResponse('', content_type="application/json")
+    #user_list_serialized = serializers.serialize('json', data)
+    return JsonResponse(user_list, safe=False)
+
+def user_single(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    data = {
+    "created_at": user.created_at,
+    "updated_at": user.updated_at,
+    "username": user.username,
+    "public_name": user.public_name,
+    "is_developer": user.is_developer,
+     }
+    return JsonResponse(data)
 
 def game_score(request, game_id):
 
     return HttpResponse('', content_type="application/json")
 
+#todo finalize owned by attribute
 def game_single(request, game_id):
 
     game = get_object_or_404(Game, pk=game_id)
+    print(game)
     data = {
     "created_at": game.created_at,
     "updated_at": game.updated_at,
@@ -64,10 +97,10 @@ def game_single(request, game_id):
     "available": game.available,
     "categories": game.categories,
     "created_by": game.created_by.public_name,
-    #"owned_by": game.owned_by.all(),
+    #"owned_by": game.owned_by,
      }
     return JsonResponse(data)
-
+#todo add price and date logic
 def games(request):
 
     if request.method == 'GET':
@@ -85,23 +118,30 @@ def games(request):
 
         if created_by != None:
             filters = filters.filter(created_by = created_by)
-
         if available != None:
             filters = filters.filter(available = available)
-
         if categories != None:
             filters = filters.filter(categories = categories)
-
         if year != None:
             print('year')
 
         data = filters.all()
-        games = {}
-        #Todo construct json
+        game_dict = {}
+        game_list = []
+        
         for game in data:
-            games[game.id] = game.name
+            game_dict["id"] = game.pk
+            game_dict["name"] = game.name
+            game_dict["url"] = game.url
+            game_dict["name"] = game.name
+            game_dict["description"] = game.description
+            game_dict["price"] = game.price
+            game_dict["categories"] = game.categories
+            game_dict["created_by"] = game.created_by_id
+            game_dict["available"] = game.available
+            game_list.append(game_dict.copy())
         #print(games)
-        return JsonResponse(games)
+        return JsonResponse(game_list, safe=False)
 
     elif request.method == 'POST':
         print("POST")
