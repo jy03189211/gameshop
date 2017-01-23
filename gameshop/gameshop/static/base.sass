@@ -301,9 +301,10 @@ a
         background: $grey-l
 
       &:hover:not(.table-header),
-        // background: $blue
-        // color: col(255)
         color: $blue
+
+      &:only-child
+        border-top: 1px solid $grey-l
 
       span
         flex: 1
@@ -492,3 +493,8 @@ a
       .btn
         float: right
         margin-left: 15px
+
+.cart-total
+  color: col(255)
+  font-size: $font-size-l
+  text-align: right
