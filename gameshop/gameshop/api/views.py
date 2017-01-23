@@ -102,7 +102,7 @@ def user_single(request, user_id):
 
     user = get_object_or_404(User, pk=user_id)
     data = {
-    "id": user.pk
+    "id": user.pk,
     "created_at": user.created_at,
     "updated_at": user.updated_at,
     "username": user.username,
@@ -131,7 +131,7 @@ def game_single(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
 
     data = {
-    "id": game.pk
+    "id": game.pk,
     "created_at": game.created_at,
     "updated_at": game.updated_at,
     "url": game.url,
