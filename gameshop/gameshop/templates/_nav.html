@@ -1,3 +1,5 @@
+{% load cart_count %}
+
 <div class="navbar-wrap">
   <div class="container">
     <div class="navbar navbar-custom">
@@ -13,6 +15,7 @@
       <div class="navbar-right">
         <div class="navbar-basket">
           <a href="{% url 'cart' %}"><i class="material-icons">shopping_basket</i></a>
+          <div class="navbar-item-badge {% if cart_count < 1 %} hidden{% endif %}">{% cart_count %}</div>
         </div>
         <div class="navbar-user">
           <a href="{% url 'login' %}"><i class="material-icons">person</i></a>

@@ -11,30 +11,14 @@
             <span class="table-col-2">Name</span>
             <span>Price</span>
           </li>
+          {% for item_name, item_price in items.items %}
           <a href="#">
             <li>
-              <span class="table-col-2">Some game name</span>
-              <span>12,34 €</span>
+              <span class="table-col-2">{{ item_name }}</span>
+              <span>{{ item_price }} €</span>
             </li>
           </a>
-          <a href="#">
-            <li>
-              <span class="table-col-2">Some game name</span>
-              <span>12,34 €</span>
-            </li>
-          </a>
-          <a href="#">
-            <li>
-              <span class="table-col-2">Some game name</span>
-              <span>12,34 €</span>
-            </li>
-          </a>
-          <a href="#">
-            <li>
-              <span class="table-col-2">Some game name</span>
-              <span>12,34 €</span>
-            </li>
-          </a>
+          {% endfor %}
         </ul>
       </div>
     </div>
@@ -43,7 +27,7 @@
         <div class="component-title">Total</div>
         <ul class="table">
           <li>
-            <span class="cart-total">12,34 €</span>
+            <span class="cart-total">{{ total }} €</span>
           </li>
         </ul>
         <div class="btn-wrap btn-right">

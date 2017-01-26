@@ -16,8 +16,9 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from gameshop.views import *
+from .views import *
 from .api.views import *
+from .storeutils.cart import urls as cart_urls
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -36,6 +37,7 @@ urlpatterns = [
     url(r'^game/$', GameView.as_view(), name="game"),
     url(r'^login/$', LoginView.as_view(), name="login"),
     url(r'^cart/$', CartView.as_view(), name="cart"),
+    url(r'^cart/', include(cart_urls)),
     #third party authentication
     #url(r'^accounts/', include('allauth.urls')),
     #api
