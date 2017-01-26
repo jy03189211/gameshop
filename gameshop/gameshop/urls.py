@@ -36,6 +36,8 @@ urlpatterns = [
     url(r'^your_games/new_game/$', NewGameView.as_view(), name="new_game"),
     url(r'^game/$', GameView.as_view(), name="game"),
     url(r'^login/$', LoginView.as_view(), name="login"),
+    url(r'^loginuser/$',login.login),
+    url(r'^register/$', LoginView.as_view(),name='register'),
     url(r'^cart/$', CartView.as_view(), name="cart"),
     url(r'^cart/', include(cart_urls)),
     #third party authentication

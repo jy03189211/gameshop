@@ -33,12 +33,43 @@ def user_sale(request, user_id, sale_id=None):
     return HttpResponse('', content_type="application/json")
 
 def user_purchased(request, user_id, game_id=None):
+    user = get_object_or_404(User, pk=user_id)
+    purchased=list(Purchase.objects.filter(game__owned_by=user_id, user__pk=user_id ))
+    purchased_dict = {}
+    purchased_list = []
 
-    return HttpResponse('', content_type="application/json")
+    for purchase in purchased:
+
+        purchased_dict["id"] = purchase.pk
+        purchased_dict["game"] = purchase.game.name
+        purchased_dict["order_id"] = purchase.order.pk
+        purchased_dict["user"] = purchase.user.name
+
+        purchased_list.append(purchased_dict.copy())
+
+    return JsonResponse(purchased_list, safe=False)
+
 
 def user_inventory(request, user_id, game_id=None):
 
-    return HttpResponse('', content_type="application/json")
+    user = get_object_or_404(User, pk=user_id)
+    inventory=list(Game.objects.filter(owned_by__pk=user_id).order_by('-name'))
+    inventory_dict = {}
+    inventory_list = []
+
+    for game in inventory:
+
+        inventory_dict["id"] = game.pk
+        inventory_dict["name"] = game.name
+        inventory_dict["url"] = game.url
+        inventory_dict["description"] = game.description
+        inventory_dict["price"] = game.price
+        inventory_dict["categories"] = game.categories
+        inventory_dict["created_by"] = game.created_by_id
+        inventory_dict["available"] = game.available
+        inventory_list.append(inventory_dict.copy())
+
+    return JsonResponse(inventory_list, safe=False)
 
 def users(request):
     filters = User.objects
@@ -56,7 +87,7 @@ def users(request):
     data = filters.all()
     user_dict = {}
     user_list = []
-    #Todo construct json
+
     for user in data:
         user_dict["id"]=user.pk
         user_dict["username"]=user.username
@@ -68,8 +99,10 @@ def users(request):
     return JsonResponse(user_list, safe=False)
 
 def user_single(request, user_id):
+
     user = get_object_or_404(User, pk=user_id)
     data = {
+    "id": user.pk,
     "created_at": user.created_at,
     "updated_at": user.updated_at,
     "username": user.username,
@@ -80,14 +113,25 @@ def user_single(request, user_id):
 
 def game_score(request, game_id):
 
-    return HttpResponse('', content_type="application/json")
+    game = get_object_or_404(Game, pk=game_id)
+    scores=list(Score.objects.filter(game__pk=game_id).order_by('-score'))
+    score_dict = {}
+    score_list = []
+
+    for score in scores:
+        score_dict["score"] = score.score
+        score_dict["game"] = game.name
+        score_list.append(score_dict.copy())
+
+    return JsonResponse(score_list, safe=False)
 
 #todo finalize owned by attribute
 def game_single(request, game_id):
 
     game = get_object_or_404(Game, pk=game_id)
-    print(game)
+
     data = {
+    "id": game.pk,
     "created_at": game.created_at,
     "updated_at": game.updated_at,
     "url": game.url,
@@ -97,7 +141,7 @@ def game_single(request, game_id):
     "available": game.available,
     "categories": game.categories,
     "created_by": game.created_by.public_name,
-    #"owned_by": game.owned_by,
+    # "owned_by": game.owned_by,
      }
     return JsonResponse(data)
 #todo add price and date logic
@@ -128,7 +172,7 @@ def games(request):
         data = filters.all()
         game_dict = {}
         game_list = []
-        
+
         for game in data:
             game_dict["id"] = game.pk
             game_dict["name"] = game.name
@@ -140,7 +184,7 @@ def games(request):
             game_dict["created_by"] = game.created_by_id
             game_dict["available"] = game.available
             game_list.append(game_dict.copy())
-        #print(games)
+
         return JsonResponse(game_list, safe=False)
 
     elif request.method == 'POST':
