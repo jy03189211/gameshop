@@ -13,8 +13,7 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     username = models.CharField(max_length=50, default='user_without_name')
     public_name = models.CharField(max_length=50, null=True, blank=True)
-    is_developer = models.BooleanField()
-
+    email = models.EmailField(unique=True)
 
 class Game(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)

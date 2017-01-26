@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-
 from gameshop.views import *
 
 urlpatterns = [
@@ -34,6 +33,8 @@ urlpatterns = [
     url(r'^your_games/new_game/$', NewGameView.as_view(), name="new_game"),
     url(r'^game/$', GameView.as_view(), name="game"),
     url(r'^login/$', LoginView.as_view(), name="login"),
+    url(r'^loginuser/$',login.login),
+    url(r'^register/$', LoginView.as_view(),name='register'),
     #third party authentication
     url(r'^accounts/', include('allauth.urls')),
 
