@@ -22,7 +22,7 @@ class Game(models.Model):
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=250, null=True, blank=True)
     price = models.FloatField()
-    available = models.BooleanField()
+    available = models.BooleanField(default=False)
     categories = models.CharField(max_length=50, default='')
     created_by = models.ForeignKey(User, related_name='developed_games', on_delete=models.CASCADE)
     # a game can be owned by multiple users

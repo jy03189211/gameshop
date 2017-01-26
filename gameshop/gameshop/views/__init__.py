@@ -11,3 +11,4 @@ from .sales import SalesView
 from .new_game import NewGameView
 from .game import GameView
 from .login import LoginView
+from .cart import CartView
