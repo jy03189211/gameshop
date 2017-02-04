@@ -10,5 +10,6 @@ from .managed_games import ManagedGamesView
 from .sales import SalesView
 from .new_game import NewGameView
 from .game import GameView
+from .game_edit import GameEditView
 from .login import LoginView
 from .cart import CartView

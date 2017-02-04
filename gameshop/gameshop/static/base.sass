@@ -42,6 +42,10 @@ a
     color: $blue
     text-decoration: none
 
+.material-icons
+  &.icon-xl
+    font-size: 48px
+
 .aspect-ratio
   position: relative
 
@@ -54,12 +58,19 @@ a
     &::before
       padding-bottom: 50%
 
+  &.aspect-ratio-100
+    &::before
+      padding-bottom: 100%
+
   > div:first-child
     position: absolute
     top: 0
     right: 0
     bottom: 0
     left: 0
+
+    img
+      width: 100%
 
 .navbar-custom
   $navbar-hover-col: $blue
@@ -208,6 +219,9 @@ a
   .btn-wrap
     margin-top: 30px
 
+    &:first-child
+      margin-top: 0
+
     &.btn-right
       text-align: right
 
@@ -258,6 +272,9 @@ a
 
     &:last-child
       padding-bottom: 0
+
+    .btn + .btn
+      margin-left: 15px
 
   .badge
     display: inline-block
@@ -340,15 +357,27 @@ a
     padding: 15px 0 5px
     font-weight: 400
 
+  .field-help
+    padding: 5px 0 15px
+    font-size: $font-size-s
+    color: $blue
+
   .field-value,
   form
+
+    ul.errorlist
+      li
+        color: $red
+        font-size: $font-size-s
+        text-transform: uppercase
 
     &.categories
       padding-top: 10px
 
     input[type="text"],
     input[type="number"],
-    input[type="password"]
+    input[type="password"],
+    input[type="email"]
       width: 100%
       height: 32px
       line-height: 32px
@@ -357,6 +386,13 @@ a
       border: none
       outline: 0
       overflow: hidden
+
+    textarea
+      width: 100%
+      padding: 10px
+      background: $grey-l
+      border: none
+      outline: 0
 
     input[type="checkbox"]
       display: none

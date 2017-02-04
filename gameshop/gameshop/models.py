@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
-import json
+from django.contrib.auth.models import User
+import json, os
+
 
 """
 NOTE: the created_at and updated_at probably will not show up in the admin panel
@@ -14,19 +16,24 @@ class User(models.Model):
     username = models.CharField(max_length=50, default='user_without_name')
     public_name = models.CharField(max_length=50, null=True, blank=True)
     email = models.EmailField(unique=True)
+    is_developer = models.BooleanField(default=False)
+
 
 class Game(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     url = models.URLField(max_length=200)
     name = models.CharField(max_length=50)
-    description = models.CharField(max_length=250, null=True, blank=True)
+    description = models.CharField(max_length=500, null=True, blank=True)
     price = models.FloatField()
     available = models.BooleanField(default=False)
     categories = models.CharField(max_length=50, default='')
     created_by = models.ForeignKey(User, related_name='developed_games', on_delete=models.CASCADE)
     # a game can be owned by multiple users
     owned_by = models.ManyToManyField(User, related_name='owned_games')
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
+
+    # TODO: add release_date and change that into the template also
 
     def set_categories(self, x):
         self.categories = json.dumps(x)

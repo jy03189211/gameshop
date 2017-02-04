@@ -5,7 +5,7 @@
 {% block subcontent %}
   <div class="component-title">New game</div>
   <div>
-    <form action="/your_games/new_game/" method="post">
+    <form action="{% url 'new_game' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {% for field in form %}
         {% if field|field_type:'checkboxinput' %}

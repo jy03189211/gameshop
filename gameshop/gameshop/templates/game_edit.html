@@ -1,0 +1,69 @@
+{% extends "_base.html" %}
+
+{% load static %}
+{% load field_type %}
+
+{% block title %}
+<title>Gameshop - {{ game.name }}</title>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="component component-parent">
+        <div class="row">
+          <div class="component col-md-3">
+            {% if game.image %}
+              <div class="aspect-ratio aspect-ratio-100">
+                <div>
+                  <img src="{{ game.image.url }}" alt="{{ game.name }} image">
+                </div>
+              </div>
+            {% endif %}
+          </div>
+          <div class="component col-md-9">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="title">{{ game.name }}</div>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+              <div class="col-md-12">
+                <form action="{% url 'game_edit' game.pk %}" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {% for field in form %}
+                    {% if field|field_type:'checkboxinput' %}
+                      <div class="field-value field-checkbox">
+                        {{ field }}<label for="{{field.id_for_label}}">{{ field.label }}</label>
+                      </div>
+                    {% else %}
+                      <div class="field-label">{{ field.label }}</div>
+                      {% if field|field_type:'clearablefileinput' %}
+                      <div class="field-help">
+                        NOTE: An image provided here will overwrite the current image.
+                      </div>
+                      {% endif %}
+                      <div class="field-value">{{ field }}</div>
+                    {% endif %}
+                  {% endfor %}
+                  <div class="btn-wrap">
+                    <input type="submit" value="Save changes" class="btn">
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block js %}
+  {{ block.super }}
+  <script src="{% static "js/cart.js" %}"></script>
+{% endblock %}
