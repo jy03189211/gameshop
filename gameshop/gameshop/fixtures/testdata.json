@@ -7,7 +7,8 @@
       "username": "user1",
       "public_name": "Some Game Studio",
       "created_at": "2017-01-01T00:00:00+00:00",
-      "updated_at": "2017-01-01T00:00:00+00:00"
+      "updated_at": "2017-01-01T00:00:00+00:00",
+      "email": "user1@example.com"
     }
   },
   {
@@ -17,7 +18,8 @@
       "is_developer": "False",
       "username": "user2",
       "created_at": "2017-01-01T00:00:00+00:00",
-      "updated_at": "2017-01-01T00:00:00+00:00"
+      "updated_at": "2017-01-01T00:00:00+00:00",
+      "email": "user2@example.com"
     }
   },
   {
