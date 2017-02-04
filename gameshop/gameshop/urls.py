@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-
 from .views import *
 from .api.views import *
 from .storeutils.cart import urls as cart_urls
+
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -34,7 +34,8 @@ urlpatterns = [
     url(r'^your_games/managed_games/$', ManagedGamesView.as_view(), name="managed_games"),
     url(r'^your_games/sales/$', SalesView.as_view(), name="sales"),
     url(r'^your_games/new_game/$', NewGameView.as_view(), name="new_game"),
-    url(r'^game/$', GameView.as_view(), name="game"),
+    url(r'^game/(?P<game_id>\d+)/$', GameView.as_view(), name="game"),
+    url(r'^game/(?P<game_id>\d+)/edit/$', GameEditView.as_view(), name="game_edit"),
     url(r'^login/$', LoginView.as_view(), name="login"),
     url(r'^loginuser/$',login.login),
     url(r'^register/$', LoginView.as_view(),name='register'),
@@ -44,5 +45,14 @@ urlpatterns = [
     #url(r'^accounts/', include('allauth.urls')),
     #api
     url(r'^api/v1/', include('gameshop.api.urls')),
-
 ]
+
+
+# for development
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
