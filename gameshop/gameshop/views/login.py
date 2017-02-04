@@ -1,18 +1,17 @@
-from django.views.generic import TemplateView
-from ..forms import UserForm
+from django.views.generic import View
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, get_object_or_404
+from gameshop.forms.user import UserForm
 
-class LoginView(TemplateView):
 
-    template_name='login.html'
+class LoginView(View):
 
     def get(self, request, *args, **kwargs):
-        form=UserForm(request.POST)
-        return render(request,'login.html',{'form':form})
+        form = UserForm(request.POST)
+        return render(request, 'login.html', {'form': form})
 
-    def post(self,request):
-        form=UserForm(request.POST)
+    def post(self, request):
+        form = UserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             username = form.cleaned_data['username']
@@ -23,9 +22,4 @@ class LoginView(TemplateView):
                 'form': form,
             }
             return render(request, 'login.html', context)
-        return render(request, 'login.html', {'form':form})
-
-
-
-
-
+        return render(request, 'login.html', {'form': form})

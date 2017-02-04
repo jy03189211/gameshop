@@ -1,8 +1,8 @@
+import re
 from django.contrib.auth.models import User
 from django import forms
-import re
 from django.core.exceptions import ObjectDoesNotExist
-from .models import User
+from gameshop.models import User
 
 
 class UserForm(forms.ModelForm):
