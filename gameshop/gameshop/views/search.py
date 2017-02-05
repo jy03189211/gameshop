@@ -18,8 +18,8 @@ class SearchView(View):
         created_by = request.GET.get('created_by')
         available = request.GET.get('available')
         name = request.GET.get('name')
-        price_min = request.GET.get('pricemin')
-        price_max = request.GET.get('pricemax')
+        price_min = request.GET.get('price_min')
+        price_max = request.GET.get('price_max')
         categories = request.GET.get('categories')
 
         # TODO: public or not? availability always or not
@@ -28,9 +28,9 @@ class SearchView(View):
         # optional filters
         if name != None:
             filters = filters.filter(name__icontains=name)
-        if price_min != None:
+        if price_min:
             filters = filters.filter(price__gte=price_min)
-        if price_max != None:
+        if price_max:
             filters = filters.filter(price__lte=price_max)
         if created_by != None:
             filters = filters.filter(created_by__public_name__icontains=created_by)
