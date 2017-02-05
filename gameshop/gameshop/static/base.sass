@@ -9,6 +9,7 @@
 $font-size: 14px
 $font-size-s: 12px
 $font-size-l: 24px
+$font-size-xl: 36px
 
 $blue: rgb(50, 115, 220)
 $green: rgb(35, 209, 96)
@@ -34,6 +35,10 @@ body
   // background-size: 100% auto
   color: col(205)
   overflow-y: scroll
+
+p
+  padding: 15px 0
+  margin: 0
 
 a
   color: col(255)
@@ -145,6 +150,24 @@ a
   margin-bottom: 15px
   background: none
 
+  .jumbo-row
+    display: table
+    height: 100%
+
+    .vertical-center
+      display: table-cell
+      vertical-align: middle
+
+  .jumbo-game-title
+    font-size: $font-size-xl
+    text-transform: uppercase
+
+  .jumbo-game-description
+    padding: 15px 0 30px
+
+
+
+
 .component
   padding: 30px
   margin-bottom: 15px
@@ -245,6 +268,13 @@ a
       font-size: $font-size-s
       text-transform: uppercase
 
+    &.btn-l
+      height: 64px
+      line-height: 64px
+      padding: 0 24px
+      font-size: $font-size-l
+      text-transform: uppercase
+
     &.btn-secondary
       background: $grey-el
 
@@ -264,7 +294,8 @@ a
     padding: 5px 0
 
     .badge,
-    .btn
+    .btn,
+    .double-badge
       float: left
 
     &:first-child
@@ -275,6 +306,16 @@ a
 
     .btn + .btn
       margin-left: 15px
+
+    & > .double-badge
+      margin-bottom: 15px
+
+    .double-badge
+      &:nth-child(2n+1)
+        margin-left: 15px
+      &:first-child
+        margin-left: 0
+
 
   .badge
     display: inline-block
@@ -295,6 +336,13 @@ a
       line-height: 34px
       padding: 0 16px
       font-size: $font-size-s
+      text-transform: uppercase
+
+    &.badge-l
+      height: 64px
+      line-height: 64px
+      padding: 0 24px
+      font-size: $font-size-l
       text-transform: uppercase
 
   ul.table

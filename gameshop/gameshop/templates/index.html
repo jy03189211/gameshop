@@ -7,7 +7,28 @@
       <div class="col-md-12">
         <div class="aspect-ratio aspect-ratio-50">
           <div class="component">
-            <div class="component-title">TODO: jumbo</div>
+
+            <div class="row jumbo-row">
+              <div class="vertical-center">
+                <div class="col-sm-6 col-md-5 col-md-push-1 jumbo-col">
+                  <div class="jumbo-game-title">{{ jumbo_game.name }}</div>
+                  <div class="jumbo-game-description">{{ jumbo_game.description }}</div>
+                  <div class="jumbo-game-developer">
+                    <div class="badge-row">
+                      <div class="badge badge-s">By</div>
+                      <div class="badge badge-s badge-nobg">{{ jumbo_game.created_by.public_name }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-5 col-md-push-1 jumbo-col">
+                  <div class="badge-row float-right">
+                    <span class="badge badge-l">{{ jumbo_game.price }} €</span>
+                    <a href="{% url 'game' jumbo_game.pk %}" class="btn btn-l">Buy and play</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -17,30 +38,17 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
-      <div class="component featured">
-        <div class="featured-title title">Some game with a long name</div>
-        <div class="featured-buy"><span class="badge badge-s">12,34 €</span><a href="#" class="btn btn-s">Buy and play</a></div>
+    {% for game in featured_games %}
+      <div class="col-md-3">
+        <div class="component featured">
+          <div class="featured-title title">{{ game.name }}</div>
+          <div class="featured-buy">
+            <span class="badge badge-s">{{ game.price }} €</span><!--
+            --><a href="#" class="btn btn-s">Buy and play</a>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="col-md-3">
-      <div class="component featured">
-        <div class="featured-title title">Some game</div>
-        <div class="featured-buy"><span class="badge badge-s">12,34 €</span><a href="#" class="btn btn-s">Buy and play</a></div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="component featured">
-        <div class="featured-title title">Another game</div>
-        <div class="featured-buy"><span class="badge badge-s">12,34 €</span><a href="#" class="btn btn-s">Buy and play</a></div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="component featured">
-        <div class="featured-title title">Some game 2</div>
-        <div class="featured-buy"><span class="badge badge-s">12,34 €</span><a href="#" class="btn btn-s">Buy and play</a></div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

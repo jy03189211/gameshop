@@ -29,26 +29,30 @@
             </div>
             <div class="divider"></div>
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-12">
+                <p>{{ game.description }}</p>
+              </div>
+            </div>
+            <div class="divider"></div>
+            <div class="row">
+              <div class="col-md-12">
                 <div class="badge-row">
-                  <div class="badge badge-s">Developer</div>
-                  <div class="badge badge-s badge-nobg">{{ game.created_by.public_name }}</div>
-                </div>
-                <div class="badge-row">
-                  <div class="badge badge-s">Release date</div>
-                  <div class="badge badge-s badge-nobg">{{ game.created_at }}</div>
-                </div>
-                <div class="badge-row">
-                  <div class="badge badge-s">Categories</div>
-                  <div class="badge badge-s badge-nobg">{{ game.categories }}</div>
-                </div>
-                <div class="badge-row">
-                  <div class="badge badge-s">Price</div>
-                  <div class="badge badge-s badge-nobg">{{ game.price }} €</div>
+                  <div class="double-badge">
+                    <div class="badge badge-s">Developer</div>
+                    <div class="badge badge-s badge-nobg">{{ game.created_by.public_name }}</div>
+                  </div>
+                  <div class="double-badge">
+                    <div class="badge badge-s">Release date</div>
+                    <div class="badge badge-s badge-nobg">{{ game.created_at }}</div>
+                  </div>
+                  <div class="double-badge">
+                    <div class="badge badge-s">Categories</div>
+                    <div class="badge badge-s badge-nobg">{{ game.categories }}</div>
+                  </div>
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="badge-row float-right">
+              <div class="col-md-12">
+                <div class="badge-row">
                   <span class="badge">{{ game.price }} €</span>
                   <a href="#" class="btn" data-action="cart-add" data-game-id="1">Buy and play</a>
                   <a href="{% url 'game_edit' game.pk %}" class="btn">Edit</a>
