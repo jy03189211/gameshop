@@ -7,7 +7,9 @@
       <div class="col-md-12">
         <div class="aspect-ratio aspect-ratio-50">
           <div class="component">
-
+            <div class="backdrop">
+              <img src="{{ jumbo_game.image.url }}" alt="jumbo image">
+            </div>
             <div class="row jumbo-row">
               <div class="vertical-center">
                 <div class="col-sm-6 col-md-5 col-md-push-1 jumbo-col">
@@ -28,7 +30,6 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -39,12 +40,17 @@
 <div class="container">
   <div class="row">
     {% for game in featured_games %}
-      <div class="col-md-3">
-        <div class="component featured">
+      <div class="col-md-3 featured">
+        <div class="component">
+          {% if game.image %}
+            <div class="backdrop">
+              <img src="{{ game.image.url }}" alt="jumbo image">
+            </div>
+          {% endif %}
           <div class="featured-title title">{{ game.name }}</div>
           <div class="featured-buy">
             <span class="badge badge-s">{{ game.price }} €</span><!--
-            --><a href="#" class="btn btn-s">Buy and play</a>
+            --><a href="{% url 'game' game.pk %}" class="btn btn-s">Buy and play</a>
           </div>
         </div>
       </div>

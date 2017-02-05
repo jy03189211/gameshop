@@ -6,6 +6,24 @@
   @else
     @return rgb($base, $base+1, $base+2)
 
+/* based on http://coderesponsible.com/useful-sass-mixins/ */
+@mixin gradient($topleft, $bottomright)
+    // FF3.6+
+    background: -moz-linear-gradient(topleft,  $topleft 0%, $bottomright 100%)
+    // Chrome, Safari4+
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%, $topleft), color-stop(100%, $bottomright))
+    // Chrome10+, Safari5.1+
+    background: -webkit-linear-gradient(left top, $topleft 0%, $bottomright 100%)
+    // Opera 11.10+
+    background: -o-linear-gradient(topleft, $topleft 0%, $bottomright 100%)
+    // IE10+
+    background: -ms-linear-gradient(topleft, $topleft 0%, $bottomright 100%)
+    // W3C
+    background: linear-gradient(to bottom right, $topleft 0%, $bottomright 100%)
+    // IE6-9
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 )
+
+
 $font-size: 14px
 $font-size-s: 12px
 $font-size-l: 24px
@@ -151,8 +169,10 @@ a
   background: none
 
   .jumbo-row
+    position: relative
     display: table
     height: 100%
+    z-index: 2
 
     .vertical-center
       display: table-cell
@@ -161,12 +181,53 @@ a
   .jumbo-game-title
     font-size: $font-size-xl
     text-transform: uppercase
+    color: col(255)
 
   .jumbo-game-description
     padding: 15px 0 30px
+    fol
 
+.featured
 
+  .component
+    position: relative
 
+  .featured-title
+    font-size: $font-size-l
+    line-height: $font-size-l
+    height: $font-size-l * 2
+    margin-bottom: 45px
+
+  .featured-title,
+  .featured-buy
+    position: relative
+    z-index: 2
+
+.jumbotron,
+.featured
+  .component
+    .backdrop
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      overflow: hidden
+      z-index: 1
+
+      &::before
+        display: block
+        content: ""
+        position: absolute
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+        background: none
+        @include gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.2))
+
+      img
+        width: 100%
 
 .component
   padding: 30px
@@ -548,14 +609,6 @@ a
 
       &:hover
         background: $grey-l
-
-.featured
-
-  .featured-title
-    font-size: $font-size-l
-    line-height: $font-size-l
-    height: $font-size-l * 2
-    margin-bottom: 45px
 
 .game-wrap
 
