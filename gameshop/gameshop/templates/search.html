@@ -1,63 +1,63 @@
 {% extends "_base.html" %}
 
+{% load field_type %}
+
 {% block content %}
 <div class="container">
   <div class="row">
     <div class="col-md-4">
       <div class="component">
         <div class="component-title">Filters</div>
-        <div class="field-label">Title</div>
-        <div class="field-value">
-          <input type="text">
-        </div>
-        <div class="field-label">Category</div>
-        <div class="field-value categories">
-          <div class="category">
-            <input type="checkbox" id="category1"><label for="category1">Category 1</label>
+        <form action="{% url 'search' %}" method="get">
+          {% for field in form %}
+            {% if field|field_type:'checkboxinput' %}
+              <div class="field-value field-checkbox">
+                {{ field }}<label for="{{field.id_for_label}}">{{ field.label }}</label>
+              </div>
+            {% else %}
+              <div class="field-label">{{ field.label }}</div>
+              <div class="field-value">{{ field }}</div>
+            {% endif %}
+          {% endfor %}
+          <div class="btn-wrap">
+            <input type="submit" value="Apply filters" class="btn">
           </div>
-          <div class="category">
-            <input type="checkbox" id="category2"><label for="category2">Category 2</label>
-          </div>
-          <div class="category">
-            <input type="checkbox" id="category3"><label for="category3">Category 3</label>
-          </div>
-          <div class="category">
-            <input type="checkbox" id="category4"><label for="category4">Category 4</label>
-          </div>
-        </div>
-        <div class="field-label">Price min</div>
-        <div class="field-value">
-          <input type="number">
-        </div>
-        <div class="field-label">Price max</div>
-        <div class="field-value">
-          <input type="number">
-        </div>
-        <div class="btn-wrap btn-right">
-          <div class="btn">Apply filters</div>
-        </div>
+        </form>
       </div>
     </div>
     <div class="col-md-8">
       <div class="row">
         <div class="col-md-12">
           <div class="component">
-            <div class="component-title">TODO: result</div>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="component">
-            <div class="component-title">TODO: result</div>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="component">
-            <div class="component-title">TODO: result</div>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="component">
-            <div class="component-title">TODO: result</div>
+            <div class="component-title">Results</div>
+            {% if results|length < 1 %}
+            <p>No results</p>
+            {% endif %}
+            <div class="game-list">
+              {% for game in results %}
+              <div class="game">
+                <div class="game-image"></div>
+                <div class="game-details">
+                  <div class="game-title">{{ game.name }}</div>
+                  <div class="game-description">{{ game.description }}</div>
+                  <div class="divider"></div>
+                  <div class="game-details">
+                    <div class="badge-row">
+                      <div class="double-badge">
+                        <div class="badge badge-s">Developed by</div>
+                        <div class="badge badge-s badge-nobg">{{ game.created_by.public_name }}</div>
+                      </div>
+                      <div class="double-badge">
+                        <div class="badge badge-s">Price</div>
+                        <div class="badge badge-s badge-nobg">{{ game.price }} €</div>
+                      </div>
+                    </div>
+                    <a href="{% url 'game' game.pk %}" class="btn btn-s">Go to page</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
           </div>
         </div>
       </div>

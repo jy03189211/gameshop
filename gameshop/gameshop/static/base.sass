@@ -372,11 +372,10 @@ a
       margin-bottom: 15px
 
     .double-badge
-      &:nth-child(2n+1)
-        margin-left: 15px
+      margin-left: 15px
+
       &:first-child
         margin-left: 0
-
 
   .badge
     display: inline-block
@@ -642,6 +641,12 @@ a
 
         .badge:not(.badge-nobg)
           background: $grey-el
+
+        .double-badge
+          margin-bottom: 0
+
+          @media only screen and (max-width: 1199px)
+            margin-bottom: 15px
 
       .btn
         float: right
