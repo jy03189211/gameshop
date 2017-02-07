@@ -70,7 +70,9 @@
       <div class="component">
         <div class="game-wrap aspect-ratio">
           <div class="game">
-            TODO: play game (shown if owned)
+            {% if game.url %}
+              <iframe src="{{ game.url }}"></iframe>
+            {% endif %}
           </div>
         </div>
       </div>
