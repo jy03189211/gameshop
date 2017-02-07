@@ -415,18 +415,6 @@ a
     &:last-child
       margin-bottom: 0
 
-    a
-      &:active,
-      &:focus
-        text-decoration: none
-
-        li
-          background: $blue
-          color: col(255)
-
-          &:hover
-            color: col(255)
-
     li
       display: flex
       width: 100%
@@ -440,9 +428,6 @@ a
 
       &.table-total
         background: $grey-l
-
-      &:hover:not(.table-header),
-        color: $blue
 
       &:only-child
         border-top: 1px solid $grey-l

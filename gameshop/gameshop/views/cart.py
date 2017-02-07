@@ -1,15 +1,20 @@
 from django.views.generic import TemplateView
 from django.shortcuts import render
 from gameshop.storeutils.cart import cart
+from gameshop.models import Game
 
 class CartView(TemplateView):
 
     def get(self, request):
-        items = cart.get_cart(request)
+        item_ids = cart.get_cart(request)
         total = 0
-        for name, price in items.items():
-            total += price
+
+        games_in_cart = Game.objects.filter(id__in=item_ids)
+
+        for game in games_in_cart:
+            total += game.price
+
         return render(request, "cart.html", {
-            'items': items,
+            'games': games_in_cart,
             'total': total
         })

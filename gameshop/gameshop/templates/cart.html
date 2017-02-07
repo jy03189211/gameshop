@@ -1,5 +1,7 @@
 {% extends "_base.html" %}
 
+{% load static %}
+
 {% block content %}
 <div class="container">
   <div class="row">
@@ -10,14 +12,18 @@
           <li class="table-header">
             <span class="table-col-2">Name</span>
             <span>Price</span>
+            <span></span>
           </li>
-          {% for item_name, item_price in items.items %}
-          <a href="#">
-            <li>
-              <span class="table-col-2">{{ item_name }}</span>
-              <span>{{ item_price }} €</span>
-            </li>
-          </a>
+          {% for game in games %}
+          <li>
+            <span class="table-col-2">
+              <a href="{% url 'game' game.pk %}">{{ game.name }}</a>
+            </span>
+            <span>{{ game.price }} €</span>
+            <span>
+              <a href="#" data-action="cart-remove" data-game-id="{{ game.pk }}">Remove</a>
+            </span>
+          </li>
           {% endfor %}
         </ul>
       </div>
@@ -37,4 +43,9 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block js %}
+  {{ block.super }}
+  <script src="{% static "js/cart.js" %}"></script>
 {% endblock %}

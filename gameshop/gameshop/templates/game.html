@@ -54,7 +54,7 @@
               <div class="col-md-12">
                 <div class="badge-row">
                   <span class="badge">{{ game.price }} €</span>
-                  <a href="#" class="btn" data-action="cart-add" data-game-id="1">Buy and play</a>
+                  <a href="#" class="btn" data-action="cart-add" data-game-id="{{ game.pk }}">Add to cart</a>
                   <a href="{% url 'game_edit' game.pk %}" class="btn">Edit</a>
                 </div>
               </div>

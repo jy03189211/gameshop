@@ -1,16 +1,21 @@
-def add_to_cart(request, item_id, item_price):
-    cart = request.session.get('cart', {})
+def add_to_cart(request, item_id):
+    """Adds the given item ID to the current session's cart"""
+    # the cart is a list of ID's
+    cart = request.session.get('cart', [])
     if not item_id in cart:
-        cart[str(item_id)] = item_price
+        cart.append(item_id)
         request.session['cart'] = cart
     return True
 
 def remove_from_cart(request, item_id):
-    cart = request.session.get('cart', {})
-    cart.pop(item_id, None)
-    #request.session['cart'] = cart
+    """Removed the given item ID from the current session's cart"""
+    cart = request.session.get('cart', [])
+    if item_id in cart:
+        cart.remove(item_id)
+    request.session['cart'] = cart
     return True
 
 def get_cart(request):
-    cart = request.session.get('cart', {})
+    """Returns a list of item ID's in the cart"""
+    cart = request.session.get('cart', [])
     return cart
