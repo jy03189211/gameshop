@@ -37,7 +37,6 @@ urlpatterns = [
     url(r'^game/(?P<game_id>\d+)/$', GameView.as_view(), name="game"),
     url(r'^game/(?P<game_id>\d+)/edit/$', GameEditView.as_view(), name="game_edit"),
     url(r'^login/$', LoginView.as_view(), name="login"),
-    url(r'^loginuser/$',login.login),
     url(r'^register/$', LoginView.as_view(),name='register'),
     url(r'^cart/$', CartView.as_view(), name="cart"),
     url(r'^cart/', include(cart_urls)),

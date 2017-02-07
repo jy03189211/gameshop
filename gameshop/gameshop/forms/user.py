@@ -1,27 +1,23 @@
-import re
-from django.contrib.auth.models import User
 from django import forms
+import re
 from django.core.exceptions import ObjectDoesNotExist
-from gameshop.models import User
+from ..models import User
+from django.forms import CharField, Form, PasswordInput
 
-
-class UserForm(forms.ModelForm):
-    #password=forms.CharField(label='id_reg_password1', widget=forms.PasswordInput())
-    username = forms.CharField(label='Username', max_length=30)
-    email = forms.EmailField(label='Email')
-    password1 = forms.CharField(label='Password',widget=forms.PasswordInput())
-    password2 = forms.CharField(label='Password (Again)',widget=forms.PasswordInput())
-
+class RegisterForm(forms.ModelForm):
+    password=forms.CharField(label='password', widget=forms.PasswordInput(),)
+    password2 = forms.CharField(label='retype password', widget=forms.PasswordInput(),)
     class Meta:
-        fields=('username','email','password1','password2')
-        model=User
+        model = User
+        fields=['username', 'email','password']
+        write_only_fields = ['password']
 
     def clean_password2(self):
-        if 'password1' in self.cleaned_data:
-            password1 = self.cleaned_data['password1']
+        if 'password' in self.cleaned_data:
+            password = self.cleaned_data['password']
             password2 = self.cleaned_data['password2']
-            if password1 == password2:
-                return password2
+            if password == password2:
+                return password
         raise forms.ValidationError('Passwords do not match.')
 
     def clean_username(self):
@@ -33,3 +29,9 @@ class UserForm(forms.ModelForm):
         except ObjectDoesNotExist:
             return username
         raise forms.ValidationError('Username is already taken.')
+
+class LoginForm(forms.ModelForm):
+    password = forms.CharField(label='password', widget=forms.PasswordInput(), )
+    class Meta:
+        model =User
+        fields=['username','password']

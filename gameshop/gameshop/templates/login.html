@@ -4,6 +4,7 @@
   <div class="row">
     <div class="col-sm-12 col-md-8 col-md-push-2">
       <div class="component">
+<<<<<<< HEAD
         <div class="row">
           <div class="col-md-4">
             <i class="material-icons icon-xl">person</i>
@@ -33,6 +34,30 @@
             {% endcomment %}
             <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false">facebook</div>
           </div>
+=======
+        <div class="component-title">Login</div>
+          <form action="/login/" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% comment %}<div class="field-label"><label for="id_login_name">Username</label></div>
+            <div class="field-value"><input id="id_login_name" type="text" name="id_name" value="{{ current_name }}" required="required"></div>
+            <div class="field-label"><label for="id_login_password">Password</label></div>
+            <div class="field-value"><input id="id_login_password" type="password" name="id_password" required="required"></div>
+            {% endcomment %}
+            {{ loginForm.as_p }}
+             <div class="btn-wrap btn-right"><input class="btn" type="submit" name="loginBtn" value="Login"></div>
+          </form>
+{% comment "Login elements with out form" %}
+        <div class="field-label">Username</div>
+        <div class="field-value">
+          <input type="text">
+        </div>
+        <div class="field-label">Password</div>
+        <div class="field-value">
+          <input type="password">
+        </div>
+        <div class="btn-wrap btn-right">
+          <a class="btn" href="{% url 'index' %}">Login</a>
+>>>>>>> login and register done
         </div>
       </div>
     </div>
@@ -48,6 +73,7 @@
             <div class="component-title">Register</div>
             {# Register form #}
             <form action="/register/" method="post" enctype="multipart/form-data">
+<<<<<<< HEAD
               {% csrf_token %} {% comment %}
               <div class="field-label"><label for="id_reg_name">Username</label></div>
               <div class="field-value"><input id="id_reg_name" type="text" name="id_name" maxlength="100" required></div>
@@ -58,6 +84,19 @@
               <div class="field-label"><label for="id_reg_email">Email</label></div>
               <div class="field-value"><input id="id_reg_email" type="email" name="id_email"></div>{% endcomment %} {{form}}
               <div class="btn-wrap btn-right"><input class="btn" type="submit" value="Register"></div>
+=======
+                {% csrf_token %}
+                {% comment %}<div class="field-label"><label for="id_reg_name">Username</label></div>
+                <div class="field-value"><input id="id_reg_name" type="text" name="id_name" maxlength="100" required></div>
+                <div class="field-label"><label for="id_reg_password1">Password</label></div>
+                <div class="field-value"><input id="id_reg_password1" type="password" name="id_password" required></div>
+                <div class="field-label"><label for="id_reg_password2">Retype Password</label></div>
+                <div class="field-value"><input id="id_reg_password2" type="password" name="id_password" required></div>
+                <div class="field-label"><label for="id_reg_email">Email</label></div>
+                <div class="field-value"><input id="id_reg_email" type="email" name="id_email"></div>{% endcomment %}
+                {{registerForm.as_p}}
+                <div class="btn-wrap btn-right"><input class="btn" type="submit" name="registerBtn" value="Register"></div>
+>>>>>>> login and register done
             </form>
 
             {% comment "Register elements with out form" %}

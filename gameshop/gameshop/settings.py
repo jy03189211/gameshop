@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'gameshop.api',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES= [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -93,7 +93,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -119,6 +118,8 @@ AUTHENTICATION_BACKENDS={
     'allauth.account.auth_backends.AuthenticationBackend',
 
 }
+#Django allows you to override the default user model by providing a value for the AUTH_USER_MODEL setting that references a custom model:
+AUTH_USER_MODEL='gameshop.User'
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
