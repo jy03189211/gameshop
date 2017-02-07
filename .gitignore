@@ -1,3 +1,7 @@
 *.DS_Store
 *.pyc
+<<<<<<< HEAD
 .vscode
+=======
+*.idea
+>>>>>>> login and register done
