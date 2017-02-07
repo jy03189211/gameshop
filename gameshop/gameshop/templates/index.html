@@ -7,11 +7,6 @@
       <div class="col-md-12">
         <div class="aspect-ratio aspect-ratio-50">
           <div class="component">
-            {% if game.image %}
-              <div class="backdrop">
-                <img src="{{ jumbo_game.image.url }}" alt="jumbo image">
-              </div>
-            {% endif %}
             <div class="row jumbo-row">
               <div class="vertical-center">
                 <div class="col-sm-6 col-md-5 col-md-push-1 jumbo-col">
@@ -32,6 +27,11 @@
                 </div>
               </div>
             </div>
+            {% if jumbo_game.image.url %}
+              <div class="backdrop">
+                <img src="{{ jumbo_game.image.url }}" alt="jumbo image">
+              </div>
+            {% endif %}
           </div>
         </div>
       </div>
