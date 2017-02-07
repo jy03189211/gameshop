@@ -7,9 +7,11 @@
       <div class="col-md-12">
         <div class="aspect-ratio aspect-ratio-50">
           <div class="component">
-            <div class="backdrop">
-              <img src="{{ jumbo_game.image.url }}" alt="jumbo image">
-            </div>
+              {% if game.image %}
+                <div class="backdrop">
+                  <img src="{{ jumbo_game.image.url }}" alt="jumbo image">
+                </div>
+              {% endif %}
             <div class="row jumbo-row">
               <div class="vertical-center">
                 <div class="col-sm-6 col-md-5 col-md-push-1 jumbo-col">

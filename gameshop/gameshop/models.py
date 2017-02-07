@@ -15,10 +15,12 @@ http://stackoverflow.com/a/1737078/1425689
 class User(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    last_login=models.DateTimeField(auto_now=True)
+    last_login=models.DateTimeField(auto_now=True,null=True)
     username = models.CharField(max_length=50, default='user_without_name', unique=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100, default="",)
+    is_developer=models.BooleanField(default=False)
+    public_name=models.CharField(max_length=15,default="")
 
 class Game(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
