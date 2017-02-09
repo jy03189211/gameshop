@@ -36,8 +36,12 @@
             <span class="cart-total">{{ total }} €</span>
           </li>
         </ul>
-        <div class="btn-wrap btn-right">
-          <a href="#" class="btn">Checkout</a>
+        <div class="btn-wrap">
+          <form action="http://payments.webcourse.niksula.hut.fi/pay/" method="POST">
+            {{ payment_form }}
+            <a href="#" class="btn" onclick="submitParent(event)">Checkout</a>
+          </form>
+          <div class="btn-help">Checkout will redirect you to the Simple Payments service.</div>
         </div>
       </div>
     </div>

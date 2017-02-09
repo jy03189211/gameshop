@@ -1,3 +1,5 @@
+from gameshop.models import Game
+
 def add_to_cart(request, item_id):
     """Adds the given item ID to the current session's cart"""
     # the cart is a list of ID's
@@ -19,3 +21,12 @@ def get_cart(request):
     """Returns a list of item ID's in the cart"""
     cart = request.session.get('cart', [])
     return cart
+
+def get_cart_total(request):
+    """Returns the cart total price"""
+    total = 0
+    item_ids = get_cart(request)
+    games_in_cart = Game.objects.filter(id__in=item_ids)
+    for game in games_in_cart:
+        total += game.price
+    return total

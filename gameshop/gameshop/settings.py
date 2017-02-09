@@ -154,6 +154,13 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
 
+# payment service settings
+SELLER_ID = 'oursellerid'
+SELLER_SECRET_KEY = 'oursellersecret'
+PAYMENT_SUCCESS_URL = '/checkout/success/'
+PAYMENT_CANCEL_URL = '/checkout/cancel/'
+PAYMENT_ERROR_URL = '/checkout/error/'
+
 # Misc. stuff
 
 APPEND_SLASH = True
