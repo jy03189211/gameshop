@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
-    #'livereload',
+    'livereload',
     'gameshop.api',
 ]
 
@@ -56,7 +56,7 @@ MIDDLEWARE_CLASSES= [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-#    'livereload.middleware.LiveReloadScript',
+    'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = 'gameshop.urls'
@@ -147,6 +147,12 @@ MEDIA_URL = '/media/'
 MEDIAFILES_DIRS = [
     os.path.join(BASE_DIR, 'gameshop/media')
 ]
+
+
+# auth
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+
 
 # Misc. stuff
 

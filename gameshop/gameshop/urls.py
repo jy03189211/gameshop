@@ -36,15 +36,17 @@ urlpatterns = [
     url(r'^your_games/new_game/$', NewGameView.as_view(), name="new_game"),
     url(r'^game/(?P<game_id>\d+)/$', GameView.as_view(), name="game"),
     url(r'^game/(?P<game_id>\d+)/edit/$', GameEditView.as_view(), name="game_edit"),
-    url(r'^login/$', LoginView.as_view(), name="login"),
-    url(r'^register/$', LoginView.as_view(),name='register'),
-    url(r'^logout/$', logout_view, name="logout"),
     url(r'^cart/$', CartView.as_view(), name="cart"),
     url(r'^cart/', include(cart_urls)),
     #third party authentication
     #url(r'^accounts/', include('allauth.urls')),
     #api
     url(r'^api/v1/', include('gameshop.api.urls')),
+
+    # authentication
+    url(r'^register/$', register_view, name='register')
+    url(r'^login/$', login_view, name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
 ]
 
 
