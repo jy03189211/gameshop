@@ -93,4 +93,7 @@ def handle_payment_success(request):
         new_purchase.save()
         user.owned_games.add(game)
 
+    # clear cart
+    cart_utils.clear_cart(request)
+
     return True

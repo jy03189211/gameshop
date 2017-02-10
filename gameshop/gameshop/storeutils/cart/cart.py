@@ -30,3 +30,7 @@ def get_cart_total(request):
     for game in games_in_cart:
         total += game.price
     return total
+
+def clear_cart(request):
+    """Resets the cart"""
+    request.session['cart'] = []
