@@ -110,6 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
 AUTHENTICATION_BACKENDS={
 # Needed to login by username in Django admin, regardless of `allauth` (Default)
     'django.contrib.auth.backends.ModelBackend',
@@ -118,8 +119,11 @@ AUTHENTICATION_BACKENDS={
     'allauth.account.auth_backends.AuthenticationBackend',
 
 }
-#Django allows you to override the default user model by providing a value for the AUTH_USER_MODEL setting that references a custom model:
+
+# Django allows you to override the default user model by providing a value for the AUTH_USER_MODEL setting that references a custom model:
 AUTH_USER_MODEL='gameshop.User'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -155,11 +159,12 @@ LOGIN_REDIRECT_URL = '/'
 
 
 # payment service settings
-SELLER_ID = 'oursellerid'
-SELLER_SECRET_KEY = 'oursellersecret'
-PAYMENT_SUCCESS_URL = '/checkout/success/'
-PAYMENT_CANCEL_URL = '/checkout/cancel/'
-PAYMENT_ERROR_URL = '/checkout/error/'
+SELLER_ID = 'teamHJP'
+SELLER_SECRET_KEY = 'bc0690b6f967d4b4921d5f3e114ffeea'
+# be sure to include a trailing slash and no leading slash
+PAYMENT_SUCCESS_URL = 'payment/success/'
+PAYMENT_CANCEL_URL = 'payment/cancel/'
+PAYMENT_ERROR_URL = 'payment/error/'
 
 # Misc. stuff
 

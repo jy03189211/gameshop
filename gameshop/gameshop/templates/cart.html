@@ -38,8 +38,12 @@
         </ul>
         <div class="btn-wrap">
           <form action="http://payments.webcourse.niksula.hut.fi/pay/" method="POST">
-            {{ payment_form }}
-            <a href="#" class="btn" onclick="submitParent(event)">Checkout</a>
+            {% if payment_form %}
+              {{ payment_form }}
+              <a href="#" class="btn" onclick="submitParent(event)">Checkout</a>
+            {% else %}
+              <a href="#" class="btn" disabled>Checkout</a>
+            {% endif %}
           </form>
           <div class="btn-help">Checkout will redirect you to the Simple Payments service.</div>
         </div>

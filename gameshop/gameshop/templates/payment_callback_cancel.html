@@ -1,0 +1,19 @@
+{% extends "_base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="component">
+        <div class="component-title">Payment cancelled</div>
+        <p>Your payment was cancelled.</p>
+        <div class="btn-wrap">
+          <a href="{% url 'cart' %}" class="btn">Return to cart</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -16,9 +16,10 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from .views import *
-from .api.views import *
-from .storeutils.cart import urls as cart_urls
+from gameshop.views import *
+from gameshop.api.views import *
+from gameshop.storeutils.cart import urls as cart_urls
+from gameshop import settings
 
 
 urlpatterns = [
@@ -39,6 +40,12 @@ urlpatterns = [
     url(r'^game/(?P<game_id>\d+)/edit/$', GameEditView.as_view(), name="game_edit"),
     url(r'^cart/$', CartView.as_view(), name="cart"),
     url(r'^cart/', include(cart_urls)),
+
+    # payment service callback handling
+    url(r'^' + settings.PAYMENT_SUCCESS_URL + '$', payment_success_view),
+    url(r'^' + settings.PAYMENT_CANCEL_URL + '$', payment_cancel_view),
+    url(r'^' + settings.PAYMENT_ERROR_URL + '$', payment_error_view),
+
     #third party authentication
     #url(r'^accounts/', include('allauth.urls')),
     #api

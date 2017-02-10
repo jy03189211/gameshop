@@ -1,0 +1,35 @@
+{% extends "_base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="component">
+        <div class="component-title">Payment successful</div>
+        <p>Payment successful. Enjoy your new games!</p>
+        <p>Payment reference number: {{ payment_ref }}</p>
+        <ul class="table align-last-right">
+          <li class="table-header">
+            <span class="table-col-2">Name</span>
+            <span>Price</span>
+            <span></span>
+          </li>
+          {% for game in games %}
+          <li>
+            <span class="table-col-2">
+              <a href="{% url 'game' game.pk %}">{{ game.name }}</a>
+            </span>
+            <span>{{ game.price }} €</span>
+            <span>
+              <a href="{% url 'game' game.pk %}">Play</a>
+            </span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
