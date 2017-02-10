@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^your_games/settings/$', SettingsView.as_view(), name="settings"),
     url(r'^your_games/owned_games/$', OwnedGamesView.as_view(), name="owned_games"),
     url(r'^your_games/orders/$', OrdersView.as_view(), name="orders"),
+    url(r'^your_games/orders/(?P<order_id>\d+)/$', OrdersView.as_view(), name="order"),
     url(r'^your_games/managed_games/$', ManagedGamesView.as_view(), name="managed_games"),
     url(r'^your_games/sales/$', SalesView.as_view(), name="sales"),
     url(r'^your_games/new_game/$', NewGameView.as_view(), name="new_game"),

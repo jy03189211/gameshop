@@ -1,82 +1,51 @@
 {% extends "_yourgames.html" %}
 
 {% block subcontent %}
-  <div class="component-title">Orders</div>
+<div class="component-title">Orders</div>
+<ul class="table align-last-right">
+  <li class="table-header">
+    <span>Order #</span>
+    <span>Date</span>
+    <span>Total</span>
+  </li>
+  {% for order in orders %}
+  <li class="{% if selected_order.pk == order.pk %}selected{% endif %}">
+    <a href="{% url 'order' order.pk %}">
+      <span>{{ order.pk }}</span>
+      <span>{{ order.created_at }}</span>
+      <span>{{ order.total }} €</span>
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+
+{% if selected_order %}
+<div class="component selected-order">
+  <div class="component-title">Order 1</div>
+  <div class="badge-row">
+    <div class="double-badge">
+      <div class="badge badge-s">Payment reference number</div>
+      <div class="badge badge-s badge-nobg">{{ selected_order.payment_ref }}</div>
+    </div>
+  </div>
   <ul class="table align-last-right">
     <li class="table-header">
-      <span>Order #</span>
-      <span class="table-col-2">Purchases</span>
-      <span>Date</span>
-      <span>Total</span>
+      <span class="table-col-2">Item</span>
+      <span>Price</span>
     </li>
-    <a href="#">
-      <li>
-        <span>1</span>
-        <span class="table-col-2">Some game name</span>
-        <span>Jan 1, 1234</span>
-        <span>12,34 €</span>
-      </li>
-    </a>
-    <a href="#">
-      <li>
-        <span>1</span>
-        <span class="table-col-2">Some game name</span>
-        <span>Jan 1, 1234</span>
-        <span>12,34 €</span>
-      </li>
-    </a>
-    <a href="#">
-      <li>
-        <span>1</span>
-        <span class="table-col-2">Some game name</span>
-        <span>Jan 1, 1234</span>
-        <span>12,34 €</span>
-      </li>
-    </a>
-    <a href="#">
-      <li>
-        <span>1</span>
-        <span class="table-col-2">Some game name</span>
-        <span>Jan 1, 1234</span>
-        <span>12,34 €</span>
-      </li>
-    </a>
+    {% for purchase in selected_order.purchases.all %}
+    <li>
+      <a href="{% url 'game' purchase.game.pk %}">
+        <span class="table-col-2">{{ purchase.game.name }}</span>
+        <span>{{ purchase.game.price }} €</span>
+      </a>
+    </li>
+    {% endfor %}
+    <li class="table-total">
+      <span class="table-col-2">Total</span>
+      <span>{{ selected_order.total }} €</span>
+    </li>
   </ul>
-  <div class="component selected-order">
-    <div class="component-title">Order 1</div>
-    <ul class="table align-last-right">
-      <li class="table-header">
-        <span class="table-col-2">Item</span>
-        <span>Price</span>
-      </li>
-      <a href="#">
-        <li>
-          <span class="table-col-2">Some game name</span>
-          <span>12,34 €</span>
-        </li>
-      </a>
-      <a href="#">
-        <li>
-          <span class="table-col-2">Some game name</span>
-          <span>12,34 €</span>
-        </li>
-      </a>
-      <a href="#">
-        <li>
-          <span class="table-col-2">Some game name</span>
-          <span>12,34 €</span>
-        </li>
-      </a>
-      <a href="#">
-        <li>
-          <span class="table-col-2">Some game name</span>
-          <span>12,34 €</span>
-        </li>
-      </a>
-      <li class="table-total">
-        <span class="table-col-2"></span>
-        <span>12,34 €</span>
-      </li>
-    </ul>
-  </div>
+</div>
+{% endif %}
 {% endblock %}

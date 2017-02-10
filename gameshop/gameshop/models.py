@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.forms import CharField, Form, PasswordInput
 from django.utils import timezone
 from django.contrib.auth.models import User
-import json, os
+import json, os, pprint
 
 
 """
@@ -52,12 +52,19 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     payment_ref = models.CharField(max_length=256)
 
+    @property
+    def total(self):
+        total = 0
+        for purchase in self.purchases.all():
+            total += purchase.game.price
+        return total
+
 
 class Purchase(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     game = models.ForeignKey(Game, related_name='purchases', on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, related_name='purchases', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
