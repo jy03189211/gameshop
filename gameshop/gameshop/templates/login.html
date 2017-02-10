@@ -11,7 +11,7 @@
         <!-- login form -->
         <form action="/login/" method="post" enctype="multipart/form-data">
           {% csrf_token %}
-          {{ loginForm }}
+          {{ login_form }}
           <div class="btn-wrap btn-right">
             <input class="btn" type="submit" name="loginBtn" value="Login">
           </div>
@@ -26,7 +26,7 @@
         <!-- register form -->
         <form action="/register/" method="post" enctype="multipart/form-data">
           {% csrf_token %}
-          {{ registerForm }}
+          {{ register_form }}
           <div class="btn-wrap btn-right">
             <input class="btn" type="submit" name="registerBtn" value="Register">
           </div>

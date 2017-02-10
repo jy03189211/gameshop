@@ -1,14 +1,18 @@
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from gameshop.forms import RegisterForm, LoginForm
+from django.shortcuts import render
+from gameshop.forms.user import RegisterForm, LoginForm
 
 
 def login_view_get(request):
     # get page for login and registration
     register_form = RegisterForm(request.GET)
     login_form = LoginForm(request.GET) # TODO: use the django view instead of this
-    return render(request, 'login.html', {'registerForm': registerForm,'loginForm':loginForm})
+    return render(request, 'login.html', {
+        'register_form': register_form,
+        'login_form': login_form}
+    )
 
 
 def login_view(request):
@@ -19,7 +23,7 @@ def login_view(request):
 
     # if POST, redirect to the django built-in login view
     if request.method == 'POST':
-        return auth_views.login(register)
+        return auth_views.login(request)
 
 
 def register_view(request):
@@ -31,3 +35,5 @@ def register_view(request):
     # if POST, register a new user
     if request.method == 'POST':
         # do register stuff
+        pass
+

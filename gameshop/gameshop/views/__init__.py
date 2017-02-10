@@ -11,6 +11,6 @@ from .sales import SalesView
 from .new_game import NewGameView
 from .game import GameView
 from .game_edit import GameEditView
-from .login import LoginView
-from .logout import logout_view
 from .cart import CartView
+from .auth import login_view
+from .auth import register_view

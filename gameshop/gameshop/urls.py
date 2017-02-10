@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from .views import *
 from .api.views import *
 from .storeutils.cart import urls as cart_urls
@@ -44,7 +45,7 @@ urlpatterns = [
     url(r'^api/v1/', include('gameshop.api.urls')),
 
     # authentication
-    url(r'^register/$', register_view, name='register')
+    url(r'^register/$', register_view, name='register'),
     url(r'^login/$', login_view, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
 ]
