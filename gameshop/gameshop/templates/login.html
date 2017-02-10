@@ -11,7 +11,7 @@
         <!-- login form -->
         <form action="/login/" method="post" enctype="multipart/form-data">
           {% csrf_token %}
-          {{ login_form }}
+          {{ form }}
           <div class="btn-wrap btn-right">
             <input class="btn" type="submit" name="loginBtn" value="Login">
           </div>
