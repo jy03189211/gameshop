@@ -22,6 +22,9 @@ class User(AbstractUser):
     is_developer=models.BooleanField(default=False)
     public_name=models.CharField(max_length=15,default="")
 
+    def __str__(self):
+        return self.username
+
 
 class Category(models.Model):
     name = models.CharField(max_length=30)
@@ -47,6 +50,8 @@ class Game(models.Model):
 
     # TODO: add release_date and change that into the template also
 
+    def __str__(self):
+        return self.name
 
 
 class Order(models.Model):
@@ -62,6 +67,9 @@ class Order(models.Model):
             total += purchase.game.price
         return total
 
+    def __str__(self):
+        return 'Order {} ({})'.format(self.pk, self.user.username)
+
 
 class Purchase(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -71,6 +79,9 @@ class Purchase(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     price = models.FloatField()
 
+    def __str__(self):
+        return 'Purchase {} ({})'.format(self.pk, self.user.username)
+
 
 class Savegame(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -79,6 +90,9 @@ class Savegame(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='savegames', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return 'Savegame ({}, {})'.format(self.game, self.user.username)
+
 
 class Score(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -86,3 +100,7 @@ class Score(models.Model):
     score = models.PositiveIntegerField()
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return 'Score ({}, {}, {})'.format(
+            self.score, self.game, self.user.username)
