@@ -22,6 +22,14 @@ class User(AbstractUser):
     is_developer=models.BooleanField(default=False)
     public_name=models.CharField(max_length=15,default="")
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name.capitalize()
+
+
 class Game(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -30,20 +38,15 @@ class Game(models.Model):
     description = models.CharField(max_length=500, null=True, blank=True)
     price = models.FloatField()
     available = models.BooleanField(default=False)
-    categories = models.CharField(max_length=50, default='')
-    created_by = models.ForeignKey(User, related_name='developed_games', on_delete=models.CASCADE)
+    created_by = models.ForeignKey(
+        User, related_name='developed_games', on_delete=models.CASCADE)
     # a game can be owned by multiple users
     owned_by = models.ManyToManyField(User, related_name='owned_games')
     image = models.ImageField(upload_to='images/', blank=True, null=True)
+    category = models.ForeignKey(Category, null=True, blank=True)
 
     # TODO: add release_date and change that into the template also
 
-    def set_categories(self, x):
-        self.categories = json.dumps(x)
-
-    def get_categories(self):
-        print(self.categories)
-        return json.loads(self.categories)
 
 
 class Order(models.Model):

@@ -19,7 +19,7 @@ class GameEditView(View):
             'description': game.description,
             'price': game.price,
             'available': game.available,
-            'categories': game.categories,
+            'category': game.category,
         }
 
         # NewGameForm for edit with initial population
@@ -41,6 +41,7 @@ class GameEditView(View):
             game.description = form.cleaned_data["description"]
             game.price = form.cleaned_data["price"]
             game.available = form.cleaned_data["available"]
+            game.category = form.cleaned_data["category"]
             if form.cleaned_data["image"]:
                 game.image = form.cleaned_data["image"]
 

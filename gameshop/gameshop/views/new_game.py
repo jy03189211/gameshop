@@ -25,6 +25,7 @@ class NewGameView(View):
                 price=form.cleaned_data["price"],
                 available=form.cleaned_data["available"],
                 created_by=creator,
+                category=form.cleaned_data["category"],
                 image=form.cleaned_data["image"]
             )
             new_game.save()
