@@ -67,13 +67,13 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div class="component">
-        <div class="game-wrap aspect-ratio">
-          <div class="game">
-            {% if game.url %}
-              <iframe src="{{ game.url }}"></iframe>
-            {% endif %}
-          </div>
+      <div class="component game-component">
+        <div class="game-wrap">
+          {% if game.url %}
+          <iframe src="{{ game.url }}" id="game-iframe"></iframe>
+          {% else %}
+          <div class="game-error">Game URL not found</div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -92,4 +92,5 @@
 {% block js %}
   {{ block.super }}
   <script src="{% static "js/cart.js" %}"></script>
+  <script src="{% static "js/message.js" %}"></script>
 {% endblock %}
