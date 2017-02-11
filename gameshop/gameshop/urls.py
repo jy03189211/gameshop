@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from gameshop.views import *
 from gameshop.api.views import *
+from gameshop.message_service import urls as message_urls
 from gameshop.storeutils.cart import urls as cart_urls
 from gameshop import settings
 
@@ -39,6 +40,7 @@ urlpatterns = [
     url(r'^your_games/new_game/$', NewGameView.as_view(), name="new_game"),
     url(r'^game/(?P<game_id>\d+)/$', GameView.as_view(), name="game"),
     url(r'^game/(?P<game_id>\d+)/edit/$', GameEditView.as_view(), name="game_edit"),
+    url(r'^game/(?P<game_id>\d+)/', include(message_urls)),
     url(r'^cart/$', CartView.as_view(), name="cart"),
     url(r'^cart/', include(cart_urls)),
 

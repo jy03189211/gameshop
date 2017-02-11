@@ -14,8 +14,12 @@ $(document).ready(function() {
       'SETTING': 'setting/'
     };
 
-    var handleServiceResponse = function(response) {
-
+    var sendErrorToGame = function(errorMessage) {
+      var msg = {
+        'messageType': 'ERROR',
+        'info': errorMessage
+      };
+      iframeWindow.postMessage(msg, "*");
     };
 
     var forwardMessageToService = function(message) {
@@ -24,18 +28,16 @@ $(document).ready(function() {
         method: 'post',
         data: message
       }).done(function(response) {
-        handleServiceResponse(response)
+        // forward responses to the game
+        iframeWindow.postMessage(response, "*");
       }).fail(function(error) {
-        console.log('error:', error);
+        // send error message to game if something went wrong
+        if (error.hasOwnProperty('statusText')) {
+          sendErrorToGame(error.statusText);
+        } else {
+          sendErrorToGame('Something went wrong')
+        }
       });
-    };
-
-    var sendErrorToGame = function(errorMessage) {
-      var msg = {
-        'messageType': 'ERROR',
-        'info': errorMessage
-      };
-      iframeWindow.postMessage(msg, "*");
     };
 
     // listen for incoming messages
