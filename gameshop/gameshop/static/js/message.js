@@ -6,14 +6,12 @@ $(document).ready(function() {
     var iframe = document.getElementById('game-iframe');
     var iframeWindow = iframe.contentWindow || iframe;
 
-    var baseUrl = window.location.protocol + "//" + window.location.host + "/";
+    var baseUrl = window.location.href;
     var urls = {
-      'SCORE': 'message/score/',
-      'SAVE': 'message/save/',
-      'LOAD_REQUEST': 'message/load_request/',
-      'LOAD': 'message/load/',
-      'ERROR': 'message/error/',
-      'SETTING': 'message/setting/'
+      'SCORE': 'score/',
+      'SAVE': 'save/',
+      'LOAD_REQUEST': 'load_request/',
+      'SETTING': 'setting/'
     };
 
     var handleServiceResponse = function(response) {
@@ -23,7 +21,8 @@ $(document).ready(function() {
     var forwardMessageToService = function(message) {
       $.ajax({
         url: baseUrl + urls[message.messageType],
-        method: 'post'
+        method: 'post',
+        data: message
       }).done(function(response) {
         handleServiceResponse(response)
       }).fail(function(error) {
