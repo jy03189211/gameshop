@@ -1,5 +1,34 @@
 {% extends "_yourgames.html" %}
 
 {% block subcontent %}
-  <div class="component-title">Sales</div>
+<div class="component-title">Sales summary</div>
+<ul class="table align-last-right">
+  <li>
+    <span>Total revenue</span>
+    <span>{{ summary.revenue }} €</span>
+  </li>
+  <li>
+    <span>Total purchases</span>
+    <span>{{ summary.num_purchases }}</span>
+  </li>
+</ul>
+<div class="component-title">All sales</div>
+<ul class="table align-last-right">
+  <li class="table-header">
+    <span>Order #</span>
+    <span class="table-col-2">Date</span>
+    <span class="table-col-2">Game</span>
+    <span>Price</span>
+  </li>
+  {% for sale in sales %}
+  <li>
+    <span>{{ sale.pk }}</span>
+    <span class="table-col-2">{{ sale.created_at }}</span>
+    <span class="table-col-2">
+      <a href="{% url 'game' sale.game.pk %}">{{ sale.game.name }}</a>
+    </span>
+    <span>{{ sale.price }} €</span>
+  </li>
+  {% endfor %}
+</ul>
 {% endblock %}

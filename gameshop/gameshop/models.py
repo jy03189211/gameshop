@@ -66,6 +66,7 @@ class Purchase(models.Model):
     game = models.ForeignKey(Game, related_name='purchases', on_delete=models.CASCADE)
     order = models.ForeignKey(Order, related_name='purchases', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    price = models.FloatField()
 
 
 class Savegame(models.Model):

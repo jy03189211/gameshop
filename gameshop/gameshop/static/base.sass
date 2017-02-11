@@ -264,6 +264,9 @@ a
     font-size: $font-size-s
     text-transform: uppercase
 
+    &:not(:first-child)
+      padding-top: 30px
+
   .title
     font-size: $font-size-l
     text-transform: uppercase
@@ -327,7 +330,8 @@ a
         &.table-total
           background: $grey-l
 
-        &:only-child
+        &:only-child,
+        &:not(.table-header):first-child
           border-top: 1px solid $grey-l
 
         &.selected

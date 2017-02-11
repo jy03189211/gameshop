@@ -89,7 +89,8 @@ def handle_payment_success(request):
     # create a purchase for each game and link to the new order
     # and the user's owner games
     for game in games:
-        new_purchase = Purchase(game=game, order=new_order, user=user)
+        new_purchase = Purchase(
+            game=game, order=new_order, user=user, price=game.price)
         new_purchase.save()
         user.owned_games.add(game)
 
