@@ -96,6 +96,9 @@
             <span>{{ score.score }}</span>
           </li>
           {% endfor %}
+          {% if not leaderboard %}
+          <li><span>No scores</span></li>
+          {% endif %}
         </ul>
       </div>
     </div>
@@ -113,6 +116,9 @@
             <span>{{ score.score }}</span>
           </li>
           {% endfor %}
+          {% if not your_highscores %}
+          <li><span>No scores</span></li>
+          {% endif %}
         </ul>
       </div>
     </div>
