@@ -28,7 +28,6 @@ urlpatterns = [
     url(r'^$', IndexView.as_view(), name="index"),
     url(r'^search/$', SearchView.as_view(), name="search"),
     url(r'^categories/$', CategoriesView.as_view(), name="categories"),
-    url(r'^leaderboards/$', LeaderboardsView.as_view(), name="leaderboards"),
     url(r'^your_games/$', DashboardView.as_view(), name="dashboard"),
     url(r'^your_games/dashboard/$', DashboardView.as_view(), name="dashboard"),
     url(r'^your_games/settings/$', SettingsView.as_view(), name="settings"),
