@@ -15,7 +15,7 @@
             <div class="badge badge-s">Developed by</div>
             <div class="badge badge-s badge-nobg">{{ game.created_by.public_name }}</div>
           </div>
-          <a href="/game/" class="btn btn-s">Play</a>
+          <a href="{% url 'game' game.pk %}" class="btn btn-s">Play</a>
         </div>
       </div>
     </div>
