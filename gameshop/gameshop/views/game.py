@@ -23,9 +23,16 @@ class GameView(View):
         # allow editing if the game was added by the current user
         allow_edit = (game.created_by == request.user)
 
+        # already owned
+        already_owned = False
+        owned_games = request.user.owned_games.all()
+        if game in owned_games:
+            already_owned = True
+
         return render(request, 'game.html', {
             'game': game,
             'your_highscores': your_highscores,
             'leaderboard': leaderboard,
-            'allow_edit': allow_edit
+            'allow_edit': allow_edit,
+            'already_owned': already_owned
         })

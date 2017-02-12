@@ -54,7 +54,11 @@
               <div class="col-md-12">
                 <div class="badge-row">
                   <span class="badge">{{ game.price }} €</span>
+                  {% if not already_owned %}
                   <a href="#" class="btn" data-action="cart-add" data-game-id="{{ game.pk }}">Add to cart</a>
+                  {% else %}
+                  <div class="btn disabled" disabled="disabled">Already owned</div>
+                  {% endif %}
                   {% if allow_edit %}
                   <a href="{% url 'game_edit' game.pk %}" class="btn">Edit</a>
                   {% endif %}
