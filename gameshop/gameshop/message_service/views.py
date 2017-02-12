@@ -75,6 +75,7 @@ def save_view(request, game_id):
         game=game, user=request.user).first()
     if existing_savegame:
         existing_savegame.data = data
+        existing_savegame.save()
         return JsonResponse({
             'messageType': 'OK',
             'info': 'Savegame updated'
