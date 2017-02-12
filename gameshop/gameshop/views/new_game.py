@@ -1,11 +1,14 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
 from django.views.generic import View
 from gameshop.models import Game
 from gameshop.models import User
 from gameshop.forms.game import NewGameForm
 
 
+@method_decorator(login_required, name='dispatch')
 class NewGameView(View):
 
     def get(self, request, *args, **kwargs):
@@ -16,15 +19,13 @@ class NewGameView(View):
         form = NewGameForm(request.POST, request.FILES)
         if form.is_valid():
             # create game based on form data
-            # TODO: fix the user once login is working
-            creator = User.objects.get(pk=1) # first test user in testdata
             new_game = Game(
                 url=form.cleaned_data["url"],
                 name=form.cleaned_data["name"],
                 description=form.cleaned_data["description"],
                 price=form.cleaned_data["price"],
                 available=form.cleaned_data["available"],
-                created_by=creator,
+                created_by=request.user,
                 category=form.cleaned_data["category"],
                 image=form.cleaned_data["image"]
             )

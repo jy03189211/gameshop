@@ -1,10 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.views.generic import View
 from django.shortcuts import render, get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.generic import View
 from gameshop.models import Game
 from gameshop.forms.game import EditGameForm
 
 
+@method_decorator(login_required, name='dispatch')
 class GameEditView(View):
 
     template_name = "game_edit.html"

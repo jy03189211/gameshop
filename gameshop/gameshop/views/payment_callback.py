@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from gameshop.models import Game
 from gameshop.storeutils.checkout import checkout as checkout_utils
 
 
+@login_required
 def payment_success_view(request):
     """Handles a successful payment"""
 
@@ -31,6 +33,7 @@ def payment_success_view(request):
     return payment_error_view(request)
 
 
+@login_required
 def payment_cancel_view(request):
     """Handles a cancelled payment"""
 
@@ -41,6 +44,7 @@ def payment_cancel_view(request):
     })
 
 
+@login_required
 def payment_error_view(request):
     """Handles payment errors"""
 
