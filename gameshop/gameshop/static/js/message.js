@@ -28,6 +28,10 @@ $(document).ready(function() {
         method: 'post',
         data: message
       }).done(function(response) {
+        // parse serialized JSON first if LOAD
+        if (response.messageType === 'LOAD') {
+          response.gameState = JSON.parse(response.gameState);
+        }
         // forward responses to the game
         iframeWindow.postMessage(response, "*");
       }).fail(function(error) {
