@@ -11,7 +11,6 @@ from .new_game import NewGameView
 from .game import GameView
 from .game_edit import GameEditView
 from .cart import CartView
-from .auth import login_view
-from .auth import register_view
+from .auth import login_view, register_view
 from .payment_callback import (
     payment_success_view, payment_cancel_view, payment_error_view)
