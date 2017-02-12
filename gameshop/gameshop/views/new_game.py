@@ -31,7 +31,10 @@ class NewGameView(View):
             )
             new_game.save()
 
-            # TODO: add failure redirect
+            # creator always owns the game also
+            request.user.owned_games.add(new_game)
+            request.user.save()
+
             return HttpResponseRedirect("/game/" + str(new_game.pk))
 
         # if form not valid
