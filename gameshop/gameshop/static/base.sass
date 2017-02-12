@@ -631,12 +631,18 @@ a
     clear: both
     width: 100%
     text-align: center
+    line-height: 0
 
-    iframe
+    .iframe-wrap
       display: inline-block
-      width: 640px
-      height: 480px
       border: 1px solid $grey-l
+      background: col(255)
+
+      iframe
+        // defaults
+        width: 640px
+        height: 480px
+
 
 .game-list
 

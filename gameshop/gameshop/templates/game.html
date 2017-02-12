@@ -70,7 +70,9 @@
       <div class="component game-component">
         <div class="game-wrap">
           {% if game.url %}
-          <iframe src="{{ game.url }}" id="game-iframe"></iframe>
+          <div class="iframe-wrap">
+            <iframe src="{{ game.url }}" id="game-iframe"></iframe>
+          </div>
           {% else %}
           <div class="game-error">Game URL not found</div>
           {% endif %}
