@@ -23,7 +23,9 @@ class User(AbstractUser):
     is_developer = models.BooleanField(default=False)
     public_name = models.CharField(max_length=50, default="")
     # authenticating api requests
-    api_key = models.CharField(null=True, blank=True, unique=True)
+    api_hosts = models.CharField(max_length=512, default="*", blank=True)
+    api_key = models.CharField(
+        max_length=512, null=True, blank=True, unique=True)
 
     def generate_api_key(self):
         random_material = binascii.hexlify(os.urandom(24))
