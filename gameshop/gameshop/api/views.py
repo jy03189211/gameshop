@@ -7,34 +7,161 @@ import json
 
 from gameshop.models import *
 
+#High scores for user filtered by game.
+def get_user_score(user_id, game_id=None):
+    filters = Score.objects.filter(user__pk=user_id)
 
-def user_score(request, user_id):
+    if game_id != None:
+        filters = filters.filter(game__pk = game_id)
+
+    data = list(filters.order_by('-score'))
+    return data
+
+def get_user_score_json(request, user_id):
+
+    if request.method == 'GET':
+        game_id = request.GET.get('gameid')
+
+        data = get_user_score(user_id, game_id)
+
+        score_dict = {}
+        score_list = []
+
+        for score in data:
+            score_dict["id"] = score.pk
+            score_dict["game"] = score.game.name
+            score_dict["user"] = score.user.username
+
+            score_list.append(score_dict.copy())
+
+        return JsonResponse(score_list, safe=False)
 
     return HttpResponse('', content_type="application/json")
 
-def user_game_savegame(request, user_id, game_id, savegame_id):
+
+# A single savegame
+def user_game_savegame_json(request, user_id, game_id, savegame_id):
+
+    if request.method == 'GET':
+        savegame = get_object_or_404(Savegame, pk=savegame_id)
+        data = {
+        "id": savegame.pk,
+        "created_at": savegame.created_at,
+        "updated_at": savegame.updated_at,
+        "data": savegame.data,
+        "game": savegame.game.name,
+        "user": savegame.user.username,
+         }
+        return JsonResponse(data)
 
     return HttpResponse('', content_type="application/json")
 
-def user_savegame_single_game(request, game_id):
+#All the saved games for a user for a single game
+def get_user_single_game_savegames_json(request,user_id, game_id):
+
+    if request.method == 'GET':
+
+        savegames=list(Savegame.objects.filter(user__pk=user_id).filter(game__pk=game_id).order_by('-updated_at'))
+        savegame_dict = {}
+        savegame_list = []
+
+        for savegame in savegames:
+
+            savegame_dict["id"] = savegame.pk
+            savegame_dict["data"] = savegame.data
+            savegame_dict["game"] = savegame.game.name
+            savegame_dict["user"] = savegame.user.username
+            savegame_list.append(savegame_dict.copy())
+
+        return JsonResponse(savegame_list, safe=False)
 
     return HttpResponse('', content_type="application/json")
 
-def user_savegames(request, user_id):
+#Get all savegames for user or post new savegame
+def get_user_savegames_json(request, user_id, game_id=None):
+
+    if request.method == 'GET':
+
+        savegames=list(Savegame.objects.filter(user__pk=user_id).order_by('-updated_at'))
+        savegame_dict={}
+        savegame_list=[]
+        for savegame in savegames:
+
+            savegame_dict["id"] = savegame.pk
+            savegame_dict["data"] = savegame.data
+            savegame_dict["game"] = savegame.game.name
+            savegame_dict["user"] = savegame.user.username
+            savegame_list.append(savegame_dict.copy())
+
+        return JsonResponse(savegame_list, safe=False)
+
+    elif request.method == 'POST':
+        received_json = ''
+        if request.content_type == 'application/json':
+            received_json = json.loads(request.body.decode("utf-8"))
+
+        if received_json['data'] != None:
+            data = received_json['data']
+
+        if received_json['game_id'] != None:
+            game = get_object_or_404(Game, pk=received_json['game_id'])
+
+        user = get_object_or_404(User, pk=user_id)
+
+        savegame = Savegame(data=data, game=game, user=user)
+        savegame.save()
 
     return HttpResponse('', content_type="application/json")
+    # return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
-def user_order(request, user_id, order_id=None):
+#Return all orders for an user or a single order
+def get_user_order_json(request, user_id, order_id=None):
 
-    return HttpResponse('', content_type="application/json")
+    if order_id == None:
+        orders=list(Order.objects.filter(user__pk=user_id).order_by('-updated_at'))
+        order_dict={}
+        order_list=[]
+        for order in orders:
 
-def user_sale(request, user_id, sale_id=None):
+            order_dict["id"] = order.pk
+            order_dict["user"] = order.user.username
+            order_dict["payment_ref"] = order.payment_ref
+            order_list.append(order_dict.copy())
 
-    return HttpResponse('', content_type="application/json")
+        return JsonResponse(order_list, safe=False)
 
-def user_purchased(request, user_id, game_id=None):
+    else:
+        order = get_object_or_404(Order, pk=order_id)
+        data = {
+        "id": order.pk,
+        "created_at": order.created_at,
+        "updated_at": order.updated_at,
+        "user": order.user.username,
+        "payment_ref": order.payment_ref,
+         }
+        return JsonResponse(data)
+
+def get_user_sale_json(request, user_id):
+
     user = get_object_or_404(User, pk=user_id)
-    purchased=list(Purchase.objects.filter(game__owned_by=user_id, user__pk=user_id ))
+    sales=list(Purchase.objects.filter(game__created_by=user_id, user__pk=user_id))
+    sale_dict = {}
+    sale_list = []
+
+    for sale in sales:
+
+        sale_dict["id"] = sale.pk
+        sale_dict["game"] = sale.game.name
+        sale_dict["sale_id"] = sale.order.pk
+        sale_dict["user"] = sale.user.name
+
+        sale_list.append(sale_dict.copy())
+
+    return JsonResponse(sale_list, safe=False)
+
+def get_user_purchased_json(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    purchased=list(Purchase.objects.filter(game__owned_by=user_id, user__pk=user_id))
     purchased_dict = {}
     purchased_list = []
 
@@ -49,29 +176,31 @@ def user_purchased(request, user_id, game_id=None):
 
     return JsonResponse(purchased_list, safe=False)
 
+def user_inventory(request, user_id):
 
-def user_inventory(request, user_id, game_id=None):
+    if request.method == 'GET':
 
-    user = get_object_or_404(User, pk=user_id)
-    inventory=list(Game.objects.filter(owned_by__pk=user_id).order_by('-name'))
-    inventory_dict = {}
-    inventory_list = []
+        inventory = Game.objects.filter(owned_by__pk=user_id).order_by('-name')
+        data = serializers.serialize("json", inventory)
+        return HttpResponse(data, content_type='application/json')
 
-    for game in inventory:
+    elif request.method == 'POST':
+        received_json = ''
+        game = ''
 
-        inventory_dict["id"] = game.pk
-        inventory_dict["name"] = game.name
-        inventory_dict["url"] = game.url
-        inventory_dict["description"] = game.description
-        inventory_dict["price"] = game.price
-        inventory_dict["categories"] = game.categories
-        inventory_dict["created_by"] = game.created_by_id
-        inventory_dict["available"] = game.available
-        inventory_list.append(inventory_dict.copy())
+        if(request.content_type == 'application/json'):
+            received_json = json.loads(request.body.decode("utf-8"))
 
-    return JsonResponse(inventory_list, safe=False)
+        if(received_json['game_id'] != None):
+            game = get_object_or_404(Game, pk=received_json['game_id'])
 
-def users(request):
+        user = get_object_or_404(User, pk=user_id)
+        user.owned_games.add(game)
+
+        return HttpResponse('', content_type="application/json")
+
+#Get all users
+def get_users_json(request):
     filters = User.objects
     username = request.GET.get('username')
     public_name = request.GET.get('public_name')
@@ -95,10 +224,10 @@ def users(request):
         user_dict["is_developer"]=user.is_developer
         user_list.append(user_dict.copy())
 
-    #user_list_serialized = serializers.serialize('json', data)
     return JsonResponse(user_list, safe=False)
 
-def user_single(request, user_id):
+#Get single user
+def get_user_single_json(request, user_id):
 
     user = get_object_or_404(User, pk=user_id)
     data = {
@@ -111,81 +240,71 @@ def user_single(request, user_id):
      }
     return JsonResponse(data)
 
-def game_score(request, game_id):
+#Get score list of a single game
+def get_game_score_json(request, game_id):
 
-    game = get_object_or_404(Game, pk=game_id)
     scores=list(Score.objects.filter(game__pk=game_id).order_by('-score'))
     score_dict = {}
     score_list = []
 
     for score in scores:
+        score_dict["id"] = score.pk
+        score_dict["created_at"] = score.created_at
+        score_dict["updated_at"] = score.updated_at
         score_dict["score"] = score.score
-        score_dict["game"] = game.name
+        score_dict["game"] = score.game.name
+        score_dict["user"] = score.user.username
         score_list.append(score_dict.copy())
 
     return JsonResponse(score_list, safe=False)
 
-#todo finalize owned by attribute
-def game_single(request, game_id):
+#Returns all games with given parameters
+def get_games(filter_dict):
 
-    game = get_object_or_404(Game, pk=game_id)
+    filters = Game.objects
 
-    data = {
-    "id": game.pk,
-    "created_at": game.created_at,
-    "updated_at": game.updated_at,
-    "url": game.url,
-    "name": game.name,
-    "description": game.description,
-    "price": game.price,
-    "available": game.available,
-    "categories": game.categories,
-    "created_by": game.created_by.public_name,
-    # "owned_by": game.owned_by,
-     }
-    return JsonResponse(data)
-#todo add price and date logic
-def games(request):
+    if filter_dict['pk'] != None:
+        filters = filters.filter(pk = filter_dict['pk'])
+    if filter_dict['name'] != None:
+        filters = filters.filter(name__icontains=filter_dict['name'])
+    if filter_dict['price_min'] != None:
+        filters = filters.filter(price__gte=filter_dict['price_min'])
+    if filter_dict['price_max'] != None:
+        filters = filters.filter(price__lte=filter_dict['price_max'])
+    if filter_dict['created_by'] != None:
+        filters = filters.filter(created_by__public_name__icontains=filter_dict['created_by'])
+    if filter_dict['category'] != None:
+        filters = filters.filter(category=filter_dict['category'])
+    if filter_dict['year'] != None:
+        filters = filters.filter(created_at__year=filter_dict['year'])
+    if filter_dict['available'] != None:
+        filters = filters.filter(available=filter_dict['available'])
+
+    data = list(filters.order_by('-name'))
+
+    return data
+
+def get_games_json(request, game_id=None):
 
     if request.method == 'GET':
-        filters = Game.objects
+        filter_dict={}
 
-        created_by = request.GET.get('createdby')
-        available = request.GET.get('available')
-        name = request.GET.get('name')
-        priceMin = request.GET.get('pricemin')
-        priceMax = request.GET.get('pricemax')
-        categories = request.GET.get('categories')
-        year = request.GET.get('year')
-        month = request.GET.get('month')
-        day = request.GET.get('day')
+        if game_id != None:
+            filter_dict['pk'] = game_id
+        else:
+            filter_dict['pk'] = None
 
-        if created_by != None:
-            filters = filters.filter(created_by = created_by)
-        if available != None:
-            filters = filters.filter(available = available)
-        if categories != None:
-            filters = filters.filter(categories = categories)
-        if year != None:
-            print('year')
+        filter_dict['name'] = request.GET.get('name')
+        filter_dict['price_min'] = request.GET.get('price_min')
+        filter_dict['price_max'] = request.GET.get('price_max')
+        filter_dict['created_by'] = request.GET.get('created_by')
+        filter_dict['category'] = request.GET.get('category')
+        filter_dict['year'] = request.GET.get('year')
+        filter_dict['available'] = request.GET.get('available')
 
-        data = filters.all()
-        game_dict = {}
-        game_list = []
+        game_list = get_games(filter_dict)
 
-        for game in data:
-            game_dict["id"] = game.pk
-            game_dict["name"] = game.name
-            game_dict["url"] = game.url
-            game_dict["name"] = game.name
-            game_dict["description"] = game.description
-            game_dict["price"] = game.price
-            game_dict["categories"] = game.categories
-            game_dict["created_by"] = game.created_by_id
-            game_dict["available"] = game.available
-            game_list.append(game_dict.copy())
+        data = serializers.serialize("json", game_list)
+        return HttpResponse(data, content_type='application/json')
 
-        return JsonResponse(game_list, safe=False)
-
-    elif request.method == 'POST':
-        print("POST")
+    return HttpResponse('', content_type="application/json")
