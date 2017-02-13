@@ -28,7 +28,7 @@ class User(AbstractUser):
     def generate_api_key(self):
         random_material = binascii.hexlify(os.urandom(24))
         hash_key = hashlib.sha256(random_material)
-        self.api_key = base64.b64encode(self.username + hash_key)
+        self.api_key = base64.b64encode(self.username + '::' + hash_key)
 
     # override save to default an empty 'public_name' with 'username'
     def save(self, *args, **kwargs):
