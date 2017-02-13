@@ -51,6 +51,7 @@ def register_view(request):
             # if the username input is valid and unique
             register_form.clean_username()
             user.set_password(user.password)
+            user.generate_api_key()
             user.save()
             user = authenticate(username=username, password=password)
             if user is not None:

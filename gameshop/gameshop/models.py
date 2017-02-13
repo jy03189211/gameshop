@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.forms import CharField, Form, PasswordInput
 from django.utils import timezone
 from django.contrib.auth.models import User
-import json, os, pprint
+import base64, binascii, hashlib, json, os, pprint
 
 
 """
@@ -22,15 +22,22 @@ class User(AbstractUser):
     password = models.CharField(max_length=100, default="",)
     is_developer = models.BooleanField(default=False)
     public_name = models.CharField(max_length=50, default="")
+    # authenticating api requests
+    api_key = models.CharField(null=True, blank=True, unique=True)
 
-    def __str__(self):
-        return self.username
+    def generate_api_key(self):
+        random_material = binascii.hexlify(os.urandom(24))
+        hash_key = hashlib.sha256(random_material)
+        self.api_key = base64.b64encode(self.username + hash_key)
 
     # override save to default an empty 'public_name' with 'username'
     def save(self, *args, **kwargs):
         if not self.public_name:
             self.public_name = self.username
         super(User, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.username
 
 
 class Category(models.Model):
