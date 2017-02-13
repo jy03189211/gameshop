@@ -32,6 +32,9 @@ class User(AbstractUser):
         hash_key = hashlib.sha256(random_material)
         self.api_key = base64.b64encode(self.username + '::' + hash_key)
 
+    def get_api_host_list(self):
+        return [h.strip() for h in self.api_hosts.split(',')]
+
     # override save to default an empty 'public_name' with 'username'
     def save(self, *args, **kwargs):
         if not self.public_name:
