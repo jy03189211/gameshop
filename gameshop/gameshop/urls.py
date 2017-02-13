@@ -43,6 +43,16 @@ urlpatterns = [
     url(r'^cart/$', CartView.as_view(), name="cart"),
     url(r'^cart/', include(cart_urls)),
 
+    # profile settings
+    url(r'^public_name_change/$',
+        public_name_change_view, name="public_name_change"),
+    url(r'^public_name_change_done/$',
+        public_name_change_done_view, name="public_name_change_done"),
+    url(r'^become_developer/$',
+        become_developer_view, name="become_developer"),
+    url(r'^become_developer_done/$',
+        become_developer_done_view, name="become_developer_done"),
+
     # payment service callback handling
     url(r'^' + settings.PAYMENT_SUCCESS_URL + '$', payment_success_view),
     url(r'^' + settings.PAYMENT_CANCEL_URL + '$', payment_cancel_view),
@@ -57,6 +67,12 @@ urlpatterns = [
     url(r'^register/$', register_view, name='register'),
     url(r'^login/$', login_view, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
+    url(r'^password_change/$', auth_views.password_change, {
+        'template_name': 'password_change.html'
+    }, name='password_change'),
+    url(r'^password_change_done/$', auth_views.password_change_done, {
+        'template_name': 'password_change_done.html'
+    }, name='password_change_done'),
 ]
 
 

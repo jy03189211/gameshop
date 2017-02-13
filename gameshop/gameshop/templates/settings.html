@@ -1,5 +1,28 @@
 {% extends "_yourgames.html" %}
 
 {% block subcontent %}
-  <div class="component-title">Settings</div>
+  <div class="component-title">Profile settings</div>
+  <div class="component">
+    <div class="component-title">Change password</div>
+    <a href="{% url 'password_change' %}" class="btn">Change password</a>
+  </div>
+  <div class="component">
+    <div class="component-title">Developer options</div>
+    {% if request.user.is_developer %}
+    <form action="{% url 'public_name_change' %}" method="post">
+      {% csrf_token %}
+      {{ public_name_form }}
+      <div class="btn-wrap">
+        <input type="submit" class="btn" value="Update public name">
+      </div>
+    </form>
+    {% else %}
+    <form action="{% url 'become_developer' %}" method="post">
+      {% csrf_token %}
+      <input id="id_become_developer" class="btn" type="submit" value="Become a developer">
+      <span class="helptext">Developers can add and sell games in the store.</span>
+    </form>
+    {% endif %}
+  </div>
+
 {% endblock %}

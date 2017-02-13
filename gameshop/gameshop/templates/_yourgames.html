@@ -15,12 +15,14 @@
           <li><a href="{% url 'owned_games' %}">Owned games</a></li>
           <li><a href="{% url 'orders' %}">Orders</a></li>
         </ul>
+        {% if request.user.is_developer %}
         <div class="subtitle">Developer actions</div>
         <ul class="subpages">
           <li><a href="{% url 'managed_games' %}">Managed games</a></li>
           <li><a href="{% url 'sales' %}">Sales</a></li>
           <li><a href="{% url 'new_game' %}">New game</a></li>
         </ul>
+        {% endif %}
       </div>
     </div>
     <div class="col-md-9">
