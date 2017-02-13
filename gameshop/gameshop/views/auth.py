@@ -2,9 +2,11 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views, authenticate, login
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import ensure_csrf_cookie
 from gameshop.forms.user import RegisterForm, LoginForm
 
 
+@ensure_csrf_cookie
 def login_view_get(request):
     # get page for login and registration
     register_form = RegisterForm(request.GET)
