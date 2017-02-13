@@ -6,14 +6,20 @@ from gameshop.models import User
 
 
 class RegisterForm(forms.ModelForm):
-    password = forms.CharField(label='password', widget=forms.PasswordInput(),)
+    password = forms.CharField(max_length=100, widget=forms.PasswordInput())
     password2 = forms.CharField(
-        label='retype password', widget=forms.PasswordInput(),)
+        label='Retype password', widget=forms.PasswordInput())
+    is_developer = forms.BooleanField(
+        label='Become a developer?', required=False,
+        help_text='Developers can add and sell games in the store.')
+    public_name = forms.CharField(max_length=50,
+        label='Public developer name', required=False,
+        help_text='The public name will be shown as the developer\'s name for the games you add.')
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
-        write_only_fields = ['password']
+        fields = ['username', 'email', 'password',
+                  'password2', 'is_developer', 'public_name']
 
     def clean_password2(self):
         if 'password' in self.cleaned_data:

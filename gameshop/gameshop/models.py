@@ -16,21 +16,31 @@ class User(AbstractUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     last_login = models.DateTimeField(auto_now=True, null=True)
-    username = models.CharField(
-        max_length=50, default='user_without_name', unique=True)
+    username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100, default="",)
     is_developer = models.BooleanField(default=False)
     public_name = models.CharField(max_length=50, default="")
+
     # authenticating api requests
     api_hosts = models.CharField(max_length=512, default="*", blank=True)
     api_key = models.CharField(
         max_length=512, null=True, blank=True, unique=True)
 
     def generate_api_key(self):
+        # get a random byte like
         random_material = binascii.hexlify(os.urandom(24))
-        hash_key = hashlib.sha256(random_material)
-        self.api_key = base64.b64encode(self.username + '::' + hash_key)
+
+        # hash with SHA256, digest to get string like
+        hash_key = hashlib.sha256(random_material).digest()
+
+        # Include username in the final encoded key for
+        # efficient usage at API request handling.
+        # api_key is a string
+        self.api_key = base64.b64encode(
+            bytes(self.username+'::', 'utf-8') + hash_key).decode()
+
+        self.save()
 
     def get_api_host_list(self):
         return [h.strip() for h in self.api_hosts.split(',')]
