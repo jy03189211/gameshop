@@ -36,9 +36,11 @@ class User(AbstractUser):
 
         # Include username in the final encoded key for
         # efficient usage at API request handling.
-        # api_key is a string
-        self.api_key = base64.b64encode(
-            bytes(self.username+'::', 'utf-8') + hash_key).decode()
+        api_key = base64.b64encode(
+            bytes(self.username+'::', 'utf-8') + hash_key)
+
+        # bytes to string
+        self.api_key = api_key.decode()
 
         self.save()
 
