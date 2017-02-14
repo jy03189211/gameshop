@@ -16,5 +16,5 @@ class NewGameForm(forms.Form):
 
 
 class EditGameForm(NewGameForm):
-    image = forms.FileField(label="Image", required=False)
-    # TODO: fix categories and remove this after
+    image = forms.FileField(label="Image", required=False,
+        help_text="An image provided here will overwrite the current image.")

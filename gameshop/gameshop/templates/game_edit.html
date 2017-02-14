@@ -33,21 +33,7 @@
               <div class="col-md-12">
                 <form action="{% url 'game_edit' game.pk %}" method="post" enctype="multipart/form-data">
                   {% csrf_token %}
-                  {% for field in form %}
-                    {% if field|field_type:'checkboxinput' %}
-                      <div class="field-value field-checkbox">
-                        {{ field }}<label for="{{field.id_for_label}}">{{ field.label }}</label>
-                      </div>
-                    {% else %}
-                      <div class="field-label">{{ field.label }}</div>
-                      {% if field|field_type:'clearablefileinput' %}
-                      <div class="field-help">
-                        NOTE: An image provided here will overwrite the current image.
-                      </div>
-                      {% endif %}
-                      <div class="field-value">{{ field }}</div>
-                    {% endif %}
-                  {% endfor %}
+                  {% include "checkbox_form_fields.html" with form=form %}
                   <div class="btn-wrap">
                     <input type="submit" value="Save changes" class="btn">
                   </div>
