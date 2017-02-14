@@ -26,7 +26,7 @@
         <!-- register form -->
         <form action="/register/" method="post" enctype="multipart/form-data">
           {% csrf_token %}
-          {{ register_form }}
+          {% include "checkbox_form_fields.html" with form=register_form %}
           <div class="btn-wrap btn-right">
             <input class="btn" type="submit" name="registerBtn" value="Register">
           </div>

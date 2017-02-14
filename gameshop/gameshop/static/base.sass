@@ -465,19 +465,17 @@ a
       font-size: $font-size-l
       text-transform: uppercase
 
-  .field-label,
-  form label
-    display: block
-    padding: 15px 0 5px
-    font-weight: 400
-
-  .field-help
-    padding: 5px 0 15px
-    font-size: $font-size-s
-    color: $blue
-
-  .field-value,
   form
+
+    label
+      display: block
+      position: relative
+      margin: 15px 0 5px
+      padding: 0
+      font-weight: 400
+
+      &:first-of-type
+        margin-top: 15px
 
     ul.errorlist
       li
@@ -487,27 +485,25 @@ a
 
     .helptext
       display: block
-      padding: 15px 0
+      padding: 5px 0 15px
       font-size: $font-size-s
       color: $blue
 
       &:last-child
         padding-bottom: 0
 
-    &.categories
-      padding-top: 10px
+    // &.categories
+    //   padding-top: 10px
 
-    input[type="text"],
-    input[type="number"],
-    input[type="password"],
-    input[type="email"],
+    input:not([type="checkbox"]):not([type="submit"]):not([type="file"]),
     select
       width: 100%
       height: 32px
       line-height: 32px
       padding: 0 10px
+      margin: 0
       background: $grey-l
-      border: none
+      border: 1px solid $grey-el
       border-radius: 0
       outline: 0
       overflow: hidden
@@ -516,48 +512,40 @@ a
       width: 100%
       padding: 10px
       background: $grey-l
-      border: none
+      border: 1px solid $grey-el
       outline: 0
 
     input[type="checkbox"]
       display: none
 
-    input[type="checkbox"] + label
-      position: relative
-      display: inline-block
-      font-weight: 400
-      padding-left: 34px
-      line-height: 24px
-      z-index: 1
-      cursor: pointer
+      & + label
+        margin-top: 30px
+        padding-left: 39px
+        line-height: 24px
 
-      &::after
-        position: absolute
-        display: block
-        content: ""
-        height: 24px
-        width: 24px
-        top: 0px
-        left: 0
-        background: $grey-l
-        z-index: 2
+        &::after
+          position: absolute
+          display: block
+          content: ""
+          height: 24px
+          width: 24px
+          top: 0
+          left: 0
+          background: $grey-l
+          border: 1px solid $grey-el
+          z-index: 2
 
-    input[type="checkbox"]:checked + label::before
-      position: absolute
-      display: block
-      content: ""
-      height: 12px
-      width: 12px
-      top: 6px
-      left: 6px
-      background: $blue
-      z-index: 3
-
-  .field-checkbox
-    margin-top: 30px
-
-    label
-      padding-top: 0
+      &:checked + label
+        &::before
+          position: absolute
+          display: block
+          content: ""
+          height: 12px
+          width: 12px
+          top: 6px
+          left: 6px
+          background: $blue
+          z-index: 3
 
 .alphabet
   padding: 30px

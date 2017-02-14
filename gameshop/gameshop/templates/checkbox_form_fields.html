@@ -1,0 +1,17 @@
+{% load field_type %}
+
+{# Custom form rendering to make checkboxes act reasonably with CSS #}
+{% for field in form %}
+  {% if field|field_type:'checkboxinput' %}
+    {{ field.errors }}
+    {{ field }}
+    <label for="{{field.id_for_label}}">{{ field.label }}</label>
+  {% else %}
+    <label for="{{field.id_for_label}}">{{ field.label }}</label>
+    {{ field.errors }}
+    {{ field }}
+  {% endif %}
+  {% if field.help_text %}
+  <span class="helptext">{{ field.help_text }}</span>
+  {% endif %}
+{% endfor %}
