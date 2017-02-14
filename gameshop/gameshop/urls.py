@@ -59,7 +59,7 @@ urlpatterns = [
     url(r'^' + settings.PAYMENT_ERROR_URL + '$', payment_error_view),
 
     #third party authentication
-    #url(r'^accounts/', include('allauth.urls')),
+    url(r'^accounts/', include('allauth.urls')),
     #api
     url(r'^api/v1/', include('gameshop.api.urls')),
 
