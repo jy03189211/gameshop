@@ -9,23 +9,28 @@ from gameshop.forms.user import RegisterForm, LoginForm
 @ensure_csrf_cookie
 def login_view_get(request):
     # get page for login and registration
-    register_form = RegisterForm(request.GET)
-    form = LoginForm(request.GET)
+
+    # if no earlier submissions, don't try to build from previous data
+    # in order to not show errors at first page load
+    register_form = RegisterForm(request.GET or None)
+    form = LoginForm(request.GET or None)
+
     return render(request, 'login.html', {
         'register_form': register_form,
         'form': form
     })
 
 
+@ensure_csrf_cookie
 def login_view(request):
 
     # if GET, do the login page
     if request.method == 'GET':
         return login_view_get(request)
 
-    # if POST, redirect to the django built-in login view
+    # if POST, user the django built-in login view
     if request.method == 'POST':
-        register_form = RegisterForm(request.GET)
+        register_form = RegisterForm()
         return auth_views.login(
             request, template_name='login.html', extra_context={
                 'register_form': register_form
@@ -33,6 +38,7 @@ def login_view(request):
         )
 
 
+@ensure_csrf_cookie
 def register_view(request):
 
     # if GET, do the login page, since on the same page with login
