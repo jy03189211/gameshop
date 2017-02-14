@@ -11,7 +11,7 @@ class RegisterForm(forms.ModelForm):
         label='Retype password', widget=forms.PasswordInput())
     is_developer = forms.BooleanField(
         label='Become a developer?', required=False,
-        help_text='Developers can add and sell games in the store.')
+        help_text='Developers can add and sell games in the store, and use the external API.')
     public_name = forms.CharField(max_length=50,
         label='Public developer name', required=False,
         help_text='The public name will be shown as the developer\'s name for the games you add.')
