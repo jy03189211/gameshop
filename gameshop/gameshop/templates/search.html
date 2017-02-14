@@ -9,7 +9,6 @@
       <div class="component">
         <div class="component-title">Filters</div>
         <form action="{% url 'search' %}" method="get">
-          {% csrf_token %}
           {{ form }}
           <div class="btn-wrap">
             <input type="submit" value="Apply filters" class="btn">

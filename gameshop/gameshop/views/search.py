@@ -9,10 +9,7 @@ class SearchView(View):
 
     def get(self, request):
 
-        # TODO: very similar to the API code,
-        # separate json and object api functions and then change this to use it
-        #-------
-
+        # full list of filterable games
         filters = Game.objects
 
         created_by = request.GET.get('created_by')
@@ -22,7 +19,6 @@ class SearchView(View):
         price_max = request.GET.get('price_max')
         category = request.GET.get('category')
 
-        # TODO: public or not? availability always or not
         filters.filter(available=True)
 
         # optional filters
@@ -34,23 +30,12 @@ class SearchView(View):
             filters = filters.filter(price__lte=price_max)
         if created_by:
             filters = filters.filter(created_by__public_name__icontains=created_by)
-
-        print(category)
         if category:
             filters = filters.filter(category=category)
 
+        results = filters.all()
 
-        # if available != None:
-        #     filters = filters.filter(available = available)
-        # if year != None:
-        #     print('year')
-
-        data = filters.all()
-
-        #-------
-
-        results = data
-
+        # remember filters
         form = SearchForm(initial=request.GET.dict())
 
         return render(request, self.template_name, {
