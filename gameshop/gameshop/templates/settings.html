@@ -7,13 +7,13 @@
     <a href="{% url 'password_change' %}" class="btn">Change password</a>
   </div>
   <div class="component">
-    <div class="component-title">Developer options</div>
+    <div class="component-title">Developer settings</div>
     {% if request.user.is_developer %}
     <form action="{% url 'public_name_change' %}" method="post">
       {% csrf_token %}
       {{ public_name_form }}
       <div class="btn-wrap">
-        <input type="submit" class="btn" value="Update public name">
+        <input type="submit" class="btn" value="Update">
       </div>
     </form>
     {% else %}
@@ -24,5 +24,17 @@
     </form>
     {% endif %}
   </div>
+  {% if request.user.is_developer %}
+  <div class="component">
+    <div class="component-title">API settings</div>
+    <form action="{% url 'update_api_settings' %}" method="post">
+      {% csrf_token %}
+      {{ api_settings_form }}
+      <div class="btn-wrap">
+        <input type="submit" class="btn" value="Update">
+      </div>
+    </form>
+  </div>
+  {% endif %}
 
 {% endblock %}
