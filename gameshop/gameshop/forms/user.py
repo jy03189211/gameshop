@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from gameshop.models import User
+from django.core.validators import validate_email, ValidationError
 
 
 class RegisterForm(forms.ModelForm):
@@ -15,7 +16,7 @@ class RegisterForm(forms.ModelForm):
     public_name = forms.CharField(max_length=50,
         label='Public developer name', required=False,
         help_text='The public name will be shown as the developer\'s name for the games you add.')
-
+    email=forms.EmailField()
     class Meta:
         model = User
         fields = ['username', 'email', 'password',
@@ -39,6 +40,12 @@ class RegisterForm(forms.ModelForm):
         except ObjectDoesNotExist:
             return username
         raise forms.ValidationError('Username is already taken.')
+
+    def clean_email(self):
+        email=self.cleaned_data['email']
+        print (validate_email(email))
+        #why do we have to return email here? nowhere to assign when being called
+        return email
 
 
 class LoginForm(forms.Form):

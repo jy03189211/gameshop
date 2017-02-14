@@ -63,7 +63,10 @@ urlpatterns = [
     url(r'^' + settings.PAYMENT_ERROR_URL + '$', payment_error_view),
 
     #third party authentication
+    #login cancel page overriding
+    url(r'^accounts/social/login/cancelled/$', login_view),
     url(r'^accounts/', include('allauth.urls')),
+
     #api
     url(r'^api/v1/', include('gameshop.api.urls')),
 
@@ -83,6 +86,7 @@ urlpatterns = [
             'message': 'Password successfully changed.'
         }
     }, name='password_change_done'),
+
 ]
 
 

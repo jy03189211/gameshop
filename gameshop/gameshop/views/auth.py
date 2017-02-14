@@ -4,7 +4,9 @@ from django.contrib.auth import views as auth_views, authenticate, login
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import ensure_csrf_cookie
 from gameshop.forms.user import RegisterForm, LoginForm
-
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
 
 @ensure_csrf_cookie
 def login_view_get(request):
@@ -53,13 +55,21 @@ def register_view(request):
             user = register_form.save(commit=False)
             username = register_form.cleaned_data['username']
             password = register_form.cleaned_data['password']
-
+            email=register_form.cleaned_data['email']
             # if the two password inputs match
             register_form.clean_password2()
             # if the username input is valid and unique
             register_form.clean_username()
+            register_form.clean_email()
             user.set_password(user.password)
             user.generate_api_key()
+            send_mail(
+                'Validation',
+                'Dear customer, \n\nPlease click the following link to validate your account.',
+                'admin@gameshop.com',
+                [email],
+                fail_silently=False,
+            )
             user.save()
             user = authenticate(username=username, password=password)
             if user is not None:
@@ -72,3 +82,10 @@ def register_view(request):
             'register_form': register_form,
             'form': LoginForm()
         })
+
+def ValidateEmail( email ):
+    try:
+        validate_email( email )
+        return True
+    except ValidationError:
+        return False
