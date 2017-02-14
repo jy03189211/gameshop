@@ -170,7 +170,7 @@ PAYMENT_ERROR_URL = 'payment/error/'
 
 APPEND_SLASH = True
 
-SITE_ID=1
+SITE_ID=2
 
 # Only when running in Heroku
 if "DYNO" in os.environ:
