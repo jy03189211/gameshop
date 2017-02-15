@@ -12,7 +12,7 @@ class NewGameForm(forms.Form):
     image = forms.FileField(label="Image")
     category = forms.ModelChoiceField(label="Category", required=True,
         queryset=Category.objects.all())
-    available = forms.BooleanField(label="Available for purchase")
+    available = forms.BooleanField(label="Available for purchase", required=False)
 
 
 class EditGameForm(NewGameForm):
