@@ -1,18 +1,21 @@
+from itsdangerous import URLSafeTimedSerializer as utsr
+import base64
+import re
+
+from django.conf import settings as django_settings
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views, authenticate, login
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import ensure_csrf_cookie
-from gameshop.forms.user import RegisterForm, LoginForm
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 
-from itsdangerous import URLSafeTimedSerializer as utsr
-import base64
-import re
-from django.conf import settings as django_settings
-from ..models import User
+from gameshop.forms.user import RegisterForm, LoginForm
+from gameshop.models import User
+
+
 @ensure_csrf_cookie
 def login_view_get(request):
     # get page for login and registration
