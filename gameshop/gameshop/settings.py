@@ -180,3 +180,8 @@ if "DYNO" in os.environ:
 
     DEBUG = True # False, once service is succesfully deployed
     ALLOWED_HOSTS = ['*']
+
+#email validation, console as backend
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+DOMAIN='localhost:8000'

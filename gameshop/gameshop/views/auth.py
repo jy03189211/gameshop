@@ -4,8 +4,15 @@ from django.contrib.auth import views as auth_views, authenticate, login
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import ensure_csrf_cookie
 from gameshop.forms.user import RegisterForm, LoginForm
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
 
-
+from itsdangerous import URLSafeTimedSerializer as utsr
+import base64
+import re
+from django.conf import settings as django_settings
+from ..models import User
 @ensure_csrf_cookie
 def login_view_get(request):
     # get page for login and registration
@@ -53,13 +60,25 @@ def register_view(request):
             user = register_form.save(commit=False)
             username = register_form.cleaned_data['username']
             password = register_form.cleaned_data['password']
-
+            email=register_form.cleaned_data['email']
             # if the two password inputs match
             register_form.clean_password2()
             # if the username input is valid and unique
             register_form.clean_username()
+            register_form.clean_email()
             user.set_password(user.password)
             user.generate_api_key()
+            token = token_confirm.generate_validate_token(username)
+            message = "\n".join([u'{0},Dear customer'.format(username), u'\n\nPlease click the following link to validate your account.',
+                                 '/'.join([django_settings.DOMAIN,'activate', token])])
+            send_mail(
+                'Validation',
+                message,
+                'admin@gameshop.com',
+                [email],
+                fail_silently=False,
+            )
+            user.is_active = False
             user.save()
             user = authenticate(username=username, password=password)
             if user is not None:
@@ -72,3 +91,40 @@ def register_view(request):
             'register_form': register_form,
             'form': LoginForm()
         })
+
+@ensure_csrf_cookie
+def activate_user(request, token):
+
+    try:
+        username = token_confirm.confirm_validate_token(token)
+    except:
+        username = token_confirm.remove_validate_token(token)
+        users = User.objects.filter(username=username)
+        for user in users:
+         user.delete()
+        return render(request, 'message.html', {'message': u'sorry, the link is over due, please redo<a href=\"' + django_settings.DOMAIN + u'/signup\">register</a>'})
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return render(request, 'message.html', {'message': u"sorry, user does not exist!"})
+    user.is_active = True
+    user.save()
+    message = 'register success!'
+    return render(request, 'message.html', {'message':message})
+
+class Token:
+    def __init__(self, security_key):
+        self.security_key = security_key
+        self.salt = base64.encodebytes(security_key.encode())
+    def generate_validate_token(self, username):
+        serializer = utsr(self.security_key)
+        return serializer.dumps(username, self.salt)
+    def confirm_validate_token(self, token, expiration=3600):
+        serializer = utsr(self.security_key)
+        return serializer.loads(token, salt=self.salt, max_age=expiration)
+    def remove_validate_token(self, token):
+        serializer = utsr(self.security_key)
+        print(serializer.loads(token, salt=self.salt))
+        return serializer.loads(token, salt=self.salt)
+
+token_confirm = Token(django_settings.SECRET_KEY)
