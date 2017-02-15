@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponseNotFound
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseNotFound
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_POST
 from django.views.generic import View
@@ -51,8 +51,7 @@ class GameEditView(View):
 
             game.save()
 
-            # TODO: add failure redirect
-            return HttpResponseRedirect("/game/" + str(game.pk))
+            return redirect('managed_games')
 
         # if form not valid
         return render(request, self.template_name, {"form": form})

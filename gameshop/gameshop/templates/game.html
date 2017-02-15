@@ -61,6 +61,9 @@
                   {% else %}
                   <div class="btn disabled" disabled="disabled">Already owned</div>
                   {% endif %}
+                  {% if request.user == game.created_by %}
+                  <a href="{% url 'game_edit' game.pk %}" class="btn">Edit</a>
+                  {% endif %}
                 </div>
               </div>
             </div>
