@@ -47,10 +47,6 @@ body
   font-family: 'Open Sans', sans-serif
   font-size: $font-size
   background-color: $grey-d
-  // background-image: url('/static/img/bg.png')
-  // background-repeat: no-repeat
-  // background-position: center top
-  // background-size: 100% auto
   color: col(205)
   overflow-y: scroll
 
@@ -192,21 +188,24 @@ a
     padding: 15px 0 30px
     fol
 
-.featured
 
+.featured
   .component
     position: relative
 
-  .featured-title
-    font-size: $font-size-l
-    line-height: $font-size-l
-    height: $font-size-l * 2
-    margin-bottom: 45px
+    .featured-title
+      font-size: $font-size-l
+      line-height: $font-size-l
+      height: $font-size-l * 2
+      margin-bottom: 45px
 
-  .featured-title,
-  .featured-buy
-    position: relative
-    z-index: 2
+    .featured-title,
+    .featured-buy
+      position: relative
+      z-index: 2
+
+      .double-badge
+        margin: 0
 
 .jumbotron,
 .featured

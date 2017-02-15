@@ -14,15 +14,19 @@
                   <div class="jumbo-game-description">{{ jumbo_game.description }}</div>
                   <div class="jumbo-game-developer">
                     <div class="badge-row">
-                      <div class="badge badge-s">By</div>
-                      <div class="badge badge-s badge-nobg">{{ jumbo_game.created_by.public_name }}</div>
+                      <div class="double-badge">
+                        <div class="badge badge-s">By</div>
+                        <div class="badge badge-s badge-nobg">{{ jumbo_game.created_by.public_name }}</div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-md-push-1 jumbo-col">
                   <div class="badge-row float-right">
-                    <span class="badge badge-l">{{ jumbo_game.price }} €</span>
-                    <a href="{% url 'game' jumbo_game.pk %}" class="btn btn-l">Buy and play</a>
+                    <div class="double-badge">
+                      <span class="badge badge-l">{{ jumbo_game.price }} €</span>
+                      <a href="{% url 'game' jumbo_game.pk %}" class="btn btn-l">Buy and play</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -50,9 +54,11 @@
             </div>
           {% endif %}
           <div class="featured-title title">{{ game.name }}</div>
-          <div class="featured-buy">
-            <span class="badge badge-s">{{ game.price }} €</span><!--
-            --><a href="{% url 'game' game.pk %}" class="btn btn-s">Buy and play</a>
+          <div class="featured-buy badge-row">
+            <div class="double-badge">
+              <span class="badge badge-s">{{ game.price }} €</span>
+              <a href="{% url 'game' game.pk %}" class="btn btn-s">Buy and play</a>
+            </div>
           </div>
         </div>
       </div>

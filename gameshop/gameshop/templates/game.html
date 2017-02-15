@@ -53,14 +53,16 @@
               </div>
               <div class="col-md-12">
                 <div class="badge-row">
-                  <span class="badge">{{ game.price }} €</span>
-                  {% if game.available and not owned and not request.user == game.created_by %}
-                  <a href="#" class="btn" data-action="cart-add" data-game-id="{{ game.pk }}">Add to cart</a>
-                  {% elif not game.available%}
-                  <div class="btn disabled" disabled="disabled">Not available</div>
-                  {% else %}
-                  <div class="btn disabled" disabled="disabled">Already owned</div>
-                  {% endif %}
+                  <div class="double-badge">
+                    <span class="badge">{{ game.price }} €</span>
+                    {% if game.available and not owned and not request.user == game.created_by %}
+                    <a href="#" class="btn" data-action="cart-add" data-game-id="{{ game.pk }}">Add to cart</a>
+                    {% elif not game.available%}
+                    <div class="btn disabled" disabled="disabled">Not available</div>
+                    {% else %}
+                    <div class="btn disabled" disabled="disabled">Already owned</div>
+                    {% endif %}
+                  </div>
                   {% if request.user == game.created_by %}
                   <a href="{% url 'game_edit' game.pk %}" class="btn">Edit</a>
                   {% endif %}
