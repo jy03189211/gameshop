@@ -1,0 +1,199 @@
+// compile
+
+// Custom theme on top of the base styles.
+   Overrides the relevant base styles.
+
+
+$navy-d: rgb(30, 35, 55)
+$navy: rgb(45, 50, 75)
+$navy-l: rgb(57, 64, 92)
+$navy-el: rgb(77, 84, 112)
+
+$blue: rgb(95, 130, 240)
+$green: rgb(35, 209, 96)
+$red: rgb(255, 56, 96)
+
+$border-radius: 3px
+
+
+body
+  background: $navy-d
+
+a
+  &:hover
+    color: $blue
+
+.navbar-custom
+
+  a
+    color: #fff
+
+  .navbar-nav
+    > li
+      > a
+        border-radius: $border-radius
+
+        &:hover
+          background: $navy
+
+      &.active
+        a
+          background: $navy-l
+          color: $blue
+
+  .navbar-right
+    > div
+      border-radius: $border-radius
+
+      &:hover
+        background: $navy
+
+      &.active
+        background: $navy-l
+        color: $blue
+
+.component
+  border-radius: $border-radius
+  overflow: hidden
+  box-shadow: 0 5px 15px 15px rgba(0, 0, 0, 0.15)
+  background: $navy
+
+  .divider
+    background: $navy-el
+
+  .component
+    box-shadow: none
+    background: none
+    border-color: $blue
+
+  ul
+    &:not(.table)
+      > li
+        > a
+          background: $navy-l
+          border-radius: $border-radius
+
+          &:hover
+            background: $blue
+            color: col(255)
+
+    &.table
+      li
+        border-bottom: 1px solid $navy-l
+
+        &.table-header
+          background: $navy-l
+
+        &.table-total
+          background: $navy-l
+
+        &:only-child,
+        &:not(.table-header):first-child
+          border-top: 1px solid $navy-l
+
+        &.selected
+          background: $blue
+
+          &:hover
+            a
+              color: col(255)
+
+  .btn
+    border-radius: $border-radius
+    background: $blue
+    color: col(255)
+
+    &:not([disabled]):hover
+      background: col(255)
+      color: $blue
+
+    &.btn-secondary
+      background: $navy-el
+
+      &:hover
+        background: col(255)
+        color: $navy
+
+    &.btn-danger
+      background: $red
+
+      &:hover
+        background: col(255)
+        color: $red
+
+    &.btn-green
+      background: $green
+
+      &:hover
+        background: col(255)
+        color: $green
+
+  .badge-row
+    .double-badge
+      .badge, .btn
+        &:nth-child(2n+1)
+          border-radius: $border-radius 0 0 $border-radius
+        &:nth-child(2n)
+          border-radius: 0 $border-radius $border-radius 0
+
+  .badge
+    background: $navy-l
+    border-radius: $border-radius
+    border-color: $navy-l
+
+  form
+
+    ul.errorlist
+      li
+        color: $red
+
+    .helptext
+      color: $blue
+
+    input:not([type="checkbox"]):not([type="submit"]):not([type="file"]),
+    select
+      background: $navy-l
+      border: 1px solid $navy-el
+      border-radius: $border-radius
+
+    textarea
+      background: $navy-l
+      border: 1px solid $navy-el
+      border-radius: $border-radius
+
+    input[type="checkbox"]
+
+      & + label
+        &::after
+          background: $navy-l
+          border: 1px solid $navy-el
+          border-radius: $border-radius
+
+      &:checked + label
+        &::before
+          background: $blue
+          border-radius: $border-radius
+
+.alphabet
+  .letter-holder
+    .letter
+      background: $navy-l
+      border-radius: $border-radius
+      overflow: hidden
+
+    &:not(.disabled) .letter:hover
+      background: $blue
+
+.game-list
+  .game
+    background: $navy-l
+    border-radius: $border-radius
+    overflow: hidden
+
+    .game-details
+      .badge-row
+        .badge
+          border-color: $navy-el
+
+        .badge:not(.badge-nobg)
+          background: $navy-el
