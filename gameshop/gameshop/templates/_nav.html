@@ -1,6 +1,9 @@
 {% load cart_count %}
 {% load static %}
 
+{# used for the conditional 'hidden' class for the cart item count badge #}
+{% cart_count as count %}
+
 <div class="navbar-wrap">
   <div class="container">
     <div class="navbar navbar-custom">
@@ -17,7 +20,7 @@
       <div class="navbar-right">
         <div class="navbar-basket">
           <a href="{% url 'cart' %}"><i class="material-icons">shopping_basket</i>Cart</a>
-          <div class="navbar-item-badge {% if cart_count < 1 %} hidden{% endif %}">{% cart_count %}</div>
+          <div class="navbar-item-badge {% if count < 1 %}hidden{% endif %}">{% cart_count %}</div>
         </div>
         {% if user.is_authenticated %}
           <div class="navbar-user">

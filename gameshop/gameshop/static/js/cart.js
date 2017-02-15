@@ -3,11 +3,13 @@ var cartUrlPrefix = '/cart';
 var updateCartBadge = function(cart) {
   var count = cart.length;
   var cartBadge = $('.navbar-basket .navbar-item-badge');
-  cartBadge.text(count);
-  cartBadge.removeClass('hidden');
-  cartBadge.animate({ top: '-=10' }, 150)
-  cartBadge.animate({ top: '+=20' }, 200)
-  cartBadge.animate({ top: '-=10' }, 150)
+  if (cartBadge) {
+    cartBadge.text(count);
+    cartBadge.removeClass('hidden');
+    cartBadge.animate({ top: '-=10' }, 150)
+    cartBadge.animate({ top: '+=20' }, 200)
+    cartBadge.animate({ top: '-=10' }, 150)
+  }
 };
 
 var addToCart = function(e) {
