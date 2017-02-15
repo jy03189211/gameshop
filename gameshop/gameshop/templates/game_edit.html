@@ -40,6 +40,13 @@
                 </form>
               </div>
             </div>
+            <div class="divider"></div>
+            <div class="subtitle">Remove game</div>
+            <p>This action cannot be undone.</p>
+            <form action="{% url 'game_remove' game.pk %}" method="post">
+              {% csrf_token %}
+              <a href="#" class="btn btn-danger" onclick="submitParentWithConfirm(event)">Remove game</a>
+            </form>
           </div>
         </div>
       </div>

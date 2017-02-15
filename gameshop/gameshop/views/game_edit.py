@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_POST
 from django.views.generic import View
 from gameshop.models import Game
 from gameshop.forms.game import EditGameForm
@@ -55,3 +56,26 @@ class GameEditView(View):
 
         # if form not valid
         return render(request, self.template_name, {"form": form})
+
+
+@require_POST
+@login_required
+def remove_game_view(request, game_id):
+    """Removes the given game if it is managed by the user logged in"""
+
+    # only allow the user's managed games
+    managed_games = Game.objects.filter(created_by=request.user)
+    # get the specific game
+    game = managed_games.filter(pk=game_id).first()
+
+    if not game:
+        return HttpResponseNotFound("Game not found")
+
+    game.delete()
+
+    message = 'Game "' + game.name + '" removed.'
+
+    return render(request, "generic.html", {
+        'title': 'Done',
+        'message': message
+    })

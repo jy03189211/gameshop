@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^your_games/new_game/$', NewGameView.as_view(), name="new_game"),
     url(r'^game/(?P<game_id>\d+)/$', GameView.as_view(), name="game"),
     url(r'^game/(?P<game_id>\d+)/edit/$', GameEditView.as_view(), name="game_edit"),
+    url(r'^game/(?P<game_id>\d+)/remove/$', remove_game_view, name="game_remove"),
     url(r'^game/(?P<game_id>\d+)/', include(message_urls)),
     url(r'^cart/$', CartView.as_view(), name="cart"),
     url(r'^cart/', include(cart_urls)),
