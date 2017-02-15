@@ -37,6 +37,7 @@
           </li>
         </ul>
         <div class="btn-wrap">
+          {% if user.is_authenticated %}
           <form action="http://payments.webcourse.niksula.hut.fi/pay/" method="POST">
             {% if payment_form %}
               {{ payment_form }}
@@ -46,6 +47,9 @@
             {% endif %}
           </form>
           <div class="btn-help">Checkout will redirect you to the Simple Payments service.</div>
+          {% else %}
+          <a href="{% url 'login' %}" class="btn" disabled>Login for checkout</a>
+          {% endif %}
         </div>
       </div>
     </div>
