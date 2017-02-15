@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth import authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from gameshop.models import User
-from django.core.validators import validate_email, ValidationError
+from django.core.validators import validate_email
 
 
 class RegisterForm(forms.ModelForm):

@@ -183,3 +183,5 @@ if "DYNO" in os.environ:
 
 #email validation, console as backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+DOMAIN='localhost:8000'

@@ -21,6 +21,8 @@ from gameshop.api.views import *
 from gameshop.message_service import urls as message_urls
 from gameshop.storeutils.cart import urls as cart_urls
 from gameshop import settings
+#from gameshop.views import auth
+from django.views.generic.base import RedirectView
 
 
 urlpatterns = [
@@ -64,7 +66,7 @@ urlpatterns = [
 
     #third party authentication
     #login cancel page overriding
-    url(r'^accounts/social/login/cancelled/$', login_view),
+    url(r'^accounts/social/login/cancelled/$', RedirectView.as_view(pattern_name='login', permanent=False), name='facebook_login_cancel'),
     url(r'^accounts/', include('allauth.urls')),
 
     #api
@@ -74,7 +76,7 @@ urlpatterns = [
     url(r'^register/$', register_view, name='register'),
     url(r'^login/$', login_view, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
-
+    url(r'^activate/(?P<token>\w+.[-_\w]*\w+.[-_\w]*\w+)/$',auth.activate_user,name='active_user'),
     # password change utilizing the django built-in views with custom templates
     url(r'^password_change/$', auth_views.password_change, {
         'template_name': 'password_change.html'
