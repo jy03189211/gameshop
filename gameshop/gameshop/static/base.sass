@@ -57,9 +57,11 @@ p
 a
   color: col(255)
 
-  &:hover
-    color: $blue
-    text-decoration: none
+  // disable hover for assumed touch/mobile devices
+  @media only screen and (min-width: 768px)
+    &:hover
+      color: $blue
+      text-decoration: none
 
 .material-icons
   font-size: inherit
@@ -394,9 +396,11 @@ a
     background: $blue
     color: col(255)
 
-    &:not([disabled]):hover
-      background: col(255)
-      color: $blue
+    // disable hover for assumed touch/mobile devices
+    @media only screen and (min-width: 768px)
+      &:not([disabled]):hover
+        background: col(255)
+        color: $blue
 
     &.btn-s
       height: 36px
@@ -417,23 +421,29 @@ a
     &.btn-secondary
       background: $grey-el
 
-      &:hover
-        background: col(255)
-        color: $grey
+      // disable hover for assumed touch/mobile devices
+      @media only screen and (min-width: 768px)
+        &:hover
+          background: col(255)
+          color: $grey
 
     &.btn-danger
       background: $red
 
-      &:hover
-        background: col(255)
-        color: $red
+      // disable hover for assumed touch/mobile devices
+      @media only screen and (min-width: 768px)
+        &:hover
+          background: col(255)
+          color: $red
 
     &.btn-green
       background: $green
 
-      &:hover
-        background: col(255)
-        color: $green
+      // disable hover for assumed touch/mobile devices
+      @media only screen and (min-width: 768px)
+        &:hover
+          background: col(255)
+          color: $green
 
   .badge-row
     overflow: hidden
@@ -640,27 +650,44 @@ a
 .game-component
   position: relative
   float: left
-  clear: both
   min-width: 100%
+  clear: both
+  overflow: auto
+
+  #scale-toggle
+    margin-bottom: 15px
 
   .game-wrap
     position: relative
     float: left
-    clear: both
     width: 100%
-    text-align: center
     line-height: 0
+    text-align: center
+    clear: both
 
     .iframe-wrap
       display: inline-block
-      border: 1px solid $grey-l
+      vertical-align: bottom
+      border: none
       background: col(255)
 
       iframe
-        // defaults
+        // default size
         width: 640px
         height: 480px
 
+        -webkit-transform-origin: 0 0
+        -moz-transform-origin: 0 0
+        -ms-transform-origin: 0 0
+        -o-transform-origin: 0 0
+        transform-origin: 0 0
+
+        @media only screen and (min-width: 768px)
+          -webkit-transform-origin: center top
+          -moz-transform-origin: center top
+          -ms-transform-origin: center top
+          -o-transform-origin: center top
+          transform-origin: center top
 
 .game-list
 

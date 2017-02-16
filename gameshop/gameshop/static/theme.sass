@@ -93,30 +93,38 @@ a
     background: $blue
     color: col(255)
 
-    &:not([disabled]):hover
-      background: col(255)
-      color: $blue
+    // disable hover for assumed touch/mobile devices
+    @media only screen and (min-width: 768px)
+      &:not([disabled]):hover
+        background: col(255)
+        color: $blue
 
     &.btn-secondary
       background: $navy-el
 
-      &:hover
-        background: col(255)
-        color: $navy
+      // disable hover for assumed touch/mobile devices
+      @media only screen and (min-width: 768px)
+        &:hover
+          background: col(255)
+          color: $navy
 
     &.btn-danger
       background: $red
 
-      &:hover
-        background: col(255)
-        color: $red
+      // disable hover for assumed touch/mobile devices
+      @media only screen and (min-width: 768px)
+        &:hover
+          background: col(255)
+          color: $red
 
     &.btn-green
       background: $green
 
-      &:hover
-        background: col(255)
-        color: $green
+      // disable hover for assumed touch/mobile devices
+      @media only screen and (min-width: 768px)
+        &:hover
+          background: col(255)
+          color: $green
 
   .badge-row
     .double-badge
