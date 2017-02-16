@@ -29,8 +29,9 @@ a
     color: #fff
 
   .navbar-nav
-    > li
-      > a
+    li
+      a,
+      form a
         border-radius: $border-radius
 
         &:hover
@@ -40,17 +41,6 @@ a
         a
           background: $navy-l
           color: $blue
-
-  .navbar-right
-    > div
-      border-radius: $border-radius
-
-      &:hover
-        background: $navy
-
-      &.active
-        background: $navy-l
-        color: $blue
 
 .component
   border-radius: $border-radius
