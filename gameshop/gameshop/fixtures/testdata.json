@@ -8,7 +8,9 @@
       "public_name": "Some Game Studio",
       "created_at": "2017-01-01T00:00:00+00:00",
       "updated_at": "2017-01-01T00:00:00+00:00",
-      "email": "user1@example.com"
+      "email": "user1@example.com",
+      "api_hosts": "*",
+      "api_key": "dXNlcjE6OitVKDOu4D2Q2wht0ojtyo+QkYzKM8NqY+XJtr5l2tKS"
     }
   },
   {
@@ -19,7 +21,9 @@
       "username": "user2",
       "created_at": "2017-01-01T00:00:00+00:00",
       "updated_at": "2017-01-01T00:00:00+00:00",
-      "email": "user2@example.com"
+      "email": "user2@example.com",
+      "api_hosts": "*",
+      "api_key": "dXNlcjI6OmxJINKQ4JPv3IFWPVkvswS9xOZa3zKdI+RxCHWjuqlg"
     }
   },
   {
@@ -31,7 +35,9 @@
       "public_name": "Studio2",
       "created_at": "2017-01-01T00:00:00+00:00",
       "updated_at": "2017-01-01T00:00:00+00:00",
-      "email": "user3@example.com"
+      "email": "user3@example.com",
+      "api_hosts": "*",
+      "api_key": "dXNlcjM6OpHTP4pVESc1NbP9p+bCastkQiOQFUMmjj/jpXxkHbgU"
     }
   },
   {

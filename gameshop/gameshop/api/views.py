@@ -3,7 +3,9 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.core import serializers
-import json
+from django.views.decorators.http import *
+import base64, binascii, hashlib, json, os
+from gameshop.decorators import require_api_key
 
 from gameshop.models import *
 
@@ -176,8 +178,27 @@ def get_user_purchased_json(request, user_id):
 
     return JsonResponse(purchased_list, safe=False)
 
+
+@require_POST
+@require_api_key
 def user_inventory(request, user_id):
 
+    user = User.objects.get(pk=user_id)
+
+    #for testing with user1
+    #user_api_key = 'dXNlcjE6OitVKDOu4D2Q2wht0ojtyo+QkYzKM8NqY+XJtr5l2tKS'
+    request_api_key = request.META['HTTP_API_KEY']
+    user_api_key = user.api_key
+
+
+    if does_api_key_match(request_api_key, user_api_key):
+        print('matches')
+        pass
+    if host_is_allowed(request, user):
+        print('is allowed')
+        pass
+
+    # TODO: remove all get checks
     if request.method == 'GET':
 
         inventory = Game.objects.filter(owned_by__pk=user_id).order_by('-name')
@@ -308,3 +329,30 @@ def get_games_json(request, game_id=None):
         return HttpResponse(data, content_type='application/json')
 
     return HttpResponse('', content_type="application/json")
+
+# Check if user host is in the list of allowed hosts
+def host_is_allowed(request, user):
+    user_allowed_hosts = user.get_api_host_list()
+    host = request.META['HTTP_HOST']
+    if host != None:
+        if user.api_hosts == '*':
+            return True
+        for allowed_host in user_allowed_hosts:
+            if host == allowed_host:
+                return True
+        return False
+
+# Check if api_key matches to the one got from database
+def does_api_key_match(request_api_key, user_api_key):
+
+    # TODO In what format are api_key and user_api_key?
+    decoded_key = base64.b64decode(request_api_key)
+    api_key_parts = decoded_key.split(bytes('::','utf-8'))
+
+    request_username = api_key_parts[0].decode('utf-8')
+    user = User.objects.get(username=request_username)
+    if user != None:
+        if request_username == user.username and request_api_key == user_api_key:
+            return True
+    else:
+        return False
