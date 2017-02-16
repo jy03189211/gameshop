@@ -32,15 +32,18 @@
               <a href="{% url 'cart' %}"><i class="material-icons">shopping_basket</i>Cart</a>
               <div class="navbar-cart-badge {% if count < 1 %}hidden{% endif %}">{% cart_count %}</div>
             </li>
-            <li>
-              <a href="{% url 'login' %}"><i class="material-icons">person</i>Login</a>
-            </li>
+            {% if user.is_authenticated %}
             <li>
               <form action="/logout/" method="post">
                 {% csrf_token %}
                 <a href="#" onclick="submitParent(event)"><i class="material-icons">power_settings_new</i>Logout</a>
               </form>
             </li>
+            {% else %}
+            <li>
+              <a href="{% url 'login' %}"><i class="material-icons">person</i>Login</a>
+            </li>
+            {% endif %}
           </ul>
         </div>
       </div>
