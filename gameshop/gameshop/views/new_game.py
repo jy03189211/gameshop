@@ -1,3 +1,4 @@
+import base64
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -18,6 +19,17 @@ class NewGameView(View):
     def post(self, request, *args, **kwargs):
         form = NewGameForm(request.POST, request.FILES)
         if form.is_valid():
+
+            # Store image in the database as base64.
+            # NOTE: Naturally, large images may be sluggish and this is not a
+            #       recommended practice. Better store and serve media from a
+            #       server designed for that purpose. Like S3.
+
+            image_binary = None
+            if request.FILES['image']:
+                image_binary = request.FILES['image'].file.read()
+                image_binary = base64.b64encode(image_binary)
+
             # create game based on form data
             new_game = Game(
                 url=form.cleaned_data["url"],
@@ -27,7 +39,7 @@ class NewGameView(View):
                 available=form.cleaned_data["available"],
                 created_by=request.user,
                 category=form.cleaned_data["category"],
-                image=form.cleaned_data["image"]
+                image_binary=image_binary
             )
             new_game.save()
 

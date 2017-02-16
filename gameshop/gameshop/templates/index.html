@@ -31,9 +31,9 @@
                 </div>
               </div>
             </div>
-            {% if jumbo_game.image %}
+            {% if jumbo_game.image_binary %}
               <div class="backdrop">
-                <img src="{{ jumbo_game.image.url }}" alt="jumbo image">
+                <img src="{{ jumbo_game.image_src }}" alt="jumbo image">
               </div>
             {% endif %}
           </div>
@@ -48,9 +48,9 @@
     {% for game in featured_games %}
       <div class="col-md-3 featured">
         <div class="component">
-          {% if game.image %}
+          {% if game.image_binary %}
             <div class="backdrop">
-              <img src="{{ game.image.url }}" alt="featured image">
+              <img src="{{ game.image_src }}" alt="featured image">
             </div>
           {% endif %}
           <div class="featured-title title">{{ game.name }}</div>

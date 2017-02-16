@@ -14,10 +14,10 @@
         <!-- this row element is used as a width target if the iframe is scaled -->
         <div class="row" id="scale-target-width">
           <div class="component col-md-3">
-            {% if game.image %}
+            {% if game.image_binary %}
               <div class="aspect-ratio aspect-ratio-100">
                 <div>
-                  <img src="{{ game.image.url }}" alt="{{ game.name }} image">
+                  <img src="{{ game.image_src }}" alt="{{ game.name }} image">
                 </div>
               </div>
             {% endif %}

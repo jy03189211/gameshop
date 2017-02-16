@@ -76,10 +76,13 @@ class Game(models.Model):
         User, related_name='developed_games', on_delete=models.CASCADE)
     # a game can be owned by multiple users
     owned_by = models.ManyToManyField(User, related_name='owned_games')
-    image = models.ImageField(upload_to='images/', blank=True, null=True)
+    image_binary = models.BinaryField(blank=True)
     category = models.ForeignKey(Category, null=True, blank=True)
 
-    # TODO: add release_date and change that into the template also
+    @property
+    def image_src(self):
+        """Returns the image in a format usable in the img tag src attribute"""
+        return 'data:image/jpeg;base64,' + self.image_binary.decode()
 
     def __str__(self):
         return self.name
