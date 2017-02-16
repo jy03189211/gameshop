@@ -6,34 +6,43 @@
 
 <div class="navbar-wrap">
   <div class="container">
-    <div class="navbar navbar-custom">
-      <div class="navbar-left">
+    <div id="navbar" class="navbar navbar-custom" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
         <a class="navbar-brand title" href="{% url 'index' %}">Gameshop</a>
-        <ul class="nav navbar-nav">
-          <li><a href="{% url 'search' %}">Search</a></li>
-          <li><a href="{% url 'categories' %}">Categories</a></li>
-          {% if user.is_authenticated %}
-          <li><a href="{% url 'dashboard' %}">Your games and profile</a></li>
-          {% endif %}
-        </ul>
       </div>
-      <div class="navbar-right">
-        <div class="navbar-basket">
-          <a href="{% url 'cart' %}"><i class="material-icons">shopping_basket</i>Cart</a>
-          <div class="navbar-item-badge {% if count < 1 %}hidden{% endif %}">{% cart_count %}</div>
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <div class="navbar-left">
+          <ul class="nav navbar-nav">
+            <li><a href="{% url 'search' %}">Search</a></li>
+            <li><a href="{% url 'categories' %}">Categories</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'dashboard' %}">Your games and profile</a></li>
+            {% endif %}
+          </ul>
         </div>
-        {% if user.is_authenticated %}
-          <div class="navbar-user">
-            <form action="/logout/" method="post">
-              {% csrf_token %}
-              <a href="#" onclick="submitParent(event)"><i class="material-icons">power_settings_new</i>Logout</a>
-            </form>
-          </div>
-        {% else %}
-          <div class="navbar-user">
-            <a href="{% url 'login' %}"><i class="material-icons">person</i>Login</a>
-          </div>
-        {% endif %}
+        <div class="navbar-right">
+          <ul class="nav navbar-nav">
+            <li class="navbar-cart">
+              <a href="{% url 'cart' %}"><i class="material-icons">shopping_basket</i>Cart</a>
+              <div class="navbar-cart-badge {% if count < 1 %}hidden{% endif %}">{% cart_count %}</div>
+            </li>
+            <li>
+              <a href="{% url 'login' %}"><i class="material-icons">person</i>Login</a>
+            </li>
+            <li>
+              <form action="/logout/" method="post">
+                {% csrf_token %}
+                <a href="#" onclick="submitParent(event)"><i class="material-icons">power_settings_new</i>Logout</a>
+              </form>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@ var cartUrlPrefix = '/cart';
 
 var updateCartBadge = function(cart) {
   var count = cart.length;
-  var cartBadge = $('.navbar-basket .navbar-item-badge');
+  var cartBadge = $('.navbar-cart-badge');
   if (cartBadge) {
     cartBadge.text(count);
     cartBadge.removeClass('hidden');

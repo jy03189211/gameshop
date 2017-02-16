@@ -62,6 +62,8 @@ a
     text-decoration: none
 
 .material-icons
+  font-size: inherit
+
   &.icon-xl
     font-size: 48px
 
@@ -99,7 +101,6 @@ a
   $navbar-pad: 20px
   $navbar-h: 50px
 
-  height: $navbar-h
   margin: $navbar-pad 0
   border: 0
 
@@ -108,47 +109,42 @@ a
     text-transform: uppercase
 
   .navbar-brand
-    margin-right: 30px
     font-size: $font-size-l
 
-  .navbar-nav
-    > li
-      > a
-        font-size: $font-size-s
+  .navbar-toggle
+    .icon-bar
+      background: col(255)
 
+  .navbar-nav
+    font-size: $font-size-s
+
+    i.material-icons
+      margin-right: 10px
+
+    li
+      form
+        a
+          position: relative
+          display: block
+          padding: 15px
+          line-height: 20px
+
+          @media only screen and (max-width: 767px)
+            padding: 10px 15px
+
+      a,
+      form a
         &:hover
           background: $navbar-hover-bg
 
       &.active
-        a
+        a,
+        form a
           background: $navbar-active-bg
           color: $navbar-active-col
 
-  .navbar-right
-    padding-right: 15px
-
-    > div
-      position: relative
-      float: left
-      padding: 13px
-      cursor: pointer
-
-      a
-        line-height: 24px
-
-      .material-icons
-        line-height: 24px
-        vertical-align: top
-        margin-right: 10px
-
-      &:hover
-        background: $navbar-hover-bg
-
-      &.active
-        background: $navbar-active-bg
-        color: $navbar-active-col
-
-    .navbar-item-badge
+  .navbar-cart
+    .navbar-cart-badge
       position: absolute
       top: 13px - 5px
       left: -5px
@@ -159,8 +155,12 @@ a
       background: $red
       color: col(255)
 
-    .navbar-basket
-      .navbar-item-badge.hidden
+      @media only screen and (max-width: 767px)
+        top: 10px
+        left: auto
+        right: 15px
+
+      &.hidden
         display: none
 
 .jumbotron
