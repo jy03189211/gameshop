@@ -5,20 +5,17 @@
   {% for game in games %}
   <div class="game-list">
     <div class="game">
-      <div class="game-image"></div>
+      <div class="game-title">{{ game.name }}</div>
+      <div class="game-description">{{ game.description }}</div>
+      <div class="divider"></div>
       <div class="game-details">
-        <div class="game-title">{{ game.name }}</div>
-        <div class="game-description">{{ game.description }}</div>
-        <div class="divider"></div>
-        <div class="game-details">
-          <div class="badge-row">
-            <div class="double-badge">
-              <div class="badge badge-s">Developed by</div>
-              <div class="badge badge-s badge-nobg">{{ game.created_by.public_name }}</div>
-            </div>
+        <div class="badge-row">
+          <div class="double-badge">
+            <div class="badge badge-s">Developed by</div>
+            <div class="badge badge-s badge-nobg">{{ game.created_by.public_name }}</div>
           </div>
-          <a href="{% url 'game' game.pk %}" class="btn btn-s">Play</a>
         </div>
+        <a href="{% url 'game' game.pk %}" class="btn btn-s">Play</a>
       </div>
     </div>
   </div>

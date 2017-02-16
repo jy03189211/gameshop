@@ -27,24 +27,21 @@
             <div class="game-list">
               {% for game in results %}
               <div class="game">
-                <div class="game-image"></div>
+                <div class="game-title">{{ game.name }}</div>
+                <div class="game-description">{{ game.description }}</div>
+                <div class="divider"></div>
                 <div class="game-details">
-                  <div class="game-title">{{ game.name }}</div>
-                  <div class="game-description">{{ game.description }}</div>
-                  <div class="divider"></div>
-                  <div class="game-details">
-                    <div class="badge-row">
-                      <div class="double-badge">
-                        <div class="badge badge-s">Developed by</div>
-                        <div class="badge badge-s badge-nobg">{{ game.created_by.public_name }}</div>
-                      </div>
-                      <div class="double-badge">
-                        <div class="badge badge-s">Price</div>
-                        <div class="badge badge-s badge-nobg">{{ game.price }} €</div>
-                      </div>
+                  <div class="badge-row">
+                    <div class="double-badge">
+                      <div class="badge badge-s">Developed by</div>
+                      <div class="badge badge-s badge-nobg">{{ game.created_by.public_name }}</div>
                     </div>
-                    <a href="{% url 'game' game.pk %}" class="btn btn-s">Go to page</a>
+                    <div class="double-badge">
+                      <div class="badge badge-s">Price</div>
+                      <div class="badge badge-s badge-nobg">{{ game.price }} €</div>
+                    </div>
                   </div>
+                  <a href="{% url 'game' game.pk %}" class="btn btn-s">Go to page</a>
                 </div>
               </div>
               {% endfor %}

@@ -70,28 +70,31 @@ a
 .aspect-ratio
   position: relative
 
-  &::before
-    display: block
-    content: ""
-    padding-bottom: 62.5%
+  // only keep aspect ratio for non-mobile layouts
+  @media only screen and (min-width: 768px)
 
-  &.aspect-ratio-50
     &::before
-      padding-bottom: 50%
+      display: block
+      content: ""
+      padding-bottom: 62.5%
 
-  &.aspect-ratio-100
-    &::before
-      padding-bottom: 100%
+    &.aspect-ratio-50
+      &::before
+        padding-bottom: 50%
 
-  > div:first-child
-    position: absolute
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
+    &.aspect-ratio-100
+      &::before
+        padding-bottom: 100%
 
-    img
-      width: 100%
+    > div:first-child
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+
+  img
+    max-width: 100%
 
 .navbar-custom
   $navbar-hover-col: $blue
@@ -172,21 +175,29 @@ a
     position: relative
     display: table
     height: 100%
-    width: 100%
     z-index: 2
+
+    @media only screen and (min-width: 768px)
+      width: 100%
 
     .vertical-center
       display: table-cell
       vertical-align: middle
 
-  .jumbo-game-title
-    font-size: $font-size-xl
-    text-transform: uppercase
-    color: col(255)
+    .jumbo-game-title
+      font-size: $font-size-xl
+      text-transform: uppercase
+      color: col(255)
 
-  .jumbo-game-description
-    padding: 15px 0 30px
-    fol
+    .jumbo-game-description
+      padding: 15px 0 30px
+
+    .jumbo-buy
+      .double-badge
+        margin-bottom: 0
+
+      @media only screen and (min-width: 768px)
+        float: right
 
 
 .featured
@@ -238,6 +249,9 @@ a
   margin-bottom: 15px
   background: $component-bg
 
+  @media only screen and (max-width: 767px)
+    padding: 15px
+
   &.component-parent
     padding: 0
 
@@ -251,6 +265,9 @@ a
   > .component
     margin: 30px 0
     border: 1px solid $blue
+
+    @media only screen and (max-width: 767px)
+      margin: 15px 0
 
     &:first-child
       margin-top: 0
@@ -278,9 +295,6 @@ a
 
     &:first-child
       padding-top: 0
-
-  .float-right
-    float: right
 
   .divider
     height: 1px
@@ -392,11 +406,13 @@ a
       text-transform: uppercase
 
     &.btn-l
-      height: 64px
-      line-height: 64px
-      padding: 0 24px
-      font-size: $font-size-l
-      text-transform: uppercase
+      // only do very large buttons on non-mobile
+      @media only screen and (min-width: 768px)
+        height: 64px
+        line-height: 64px
+        padding: 0 24px
+        font-size: $font-size-l
+        text-transform: uppercase
 
     &.btn-secondary
       background: $grey-el
@@ -465,11 +481,13 @@ a
       text-transform: uppercase
 
     &.badge-l
-      height: 64px
-      line-height: 64px
-      padding: 0 24px
-      font-size: $font-size-l
-      text-transform: uppercase
+      // only do very large badges on non-mobile
+      @media only screen and (min-width: 768px)
+        height: 64px
+        line-height: 64px
+        padding: 0 24px
+        font-size: $font-size-l
+        text-transform: uppercase
 
   form
 
@@ -651,6 +669,9 @@ a
     margin-top: 15px
     background: $grey-l
 
+    @media only screen and (max-width: 767px)
+      padding: 15px
+
     .game-title
       font-size: $font-size-l
       text-transform: uppercase
@@ -666,6 +687,9 @@ a
       .badge-row
         float: left
 
+        @media only screen and (max-width: 767px)
+          width: 100%
+
         .badge
           border-color: $grey-el
 
@@ -679,8 +703,9 @@ a
             margin-bottom: 15px
 
       .btn
-        float: right
-        margin-left: 15px
+        @media only screen and (min-width: 768px)
+          float: right
+          margin-left: 15px
 
 .cart-total
   color: col(255)
