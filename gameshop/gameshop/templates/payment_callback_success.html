@@ -7,9 +7,11 @@
   <div class="row">
     <div class="col-md-12">
       <div class="component">
-        <div class="component-title">Payment successful</div>
-        <p>Payment successful. Enjoy your new games!</p>
+        <div class="component-title">Checkout successful</div>
+        <p>Checkout successful. Enjoy your new games!</p>
+        {% if payment_ref %}
         <p>Payment reference number: {{ payment_ref }}</p>
+        {% endif %}
         <ul class="table align-last-right">
           <li class="table-header">
             <span class="table-col-2">Name</span>

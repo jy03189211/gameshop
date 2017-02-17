@@ -8,8 +8,10 @@
     <div class="col-md-12">
       <div class="component">
         <div class="component-title">Payment error</div>
-        <p>There was an error processing your payment. Please note your payment reference and try again.</p>
+        <p>There was an error processing your payment. Please try again.</p>
+        {% if payment_ref %}
         <p>Payment reference number: {{ payment_ref }}</p>
+        {% endif %}
         <div class="btn-wrap">
           <a href="{% url 'cart' %}" class="btn">Return to cart</a>
         </div>

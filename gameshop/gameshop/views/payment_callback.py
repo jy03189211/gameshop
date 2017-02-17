@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from gameshop.models import Game
 from gameshop.storeutils.checkout import checkout as checkout_utils
 
@@ -14,8 +14,7 @@ def payment_success_view(request):
 
         stub = request.session.get('payment_stub', None)
         if stub == None:
-            # TODO: do error handling?
-            pass
+            return redirect('payment_error')
 
         purchased_ids = stub[1]
         purchased_games = Game.objects.filter(pk__in=purchased_ids)
@@ -30,7 +29,7 @@ def payment_success_view(request):
             'payment_ref': payment_ref
         })
 
-    return payment_error_view(request)
+    return redirect('payment_error')
 
 
 @login_required
@@ -48,7 +47,7 @@ def payment_cancel_view(request):
 def payment_error_view(request):
     """Handles payment errors"""
 
-    payment_ref = request.GET.get('ref', '')
+    payment_ref = request.GET.get('ref', None)
 
     return render(request, 'payment_callback_error.html', {
         'payment_ref': payment_ref

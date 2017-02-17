@@ -1,5 +1,6 @@
 import uuid
 from hashlib import md5
+from django.core.signing import Signer
 from gameshop.forms.payment import PaymentForm
 from gameshop.models import Game, Order, Purchase, User
 from gameshop.storeutils.cart import cart as cart_utils
@@ -25,20 +26,28 @@ def prepare_payment_form(request):
         md5_hash = md5(checksumstr.encode("ascii"))
         checksum = md5_hash.hexdigest()
 
+        # full absolute URL
         base_url = request.META['wsgi.url_scheme'] + '://' \
                     + request.META['HTTP_HOST'] + '/'
 
-        payment_form = PaymentForm(
-            initial={
-                'pid': pid,
-                'sid': settings.SELLER_ID,
-                'amount': amount,
-                'checksum': checksum,
-                'success_url': base_url + settings.PAYMENT_SUCCESS_URL,
-                'cancel_url': base_url + settings.PAYMENT_CANCEL_URL,
-                'error_url': base_url + settings.PAYMENT_ERROR_URL,
-            }
-        )
+        initial_form_data = {
+            'pid': pid,
+            'sid': settings.SELLER_ID,
+            'amount': amount,
+            'checksum': checksum,
+            'success_url': base_url + settings.PAYMENT_SUCCESS_URL,
+            'cancel_url': base_url + settings.PAYMENT_CANCEL_URL,
+            'error_url': base_url + settings.PAYMENT_ERROR_URL,
+        }
+
+        # if the amount is zero, the payment service will be bypassed and
+        # the request can be reduced
+        if amount == 0:
+            initial_form_data['success_url'] = ''
+            initial_form_data['cancel_url'] = ''
+            initial_form_data['error_url'] = ''
+
+        payment_form = PaymentForm(initial_form_data)
 
         # store stub purchase in session for success handling
         request.session['payment_stub'] = (pid, cart)
@@ -53,21 +62,33 @@ def handle_payment_success(request):
 
     result = request.GET.get('result', '')
     if result != 'success':
-        print("result not success")
         return False
 
     # get payment stub (tuple (pid, cart))
     stub = request.session.get('payment_stub', None)
     if stub == None:
-        print("no stub")
         return False
 
     pid = stub[0]
     payment_ref = request.GET.get('ref', '')
 
-    # verify checksum
+    # verify checksum from the external payment service
     checksumstr = "pid={}&ref={}&result={}&token={}".format(
         pid, payment_ref, result, settings.SELLER_SECRET_KEY)
+
+    # If amount exists in the request and is zero, checkout bypassed the payment
+    # service, i.e. there are only free games. Checksum will be the same as in
+    # prepare_payment_form above.
+    amount = request.GET.get('amount', None)
+    if amount != None:
+        try:
+            # conversion might fail in case of a faulty request
+            amount = float(amount)
+        except:
+            return False
+
+        checksumstr = "pid={}&sid={}&amount={}&token={}".format(
+            pid, settings.SELLER_ID, amount, settings.SELLER_SECRET_KEY)
 
     md5_hash = md5(checksumstr.encode("ascii"))
     checksum = md5_hash.hexdigest()
@@ -75,7 +96,7 @@ def handle_payment_success(request):
     received_checksum = request.GET.get('checksum', '')
 
     if received_checksum != checksum:
-        print("checksum failed")
+        print("does not match")
         return False
 
     item_ids = stub[1]

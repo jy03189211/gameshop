@@ -9,6 +9,8 @@ class PaymentForm(forms.Form):
     sid = forms.CharField(widget=forms.HiddenInput())
     amount = forms.CharField(widget=forms.HiddenInput())
     checksum = forms.CharField(widget=forms.HiddenInput())
-    success_url = forms.CharField(widget=forms.HiddenInput())
-    cancel_url = forms.CharField(widget=forms.HiddenInput())
-    error_url = forms.CharField(widget=forms.HiddenInput())
+    # payment service will be bypassed for zero amount payments,
+    # thus allow urls to be omitted
+    success_url = forms.CharField(widget=forms.HiddenInput(), required=False)
+    cancel_url = forms.CharField(widget=forms.HiddenInput(), required=False)
+    error_url = forms.CharField(widget=forms.HiddenInput(), required=False)

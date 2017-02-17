@@ -60,9 +60,9 @@ urlpatterns = [
         update_api_settings_done_view, name="update_api_settings_done"),
 
     # payment service callback handling
-    url(r'^' + settings.PAYMENT_SUCCESS_URL + '$', payment_success_view),
-    url(r'^' + settings.PAYMENT_CANCEL_URL + '$', payment_cancel_view),
-    url(r'^' + settings.PAYMENT_ERROR_URL + '$', payment_error_view),
+    url(r'^' + settings.PAYMENT_SUCCESS_URL + '$', payment_success_view, name="payment_success"),
+    url(r'^' + settings.PAYMENT_CANCEL_URL + '$', payment_cancel_view, name="payment_cancel"),
+    url(r'^' + settings.PAYMENT_ERROR_URL + '$', payment_error_view, name="payment_error"),
 
     #third party authentication
     #login cancel page overriding
