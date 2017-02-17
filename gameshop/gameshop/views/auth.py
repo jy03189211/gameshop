@@ -63,17 +63,22 @@ def register_view(request):
             user = register_form.save(commit=False)
             username = register_form.cleaned_data['username']
             password = register_form.cleaned_data['password']
-            email=register_form.cleaned_data['email']
+            email = register_form.cleaned_data['email']
+
             # if the two password inputs match
             register_form.clean_password2()
+
             # if the username input is valid and unique
             register_form.clean_username()
             register_form.clean_email()
             user.set_password(user.password)
             user.generate_api_key()
             token = token_confirm.generate_validate_token(username)
-            message = "\n".join([u'{0},Dear customer'.format(username), u'\n\nPlease click the following link to validate your account.',
-                                 '/'.join([django_settings.DOMAIN,'activate', token])])
+            message = "\n".join([
+                u'Dear customer {0},'.format(username),
+                u'\nPlease click the following link to validate your account.',
+                '/'.join([django_settings.DOMAIN,'activate', token])])
+
             send_mail(
                 'Validation',
                 message,
@@ -81,13 +86,18 @@ def register_view(request):
                 [email],
                 fail_silently=False,
             )
+
             user.is_active = False
             user.save()
-            user = authenticate(username=username, password=password)
+            #user = authenticate(username=username, password=password)
+
             if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('index')
+                #login(request, user)
+                return render(request, 'generic.html', {
+                    'title': 'Registration',
+                    'message': 'Please check your email to activate your account. \
+                        You can login after activation.'
+                })
 
         # try again, something went wrong
         return render(request, 'login.html', {
@@ -104,30 +114,53 @@ def activate_user(request, token):
         username = token_confirm.remove_validate_token(token)
         users = User.objects.filter(username=username)
         for user in users:
-         user.delete()
-        return render(request, 'message.html', {'message': u'sorry, the link is over due, please redo<a href=\"' + django_settings.DOMAIN + u'/signup\">register</a>'})
+            user.delete()
+
+        return render(request, 'generic.html', {
+            'title': 'Error',
+            'message': 'Sorry, the link is over due. Please register again.'
+        })
+
     try:
         user = User.objects.get(username=username)
     except User.DoesNotExist:
-        return render(request, 'message.html', {'message': u"sorry, user does not exist!"})
-    user.is_active = True
-    user.save()
-    message = 'register success!'
-    return render(request, 'message.html', {'message':message})
+        return render(request, 'generic.html', {
+            'title': 'Error',
+            'message': 'Sorry, the user does not exist!'
+        })
+
+    if user.is_active:
+        title = 'Information'
+        message = 'User already active.'
+    else:
+        user.is_active = True
+        user.save()
+        title = 'Success'
+        message = 'User activated! You can now login.'
+
+    return render(request, 'generic.html', {
+        'title': title,
+        'message': message
+    })
+
 
 class Token:
     def __init__(self, security_key):
         self.security_key = security_key
         self.salt = base64.encodebytes(security_key.encode())
+
     def generate_validate_token(self, username):
         serializer = utsr(self.security_key)
         return serializer.dumps(username, self.salt)
+
     def confirm_validate_token(self, token, expiration=3600):
         serializer = utsr(self.security_key)
         return serializer.loads(token, salt=self.salt, max_age=expiration)
+
     def remove_validate_token(self, token):
         serializer = utsr(self.security_key)
         print(serializer.loads(token, salt=self.salt))
         return serializer.loads(token, salt=self.salt)
+
 
 token_confirm = Token(django_settings.SECRET_KEY)
