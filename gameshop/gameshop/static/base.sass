@@ -513,88 +513,88 @@ a
     &.inline-form
       display: inline
 
-    label
-      display: block
-      position: relative
-      margin: 15px 0 5px
-      padding: 0
-      font-weight: 400
+  label
+    display: block
+    position: relative
+    margin: 15px 0 5px
+    padding: 0
+    font-weight: 400
 
-      &:first-of-type
-        margin-top: 15px
+    &:first-of-type
+      margin-top: 15px
 
-    ul.errorlist
-      li
-        color: $red
-        font-size: $font-size-s
-        text-transform: uppercase
-
-    .helptext
-      display: block
-      padding: 5px 0 15px
+  ul.errorlist
+    li
+      color: $red
       font-size: $font-size-s
-      color: $blue
+      text-transform: uppercase
 
-      &:last-child
-        padding-bottom: 0
+  .helptext
+    display: block
+    padding: 5px 0 15px
+    font-size: $font-size-s
+    color: $blue
 
-    input:not([type="checkbox"]):not([type="submit"]):not([type="file"]),
-    select
-      width: 100%
-      height: 32px
-      line-height: 32px
-      padding: 0 10px
-      margin: 0
-      background: $grey-l
-      border: 1px solid $grey-el
-      border-radius: 0
-      outline: 0
-      overflow: hidden
+    &:last-child
+      padding-bottom: 0
 
-      &:disabled
-        background: none
+  input:not([type="checkbox"]):not([type="submit"]):not([type="file"]),
+  select
+    width: 100%
+    height: 32px
+    line-height: 32px
+    padding: 0 10px
+    margin: 0
+    background: $grey-l
+    border: 1px solid $grey-el
+    border-radius: 0
+    outline: 0
+    overflow: hidden
 
-    select.dropdown
-      width: auto
+    &:disabled
+      background: none
 
-    textarea
-      width: 100%
-      padding: 10px
-      background: $grey-l
-      border: 1px solid $grey-el
-      outline: 0
+  select.dropdown
+    width: auto
 
-    input[type="checkbox"]
-      display: none
+  textarea
+    width: 100%
+    padding: 10px
+    background: $grey-l
+    border: 1px solid $grey-el
+    outline: 0
 
-      & + label
-        margin-top: 30px
-        padding-left: 39px
-        line-height: 24px
+  input[type="checkbox"]
+    display: none
 
-        &::after
-          position: absolute
-          display: block
-          content: ""
-          height: 24px
-          width: 24px
-          top: 0
-          left: 0
-          background: $grey-l
-          border: 1px solid $grey-el
-          z-index: 2
+    & + label
+      margin-top: 30px
+      padding-left: 39px
+      line-height: 24px
 
-      &:checked + label
-        &::before
-          position: absolute
-          display: block
-          content: ""
-          height: 12px
-          width: 12px
-          top: 6px
-          left: 6px
-          background: $blue
-          z-index: 3
+      &::after
+        position: absolute
+        display: block
+        content: ""
+        height: 24px
+        width: 24px
+        top: 0
+        left: 0
+        background: $grey-l
+        border: 1px solid $grey-el
+        z-index: 2
+
+    &:checked + label
+      &::before
+        position: absolute
+        display: block
+        content: ""
+        height: 12px
+        width: 12px
+        top: 6px
+        left: 6px
+        background: $blue
+        z-index: 3
 
 .alphabet
   padding: 30px
