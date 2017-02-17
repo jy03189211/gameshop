@@ -5,14 +5,14 @@
 <ul class="table align-last-right">
   <li class="table-header">
     <span>Order #</span>
-    <span>Date</span>
+    <span class="table-col-2">Date</span>
     <span>Total</span>
   </li>
   {% for order in orders %}
   <li class="{% if selected_order.pk == order.pk %}selected{% endif %}">
     <a href="{% url 'order' order.pk %}">
       <span>{{ order.pk }}</span>
-      <span>{{ order.created_at }}</span>
+      <span class="table-col-2">{{ order.created_at|date:'N d, Y, H:i' }}</span>
       <span>{{ order.total }} €</span>
     </a>
   </li>

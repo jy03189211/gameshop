@@ -334,6 +334,9 @@ a
       width: 100%
       margin: 15px 0
 
+      @media only screen and (max-width: 767px)
+        font-size: $font-size-s
+
       li
         display: flex
         width: 100%
@@ -469,6 +472,9 @@ a
     .double-badge
       margin-right: 15px
 
+      &:last-child
+        margin-right: 0
+
   .badge
     display: inline-block
     height: 48px
@@ -490,6 +496,9 @@ a
       font-size: $font-size-s
       text-transform: uppercase
 
+      @media only screen and (max-width: 767px)
+        padding: 0 10px
+
     &.badge-l
       // only do very large badges on non-mobile
       @media only screen and (min-width: 768px)
@@ -500,6 +509,9 @@ a
         text-transform: uppercase
 
   form
+
+    &.inline-form
+      display: inline
 
     label
       display: block
@@ -541,6 +553,9 @@ a
 
       &:disabled
         background: none
+
+    select.dropdown
+      width: auto
 
     textarea
       width: 100%

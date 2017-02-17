@@ -1,18 +1,42 @@
 {% extends "_yourgames.html" %}
 
 {% block subcontent %}
-<div class="component-title">Sales summary</div>
-<ul class="table align-last-right">
-  <li>
-    <span>Total revenue</span>
-    <span>{{ summary.revenue }} €</span>
-  </li>
-  <li>
-    <span>Total purchases</span>
-    <span>{{ summary.num_purchases }}</span>
-  </li>
-</ul>
-<div class="component-title">All sales</div>
+<div>
+  Showing sales for:
+  <form action="{% url 'sales' %}" method="get" class="inline-form">
+    <select class="dropdown" name="game" onchange="submitParent(event)">
+      <option value="all">All games</option>
+      {% for game in managed_games %}
+        <option value="{{ game.pk }}"
+          {% if selected_pk == game.pk %}selected="selected"{% endif %}>
+          {{ game.name }}
+        </option>
+      {% endfor %}
+    </select>
+  </form>
+</div>
+<div class="component">
+  <div class="component-title">Sales summary</div>
+  <ul class="table align-last-right">
+    <li>
+      <span>Total revenue</span>
+      <span>{{ summary.revenue }} €</span>
+    </li>
+    <li>
+      <span>Total purchases</span>
+      <span>{{ summary.num_purchases }}</span>
+    </li>
+    <li>
+      <span>Revenue, last 30 days</span>
+      <span>{{ summary.revenue_last30d }} €</span>
+    </li>
+    <li>
+      <span>Purchases, last 30 days</span>
+      <span>{{ summary.num_purchases_last30d }}</span>
+    </li>
+  </ul>
+</div>
+<div class="component-title">List of sales</div>
 <ul class="table align-last-right">
   <li class="table-header">
     <span>Order #</span>
@@ -23,7 +47,7 @@
   {% for sale in sales %}
   <li>
     <span>{{ sale.pk }}</span>
-    <span class="table-col-2">{{ sale.created_at }}</span>
+    <span class="table-col-2">{{ sale.created_at|date:'N d, Y, H:i' }}</span>
     <span class="table-col-2">
       <a href="{% url 'game' sale.game.pk %}">{{ sale.game.name }}</a>
     </span>
