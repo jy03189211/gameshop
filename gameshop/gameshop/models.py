@@ -24,14 +24,14 @@ class User(AbstractUser):
 
     # authenticating api requests
     api_hosts = models.CharField(max_length=512, default="*", blank=True)
-    api_key = models.CharField(
-        max_length=512, null=True, blank=True, unique=True)
+    api_key = models.CharField(max_length=512, null=True, blank=True)
 
     def generate_api_key(self):
-        # get a random byte like
+        # get a random bytes-like, use os.urandom for an extremely low
+        # collision probability
         random_material = binascii.hexlify(os.urandom(24))
 
-        # hash with SHA256, digest to get string like
+        # hash with SHA256, digest to get string-like
         hash_key = hashlib.sha256(random_material).digest()
 
         # Include username in the final encoded key for
@@ -41,7 +41,6 @@ class User(AbstractUser):
 
         # bytes to string
         self.api_key = api_key.decode()
-
         self.save()
 
     def get_api_host_list(self):
