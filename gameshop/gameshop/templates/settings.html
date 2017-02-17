@@ -6,7 +6,7 @@
     <div class="component-title">Change password</div>
     <a href="{% url 'password_change' %}" class="btn">Change password</a>
   </div>
-  <div class="component">
+  <div class="component" id="developer_settings">
     <div class="component-title">Developer settings</div>
     {% if request.user.is_developer %}
     <form action="{% url 'public_name_change' %}" method="post">
@@ -25,8 +25,12 @@
     {% endif %}
   </div>
   {% if request.user.is_developer %}
-  <div class="component">
+  <div class="component" id="api_settings">
     <div class="component-title">API settings</div>
+    <label>API key</label>
+    <input type="text" value="{{ request.user.api_key }}" disabled="disabled">
+    <br>
+    <span class="helptext">Your API key is required with every external API request. All requests must be POST requests with "api_key" in the request data.</span>
     <form action="{% url 'update_api_settings' %}" method="post">
       {% csrf_token %}
       {{ api_settings_form }}
@@ -37,4 +41,16 @@
   </div>
   {% endif %}
 
+{% endblock %}
+
+{# Enable jumping back to the correct form with errors for a better UX #}
+{% block js %}
+{{ block.super }}
+  {% if anchor != None %}
+  <script type="text/javascript">
+    $(document).ready(function(){
+      window.location = "#{{ anchor }}";
+    });
+  </script>
+  {% endif %}
 {% endblock %}
