@@ -22,7 +22,7 @@
             <li><a href="{% url 'search' %}">Search</a></li>
             <li><a href="{% url 'categories' %}">Categories</a></li>
             {% if user.is_authenticated %}
-            <li><a href="{% url 'dashboard' %}">Your games and profile</a></li>
+            <li><a href="{% url 'your_games' %}">Your games and profile</a></li>
             {% endif %}
           </ul>
         </div>

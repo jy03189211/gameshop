@@ -5,11 +5,6 @@
   <div class="row">
     <div class="col-md-3">
       <div class="component">
-        <div class="subtitle">General</div>
-        <ul class="subpages">
-          <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-          <li><a href="{% url 'settings' %}">Settings</a></li>
-        </ul>
         <div class="subtitle">Player actions</div>
         <ul class="subpages">
           <li><a href="{% url 'owned_games' %}">Owned games</a></li>
@@ -23,6 +18,10 @@
           <li><a href="{% url 'new_game' %}">New game</a></li>
         </ul>
         {% endif %}
+        <div class="subtitle">Settings</div>
+        <ul class="subpages">
+          <li><a href="{% url 'settings' %}">Settings</a></li>
+        </ul>
       </div>
     </div>
     <div class="col-md-9">

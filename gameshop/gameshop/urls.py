@@ -30,8 +30,7 @@ urlpatterns = [
     url(r'^$', IndexView.as_view(), name="index"),
     url(r'^search/$', SearchView.as_view(), name="search"),
     url(r'^categories/$', CategoriesView.as_view(), name="categories"),
-    url(r'^your_games/$', DashboardView.as_view(), name="dashboard"),
-    url(r'^your_games/dashboard/$', DashboardView.as_view(), name="dashboard"),
+    url(r'^your_games/$', RedirectView.as_view(pattern_name='owned_games', permanent=True), name="your_games"),
     url(r'^your_games/settings/$', SettingsView.as_view(), name="settings"),
     url(r'^your_games/owned_games/$', OwnedGamesView.as_view(), name="owned_games"),
     url(r'^your_games/orders/$', OrdersView.as_view(), name="orders"),
@@ -100,4 +99,4 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

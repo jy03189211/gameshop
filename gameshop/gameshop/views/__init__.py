@@ -1,7 +1,6 @@
 from .index import IndexView
 from .search import SearchView
 from .categories import CategoriesView
-from .dashboard import DashboardView
 from .owned_games import OwnedGamesView
 from .orders import OrdersView
 from .managed_games import ManagedGamesView
