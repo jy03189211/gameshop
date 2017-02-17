@@ -43,8 +43,8 @@
                     <div class="badge badge-s badge-nobg">{{ game.created_by.public_name }}</div>
                   </div>
                   <div class="double-badge">
-                    <div class="badge badge-s">Release date</div>
-                    <div class="badge badge-s badge-nobg">{{ game.created_at }}</div>
+                    <div class="badge badge-s">Added on</div>
+                    <div class="badge badge-s badge-nobg">{{ game.created_at|date:'N d, Y' }}</div>
                   </div>
                   <div class="double-badge">
                     <div class="badge badge-s">Category</div>
