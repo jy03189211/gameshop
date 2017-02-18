@@ -9,32 +9,34 @@
           <div class="component">
             <div class="row jumbo-row">
               <div class="vertical-center">
-                <div class="col-sm-6 col-md-5 col-md-push-1 jumbo-col">
-                  <div class="jumbo-game-title">{{ jumbo_game.name }}</div>
-                  <div class="jumbo-game-description">{{ jumbo_game.description }}</div>
-                  <div class="jumbo-game-developer">
-                    <div class="badge-row">
-                      <div class="double-badge">
-                        <div class="badge badge-s">By</div>
-                        <div class="badge badge-s badge-nobg">{{ jumbo_game.created_by.public_name }}</div>
+                {% if jumbo_game != None %}
+                  <div class="col-sm-6 col-md-5 col-md-push-1 jumbo-col">
+                    <div class="jumbo-game-title">{{ jumbo_game.name }}</div>
+                    <div class="jumbo-game-description">{{ jumbo_game.description }}</div>
+                    <div class="jumbo-game-developer">
+                      <div class="badge-row">
+                        <div class="double-badge">
+                          <div class="badge badge-s">By</div>
+                          <div class="badge badge-s badge-nobg">{{ jumbo_game.created_by.public_name }}</div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-sm-6 col-md-5 col-md-push-1 jumbo-col">
-                  <div class="badge-row jumbo-buy">
-                    <div class="double-badge">
-                      <span class="badge badge-l">{{ jumbo_game.price }} €</span>
-                      <a href="{% url 'game' jumbo_game.pk %}" class="btn btn-l">Buy and play</a>
+                  <div class="col-sm-6 col-md-5 col-md-push-1 jumbo-col">
+                    <div class="badge-row jumbo-buy">
+                      <div class="double-badge">
+                        <span class="badge badge-l">{{ jumbo_game.price }} €</span>
+                        <a href="{% url 'game' jumbo_game.pk %}" class="btn btn-l">Buy and play</a>
+                      </div>
                     </div>
                   </div>
+                  {% endif %}
                 </div>
               </div>
-            </div>
-            {% if jumbo_game.image_binary %}
-              <div class="backdrop">
-                <img src="{{ jumbo_game.image_src }}" alt="jumbo image">
-              </div>
+              {% if jumbo_game.image_binary %}
+                <div class="backdrop">
+                  <img src="{{ jumbo_game.image_src }}" alt="jumbo image">
+                </div>
             {% endif %}
           </div>
         </div>
@@ -45,24 +47,26 @@
 
 <div class="container">
   <div class="row">
-    {% for game in featured_games %}
-      <div class="col-md-3 featured">
-        <div class="component">
-          {% if game.image_binary %}
-            <div class="backdrop">
-              <img src="{{ game.image_src }}" alt="featured image">
-            </div>
-          {% endif %}
-          <div class="featured-title title">{{ game.name }}</div>
-          <div class="featured-buy badge-row">
-            <div class="double-badge">
-              <span class="badge badge-s">{{ game.price }} €</span>
-              <a href="{% url 'game' game.pk %}" class="btn btn-s">Buy and play</a>
+    {% if featured_games != None %}
+      {% for game in featured_games %}
+        <div class="col-md-3 featured">
+          <div class="component">
+            {% if game.image_binary %}
+              <div class="backdrop">
+                <img src="{{ game.image_src }}" alt="featured image">
+              </div>
+            {% endif %}
+            <div class="featured-title title">{{ game.name }}</div>
+            <div class="featured-buy badge-row">
+              <div class="double-badge">
+                <span class="badge badge-s">{{ game.price }} €</span>
+                <a href="{% url 'game' game.pk %}" class="btn btn-s">Buy and play</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    {% endif %}
   </div>
 </div>
 {% endblock %}
