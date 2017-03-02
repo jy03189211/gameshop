@@ -10,7 +10,7 @@ class NewGameForm(forms.Form):
     price = forms.DecimalField(
         label="Price", min_value=0.0, max_value=1000.0, decimal_places=2)
     image = forms.FileField(label="Image")
-    category = forms.ModelChoiceField(label="Category", required=True,
+    category = forms.ModelChoiceField(label="Category", required=False,
         queryset=Category.objects.all())
     available = forms.BooleanField(label="Available for purchase", required=False)
 

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     #'livereload',
     'gameshop.api',
+    #'django_social_share',
 ]
 
 MIDDLEWARE_CLASSES= [

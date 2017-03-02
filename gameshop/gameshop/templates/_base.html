@@ -9,6 +9,11 @@
     {% endblock %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="fb:app_id"      content="410422715960410">
+    <meta property="og:url"           content="{{ game.url }}" />
+    <meta property="og:image"           content="https://github.com/jy03189211/jy03189211.github.io/blob/master/assets/images/flappy.png" />
+    <meta property="og:description"   content="{{ game.description }}" />
+    <meta property="og:title"         content="{{ game.title }}" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'lib/bootstrap.min.css' %}">
@@ -16,6 +21,7 @@
     <link rel="stylesheet" href="{% static 'lib/bootstrap-social.css' %}">
     <link rel="stylesheet" href="{% static 'base.min.css' %}">
     <link rel="stylesheet" href="{% static 'theme.min.css' %}">
+
   </head>
   <body>
     {% include "_nav.html" %}

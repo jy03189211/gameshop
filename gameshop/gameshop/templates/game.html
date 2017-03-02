@@ -1,7 +1,7 @@
 {% extends "_base.html" %}
 
 {% load static %}
-
+{#{% load socialaccount %}#}
 {% block title %}
 <title>Gameshop - {{ game.name }}</title>
 {% endblock %}
@@ -84,6 +84,7 @@
       <div class="component game-component">
         <div class="btn-wrap">
           <div class="btn btn-s btn-secondary" id="scale-toggle">Toggle scaling</div>
+          <div id="shareBtn" class="fb-share-button" data-href="{{ game.url }}"  data-layout="button_count" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" ></a></div>
         </div>
         <div class="game-wrap" id="game-wrap">
           {% if game.url %}
@@ -153,4 +154,6 @@
   {{ block.super }}
   <script src="{% static "js/cart.js" %}"></script>
   <script src="{% static "js/message.js" %}"></script>
+  <script src="{% static "js/social-media.js" %}"></script>
+
 {% endblock %}
