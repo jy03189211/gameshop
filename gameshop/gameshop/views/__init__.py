@@ -8,6 +8,7 @@ from .sales import SalesView
 from .new_game import NewGameView
 from .game import GameView
 from .game_edit import GameEditView, remove_game_view
+from .game_image import GameImageView
 from .cart import CartView
 from .auth import login_view, register_view
 from .payment_callback import (
