@@ -6,6 +6,7 @@ from django.views.decorators.http import require_POST
 from django.views.generic import View
 from gameshop.models import Game
 from gameshop.forms.game import EditGameForm
+import base64
 
 
 @method_decorator(login_required, name='dispatch')
@@ -46,8 +47,13 @@ class GameEditView(View):
             game.price = form.cleaned_data["price"]
             game.available = form.cleaned_data["available"]
             game.category = form.cleaned_data["category"]
-            if form.cleaned_data["image"]:
-                game.image = form.cleaned_data["image"]
+
+            # update image if a new one was given
+            image_binary = None
+            if request.FILES['image']:
+                image_binary = request.FILES['image'].file.read()
+                image_binary = base64.b64encode(image_binary)
+            game.image_binary = image_binary
 
             game.save()
 
