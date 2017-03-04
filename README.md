@@ -147,7 +147,7 @@
 - ???
 
 ## Instructions
-- Application available at: ???
+- Application available at: https://boiling-gorge-94597.herokuapp.com/
 
 ##### Test accounts
 - There are 4 pre-created test accounts that can be used for testing the store
