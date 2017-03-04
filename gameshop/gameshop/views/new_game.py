@@ -26,8 +26,9 @@ class NewGameView(View):
             #       server designed for that purpose. Like S3.
 
             image_binary = None
-            if request.FILES['image']:
-                image_binary = request.FILES['image'].file.read()
+            image_file = request.FILES.get('image', None)
+            if image_file:
+                image_binary = image_file.file.read()
                 image_binary = base64.b64encode(image_binary)
 
             # create game based on form data

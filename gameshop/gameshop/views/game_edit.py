@@ -49,15 +49,16 @@ class GameEditView(View):
             game.category = form.cleaned_data["category"]
 
             # update image if a new one was given
-            image_binary = None
-            if request.FILES['image']:
-                image_binary = request.FILES['image'].file.read()
+            image_file = request.FILES.get('image', None)
+            if image_file != None:
+                image_binary = None
+                image_binary = image_file.file.read()
                 image_binary = base64.b64encode(image_binary)
-            game.image_binary = image_binary
+                game.image_binary = image_binary
 
             game.save()
 
-            return redirect('managed_games')
+            return redirect('game', game_id=game.pk)
 
         # if form not valid
         return render(request, self.template_name, {"form": form})

@@ -75,7 +75,7 @@ class Game(models.Model):
         User, related_name='developed_games', on_delete=models.CASCADE)
     # a game can be owned by multiple users
     owned_by = models.ManyToManyField(User, related_name='owned_games')
-    image_binary = models.BinaryField(blank=True)
+    image_binary = models.BinaryField(null=True, blank=True)
     category = models.ForeignKey(Category, null=True, blank=True)
 
     @property
