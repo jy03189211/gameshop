@@ -142,6 +142,10 @@
 ## Successes and failures
 - We somewhat fully succeeded in our plan of implementing all the features in
 	the project description
+- Being new to Django, everything too quite a while in the beginning and the
+	actual schedule was thus slightly lagging behind, but we still managed to get
+	everything done well in time
+- ???
 
 ## Work division
 - ???
