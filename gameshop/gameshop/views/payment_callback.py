@@ -61,6 +61,14 @@ def payment_error_view(request):
     payment_ref = request.GET.get('ref', None)
     pid = request.GET.get('pid', None)
 
+    # add the payment reference to the sub and set the error flag,
+    # useful for admin investigation
+    stub = PaymentStub.objects.filter(user=request.user, pid=pid).first()
+    if stub != None:
+        stub.error = True
+        stub.payment_ref = payment_ref
+        stub.save()
+
     return render(request, 'payment_callback_error.html', {
         'payment_ref': payment_ref,
         'pid': pid

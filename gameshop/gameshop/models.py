@@ -114,9 +114,13 @@ class PaymentStub(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pid = models.CharField(max_length=255)
     cart_str = models.TextField()
+    payment_ref = models.CharField(max_length=256, null=True, blank=True)
+    error = models.BooleanField(default=False)
 
     def __str__(self):
-        return 'Stub {} {} {}'.format(self.user.username, self.pid, self.cart_str)
+        error_postfix = ' (ERROR)' if self.error else ''
+        return 'Stub {} {} {}{}'.format(
+            self.user.username, self.pid, self.cart_str, error_postfix)
 
 
 class Purchase(models.Model):
