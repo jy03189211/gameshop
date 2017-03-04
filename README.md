@@ -80,6 +80,14 @@
 		damage in the base layout file
 	- (SASS compiled to CSS every time the files are saved by a handy editor
 		plugin)
+- About the folder structure
+	- The project directory structure seems to include nested apps as the
+		"message_service" and "storeutils" folders are inside the "gameshop" folder,
+		but the purpose of the message service and store utilities is such that they
+		are only meant to be used inside the "gameshop" app, and would not work
+		outside. Thus, we have included them in such a nested way since they are
+		essentially helpers that are merely separated to improve modularity
+		and separation of concerns.
 - **Points given to self: 100/100**
 
 #### Non-functional requirements
@@ -119,12 +127,13 @@
 - We implemented a "Flappy Bird" copy where the player tries to guide the bird
  	between approaching pipes as far as possible, and every passed pipe gives
 	a point
-	- The game automatically submits the score when at "game over" if the player
+	- The game automatically submits the score at game over if the player
 		has at least one point
-- **Points given to self: 60/100**
-	- The game does not use the SAVE and LOAD messages, due to the realization
-		that the "Flappy Bird" concept does not really support the whole concept
-		of saving and loading since it is an endless runner
+	- When the game is not running (i.e. at game load or game over when there is
+		a message on top of the game), the player can save the current score to the
+		service by pressing "S", or load the current savegame (i.e. points) from the
+		service by pressing "L"
+- **Points given to self: 100/100**
 
 #### Mobile-friendly
 - Mobile layout implemented with Bootstrap and custom media queries where
