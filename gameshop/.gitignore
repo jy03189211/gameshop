@@ -1,6 +1,7 @@
 *.sqlite3*
 migrations
 *Icon
+*Icon?
 *__pycache__
 .idea
 media
