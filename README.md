@@ -29,6 +29,7 @@
 - Users can find games through the "Search" page and the "Categories" page
 - The store landing page shows featured games (which are simply the most
 	recently added games)
+- The checkout process handles free games separately without the payment service
 - Extra features implemented:
 	- The game frame can optionally be scaled to fit the screen, which allows for
 	 	a much better experience for smaller screen sizes
@@ -81,7 +82,7 @@
 		plugin)
 - **Points given to self: 100/100**
 
-#### Non-functional requirements (comments)
+#### Non-functional requirements
 - Git used extensively throughout the project
 
 #### Save/load and resolution feature
@@ -139,14 +140,46 @@
 - **Points given to self: ???/50**
 
 ## Successes and failures
-- ???
+- We somewhat fully succeeded in our plan of implementing all the features in
+	the project description
 
 ## Work division
 - ???
 
 ## Instructions
 - Application available at: ???
-- ???
+
+##### Test accounts
+- There are 4 pre-created test accounts that can be used for testing the store
+- 2 normal players
+	- ???
+	- ???
+- 2 developers
+	- ???
+	- ???
+
+##### General instructions
+- Login and registration happen on the "Login/Register" page that can be
+	accessed with the link at the top-right corner
+	- Registration requires account activation through the link that is in the
+		email sent to the newly registered user (and that is printed in the
+		backend console)
+- Games can be added to the cart at the game's page that can be accessed
+	with the "Buy and Play" and "Play" links wherever the game is listed in
+	the store
+	- Look for games with the "Search" and "Categories" pages
+- The cart can be accessed with the cart icon at the top-right corner
+- Pressing "Checkout" at the cart page will start the checkout process
+	- Checkout for free games bypasses the payment service
+- Once a user owns a game, the actual game appears on the game's page
+- The "Your games and profile" section shows all owned games and orders
+	as well as managed games (called "inventory" in the project description) and
+	sales for developers
+- Developers can add new games in the "Your games and profile" section
+- Users who are not developers can become developers in the "Settings" page
+	under "Your games and profile"
+- Sales can be viewed for all games or per game using the dropdown at the top
+	of the "Sales" page
 
 
 ---
