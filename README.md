@@ -1,3 +1,155 @@
+# Final submission
+## Team
+
+464989 Jin Jin
+84143N Eppu Halmesaari
+240938 Roope Palomäki
+
+## Implemented features
+
+#### Authentication
+- We implemented all requirements in the project description
+- Uses Django auth
+- Extends the Django `User` model with the `AbstractUser` class
+- The email activation message that would be sent for completing registration
+	is logged into the backend Django console
+- A user account can be only a player or both a player and a developer. This is
+	indicated by the `is_developer` field in the `User` model. A user can choose
+	this at the time of registration, but can also become a developer later in the
+	profile settings (which is under "Your games and profile").
+- Users can also change their password in the profile settings
+- **Points given to self: 200/200**
+
+#### Basic player functionalities
+- All basic functionalities listed have been implemented and payments are handled
+	through the payment service
+- Games are played on the game's store page but are only loaded and shown if the
+	logged-in user owns the game
+- All owned games can be seen under the "Your games and profile" page
+- Users can find games through the "Search" page and the "Categories" page
+- The store landing page shows featured games (which are simply the most
+	recently added games)
+- Extra features implemented:
+	- The game frame can optionally be scaled to fit the screen, which allows for
+	 	a much better experience for smaller screen sizes
+- **Points given to self: 300/300**
+
+#### Basic developer functionalities
+- All basic functionalities listed have been implemented
+- Games can be added and managed at the "Your games and profile" section where
+	the relevant developer options are available for users who are developers
+- Managed games and sales statistics can also be seen at the "Your games and
+	profile" section
+	- Sales lists and statistics can be seen for all games or for a single game
+- Games have an image that is shown in various places in the store. The image is
+	stored in the database as binary data and is injected into the `img` tags,
+	but can also be requested with by adding `/image/` to the game URL,
+	e.g. `example.com/game/1/image/`
+- Developers can have a public name that is shown instead of the username in the
+	game information in various places in the store. Defaults to the username, and
+	can be changed during registration or in the settings.
+- **Points given to self: 200/200**
+
+#### Game/service interaction
+- We implemented all 6 message types as described in the project description
+- The Django backend has the message service helpers in the `message_service`
+	folder, and the client side is implemented in `static/js/message.js`
+- Scores are recorded and shown under the actual game on the game page
+	- Scores are stored with the `Score` model, and per-game lists for global
+		leaderboards and per-user highscores are compiled in the game page view
+	- New scores are shown after a page reload
+- We also implemented a message tester that demonstrates the resolution changing
+	and other messages. It can be found with the name "Message tester" in the
+	demo store. (Score and savegame data hardcoded in the tester)
+	- Shows incoming messages
+- **Points given to self: 195/200**
+	- highscores only showing after page reload
+
+#### Quality of work
+- Code commented where needed for understanding, while the aim is for the code
+	to be understandable through variable naming etc.
+- Used plenty of the available Django features and shortcuts for DRY
+- The site _layout_ builds on Bootstrap 3, i.e. mostly the grid system
+	- Visual style almost fully hand-built
+	- The base styles are in `base.sass` which is compiled to a minified
+		`base.min.css`
+	- `theme.sass` defines a visual theme on top of the base styles, and is
+		compiled to `theme.min.css`
+	- The theme could be easily changed with theme CSS files without doing
+		damage in the base layout file
+	- (SASS compiled to CSS every time the files are saved by a handy editor
+		plugin)
+- **Points given to self: 100/100**
+
+#### Non-functional requirements (comments)
+- Git used extensively throughout the project
+
+#### Save/load and resolution feature
+- SAVE, LOAD, and SETTING messages are supported as described in the project
+	description
+- Resolution is clamped to [(150x150), (1024x768)] for sensible limits
+	- (can be tested easily with the "Message tester")
+- In addition to the resolution, we also implemented a scaling feature that is
+	useful especially for smaller screens
+	- (used with the "Toggle scaling" button above the game frame)
+- **Points given to self: 100/100**
+
+
+#### 3rd party login
+- Facebook login implemented
+- **Points given to self: ???/100**
+
+#### RESTful API
+- RESTful API implemented with a variety of endpoints
+- ???
+- The API also utilizes an API key system to authenticate every requested
+	- A user is generated an API key at registration time, and that key/token
+		must be given in the POST data of every request in the `api_key`
+		attribute
+- In addition, developers can restrict the domains where requests are allowed
+	from with their API key, can be changed in the profile settings
+- **Points given to self: ???/100**
+
+#### 3rd party login
+- ???
+- **Points given to self: ???/100**
+
+#### Own game
+- We implemented a "Flappy Bird" copy where the player tries to guide the bird
+ 	between approaching pipes as far as possible, and every passed pipe gives
+	a point
+	- The game automatically submits the score when at "game over" if the player
+		has at least one point
+- **Points given to self: 60/100**
+	- The game does not use the SAVE and LOAD messages, due to the realization
+		that the "Flappy Bird" concept does not really support the whole concept
+		of saving and loading since it is an endless runner
+
+#### Mobile-friendly
+- Mobile layout implemented with Bootstrap and custom media queries where
+	applicable
+- The main navigation adapts by collapsing
+- Optional game scaling implemented so that games can be played more comfortably
+	on a mobile screen
+- **Points given to self: 50/50**
+
+#### Social media sharing
+- Facebook sharing implemented
+- On the game page above the game frame
+- **Points given to self: ???/50**
+
+## Successes and failures
+- ???
+
+## Work division
+- ???
+
+## Instructions
+- Application available at: ???
+- ???
+
+
+---
 # Project plan
 ----
 ## Team
