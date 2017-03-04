@@ -52,6 +52,11 @@ $(document).ready(function() {
        * Perform validation already on the client to avoid unnecessary requests
        */
 
+      // ignore facebook messages (the sharing button will create messages)
+      if (typeof receivedMessage == 'string') {
+        if (receivedMessage.startsWith('_FB_')) { return; }
+      }
+
       // check that the messageType attribute exists
       if (!receivedMessage.hasOwnProperty('messageType')) {
         sendErrorToGame('Incorrect message format');
