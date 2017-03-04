@@ -70,6 +70,11 @@ var disableMobileGameScaling = function() {
 };
 
 $(document).ready(function() {
+  // set focus on the iframe since games may utilize key presses
+  $('#game-iframe').on('load', function() {
+    $(this)[0].focus();
+  });
+
   var scale_enabled = false;
 
   // add listener for scale toggle click
