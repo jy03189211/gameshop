@@ -133,6 +133,8 @@
 		a message on top of the game), the player can save the current score to the
 		service by pressing "S", or load the current savegame (i.e. points) from the
 		service by pressing "L"
+- The game is located in the "static" folder for serving it with the store. The
+	message tester is also in the same folder.
 - **Points given to self: 100/100**
 
 #### Mobile-friendly
