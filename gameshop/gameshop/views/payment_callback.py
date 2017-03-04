@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from gameshop.models import Game
+from gameshop.models import Game, PaymentStub
 from gameshop.storeutils.checkout import checkout as checkout_utils
+import json
 
 
 @login_required
@@ -12,15 +13,19 @@ def payment_success_view(request):
 
     if payment_handled_successfully:
 
-        stub = request.session.get('payment_stub', None)
+        pid = request.GET.get('pid', '')
+
+        # get payment stub from the db
+        stub = PaymentStub.objects.filter(user=request.user, pid=pid).first()
         if stub == None:
             return redirect('payment_error')
 
-        purchased_ids = stub[1]
+        purchased_ids = json.loads(stub.cart_str)
         purchased_games = Game.objects.filter(pk__in=purchased_ids)
 
-        # clear stub, not needed after this point
-        del request.session['payment_stub']
+        # clear stub, not needed after this point, the same information is
+        # stored in the purchase
+        stub.delete()
 
         payment_ref = request.GET.get('ref', '')
 
@@ -37,6 +42,12 @@ def payment_cancel_view(request):
     """Handles a cancelled payment"""
 
     payment_ref = request.GET.get('ref', '')
+    pid = request.GET.get('pid', '')
+
+    # if payment was explicitly cancelled, remove the stub
+    stub = PaymentStub.objects.filter(user=request.user, pid=pid).first()
+    if stub != None:
+        stub.delete()
 
     return render(request, 'payment_callback_cancel.html', {
         'payment_ref': payment_ref
@@ -48,7 +59,9 @@ def payment_error_view(request):
     """Handles payment errors"""
 
     payment_ref = request.GET.get('ref', None)
+    pid = request.GET.get('pid', None)
 
     return render(request, 'payment_callback_error.html', {
-        'payment_ref': payment_ref
+        'payment_ref': payment_ref,
+        'pid': pid
     })

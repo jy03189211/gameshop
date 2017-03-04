@@ -104,6 +104,21 @@ class Order(models.Model):
         return 'Order {} ({})'.format(self.pk, self.user.username)
 
 
+class PaymentStub(models.Model):
+    """
+    Temporary information stored for the duration of the checkout process and
+    that can be used for investigation in case there is trouble with the payment
+    """
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pid = models.CharField(max_length=255)
+    cart_str = models.TextField()
+
+    def __str__(self):
+        return 'Stub {} {} {}'.format(self.user.username, self.pid, self.cart_str)
+
+
 class Purchase(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

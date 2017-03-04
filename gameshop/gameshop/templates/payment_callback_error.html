@@ -12,6 +12,9 @@
         {% if payment_ref %}
         <p>Payment reference number: {{ payment_ref }}</p>
         {% endif %}
+        {% if pid %}
+        <p>Payment ID: {{ pid }}</p>
+        {% endif %}
         <div class="btn-wrap">
           <a href="{% url 'cart' %}" class="btn">Return to cart</a>
         </div>

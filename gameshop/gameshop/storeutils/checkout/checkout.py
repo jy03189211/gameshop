@@ -1,8 +1,8 @@
-import uuid
+import json, uuid
 from hashlib import md5
 from django.core.signing import Signer
 from gameshop.forms.payment import PaymentForm
-from gameshop.models import Game, Order, Purchase, User
+from gameshop.models import Game, Order, PaymentStub, Purchase, User
 from gameshop.storeutils.cart import cart as cart_utils
 from gameshop import settings
 
@@ -49,8 +49,13 @@ def prepare_payment_form(request):
 
         payment_form = PaymentForm(initial_form_data)
 
-        # store stub purchase in session for success handling
-        request.session['payment_stub'] = (pid, cart)
+        # store payment stub in the db for success handling
+        stub = PaymentStub(
+            user=request.user,
+            pid=pid,
+            cart_str=json.dumps(cart)
+        )
+        stub.save()
 
         return payment_form
 
@@ -64,12 +69,13 @@ def handle_payment_success(request):
     if result != 'success':
         return False
 
-    # get payment stub (tuple (pid, cart))
-    stub = request.session.get('payment_stub', None)
+    pid = request.GET.get('pid', '')
+
+    # get payment stub from the db
+    stub = PaymentStub.objects.filter(user=request.user, pid=pid).first()
     if stub == None:
         return False
 
-    pid = stub[0]
     payment_ref = request.GET.get('ref', '')
 
     # verify checksum from the external payment service
@@ -99,7 +105,7 @@ def handle_payment_success(request):
         print("does not match")
         return False
 
-    item_ids = stub[1]
+    item_ids = json.loads(stub.cart_str)
     games = Game.objects.filter(pk__in=item_ids)
     user = request.user
 
