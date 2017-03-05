@@ -24,6 +24,9 @@ class CategoriesView(View):
         # lowercase English alphabet
         alphabet = list(string.ascii_lowercase)
 
+        pprint.pprint(first_letters)
+        pprint.pprint(alphabet)
+
         return render(request, "categories.html", {
             'category_groups': category_groups,
             'first_letters': first_letters,
