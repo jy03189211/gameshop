@@ -122,8 +122,8 @@
 - **Implemented by: Roope**
 
 #### 3rd party login
-- Facebook login implemented
-- **Points given to self: ???/100**
+- Facebook login implemented using Django third party app, allauth as the social login solution
+- **Points given to self: 100/100**
 - **Implemented by: Jin**
 
 #### RESTful API
@@ -164,7 +164,7 @@
 #### Social media sharing
 - Facebook sharing implemented
 - On the game page above the game frame
-- **Points given to self: ???/50**
+- **Points given to self: 50/50**
 - **Implemented by: Jin**
 
 #### Deployment
