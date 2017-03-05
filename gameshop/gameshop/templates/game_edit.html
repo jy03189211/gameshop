@@ -17,7 +17,7 @@
             {% if game.image_binary %}
               <div class="aspect-ratio aspect-ratio-100">
                 <div>
-                  <img src="{{ game.image_src }}" alt="{{ game.name }} image">
+                  <img src="{% url 'game_image' game.pk %}" alt="{{ game.name }} image">
                 </div>
               </div>
             {% endif %}
