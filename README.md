@@ -49,6 +49,9 @@
 - All basic functionalities listed have been implemented
 - Games can be added and managed at the "Your games and profile" section where
 	the relevant developer options are available for users who are developers
+  - Note: since Google Chrome does not allow insecure resources inside secure
+    HTTPS pages, and our game shop is secured with HTTPS, games will only load
+    properly if they are added using an HTTPS URL.
 - Managed games and sales statistics can also be seen at the "Your games and
 	profile" section
 	- Sales lists and statistics can be seen for all games or for a single game
