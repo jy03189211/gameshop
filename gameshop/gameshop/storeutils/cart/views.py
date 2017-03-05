@@ -6,7 +6,7 @@ from gameshop.models import Game
 
 @require_POST
 def add_to_cart_view(request, item_id):
-    item = Game.objects.get(pk=item_id)
+    item = Game.objects.filter(pk=item_id).first()
     # if no game, 404
     if item == None:
         return HttpResponseNotFound("No such game")
@@ -21,5 +21,4 @@ def remove_from_cart_view(request, item_id):
         # removes if the item was in cart, but no errors if not
         return JsonResponse(cart.get_cart(request), safe=False)
     else:
-        # TODO: implement something more sensible
         return HttpResponseServerError("Something went wrong")

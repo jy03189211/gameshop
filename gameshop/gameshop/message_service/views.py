@@ -29,8 +29,10 @@ def score_view(request, game_id):
     """Saves a score sent from a game"""
 
     if not _check_type_and_attribute(request, 'SCORE', 'score'):
-        # TODO: handle error
-        pass
+        return JsonResponse({
+            'messageType': 'ERROR',
+            'info': 'Invalid request format'
+        }, status=400) # bad request
 
     score = request.POST.get('score', None)
     game = Game.objects.filter(pk=game_id).first()
@@ -59,8 +61,10 @@ def save_view(request, game_id):
     """
 
     if not _check_type_and_attribute(request, 'SAVE', 'gameState'):
-        # TODO: handle error
-        pass
+        return JsonResponse({
+            'messageType': 'ERROR',
+            'info': 'Invalid request format'
+        }, status=400) # bad request
 
     data = request.POST.get('gameState', None)
     game = Game.objects.filter(pk=game_id).first()
@@ -96,8 +100,10 @@ def load_request_view(request, game_id):
     """Responds with savegame data for the given (game, user) combination"""
 
     if not _check_type_and_attribute(request, 'LOAD_REQUEST'):
-        # TODO: handle error
-        pass
+        return JsonResponse({
+            'messageType': 'ERROR',
+            'info': 'Invalid request format'
+        }, status=400) # bad request
 
     game = Game.objects.filter(pk=game_id).first()
     if not game:

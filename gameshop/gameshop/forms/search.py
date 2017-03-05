@@ -8,5 +8,3 @@ class SearchForm(forms.Form):
     created_by = forms.CharField(label="Developer", required=False, max_length=50)
     category = forms.ModelChoiceField(label="Category", required=False,
         queryset=Category.objects.all())
-
-    # TODO: add more fields
