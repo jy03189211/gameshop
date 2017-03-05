@@ -24,7 +24,8 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = '%gv583a=n&gb%!so&6)5euej*hsx@x$g-sal-r_5fb7vmf&evy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+#DEBUG = os.environ.get('DEBUG', False)
 
 ALLOWED_HOSTS = []
 
@@ -162,17 +163,22 @@ PAYMENT_ERROR_URL = 'payment/error/'
 
 APPEND_SLASH = True
 
-SITE_ID=2
+SITE_ID=4
 
 # Only when running in Heroku
 if "DYNO" in os.environ:
-    STATIC_ROOT = 'staticfiles'
+    #STATIC_ROOT = 'staticfiles'
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
     import dj_database_url
     DATABASES['default'] =  dj_database_url.config()
 
-    DEBUG = True # False, once service is succesfully deployed
+    DEBUG = False # False,  once service is succesfully deployed
     ALLOWED_HOSTS = ['*']
 
+#remove if necessary
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
 #email validation, console as backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
