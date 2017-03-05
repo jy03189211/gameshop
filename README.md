@@ -140,7 +140,8 @@
 		attribute
 - In addition, developers can restrict the domains where requests are allowed
 	from with their API key, can be changed in the profile settings
-- **Points given to self: ???/100**
+- **Points given to self: 90/100**
+  - Authorization/Authentication could be more specific, etc. different rights for different API keys
 - **Implemented by: Eppu**
 
 #### Own game
@@ -183,7 +184,7 @@
 - Being new to Django, everything too quite a while in the beginning and the
 	actual schedule was thus slightly lagging behind, but we still managed to get
 	everything done well in time
-- Managed to create the project by communicating mainly through Slack.
+- Managed to create the project by communicating only through Slack
 
 ## Instructions
 - Application available at: https://boiling-gorge-94597.herokuapp.com/
@@ -228,6 +229,8 @@
         the service
     - The score is automatically submitted to the service at game over,
         assuming that the score that would be sent is over 0
+- API endpoints are at the end of this document
+
 
 
 ---
