@@ -8,8 +8,8 @@
 
 {% block social_sharing %}
     <meta property="fb:app_id"      content="410422715960410">
-    <meta property="og:url"           content="{{ game.url }}" />
-    <meta property="og:image"           content="{{ request.url }}/image" />
+    <meta property="og:url"           content="{{ request.build_absolute_uri }}" />
+    <meta property="og:image"           content="{{ request.build_absolute_uri }}image" />
     <meta property="og:description"   content="{{ game.description }}" />
     <meta property="og:title"         content="{{ game.title }}" />
 {% endblock %}
@@ -91,7 +91,7 @@
       <div class="component game-component">
         <div class="btn-wrap">
           <div class="btn btn-s btn-secondary" id="scale-toggle">Toggle scaling</div>
-          <div id="shareBtn" class="fb-share-button" data-href="{{ request.url }}"  data-layout="button_count" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" ></a></div>
+          <div id="shareBtn" class="fb-share-button" data-href="{{ request.build_absolute_uri }}"  data-layout="button_count" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" ></a></div>
         </div>
         <div class="game-wrap" id="game-wrap">
           {% if game.url %}
