@@ -10,7 +10,13 @@ from gameshop.decorators import require_api_key
 from gameshop.models import *
 
 #High scores for user filtered by game.
+@require_api_key
 def get_user_score(user_id, game_id=None):
+
+    request_api_key = request.META['HTTP_API_KEY']
+    if is_api_key_found(request_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
+
     filters = Score.objects.filter(user__pk=user_id)
 
     if game_id != None:
@@ -19,7 +25,12 @@ def get_user_score(user_id, game_id=None):
     data = list(filters.order_by('-score'))
     return data
 
+@require_api_key
 def get_user_score_json(request, user_id):
+
+    request_api_key = request.META['HTTP_API_KEY']
+    if is_api_key_found(request_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
 
     if request.method == 'GET':
         game_id = request.GET.get('gameid')
@@ -42,7 +53,12 @@ def get_user_score_json(request, user_id):
 
 
 # A single savegame
+@require_api_key
 def user_game_savegame_json(request, user_id, game_id, savegame_id):
+
+    request_api_key = request.META['HTTP_API_KEY']
+    if is_api_key_found(request_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
 
     if request.method == 'GET':
         savegame = get_object_or_404(Savegame, pk=savegame_id)
@@ -59,7 +75,12 @@ def user_game_savegame_json(request, user_id, game_id, savegame_id):
     return HttpResponse('', content_type="application/json")
 
 #All the saved games for a user for a single game
+@require_api_key
 def get_user_single_game_savegames_json(request,user_id, game_id):
+
+    request_api_key = request.META['HTTP_API_KEY']
+    if is_api_key_found(request_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
 
     if request.method == 'GET':
 
@@ -80,7 +101,12 @@ def get_user_single_game_savegames_json(request,user_id, game_id):
     return HttpResponse('', content_type="application/json")
 
 #Get all savegames for user or post new savegame
+@require_api_key
 def get_user_savegames_json(request, user_id, game_id=None):
+
+    request_api_key = request.META['HTTP_API_KEY']
+    if is_api_key_found(request_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
 
     if request.method == 'GET':
 
@@ -117,7 +143,12 @@ def get_user_savegames_json(request, user_id, game_id=None):
     # return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
 #Return all orders for an user or a single order
+@require_api_key
 def get_user_order_json(request, user_id, order_id=None):
+
+    request_api_key = request.META['HTTP_API_KEY']
+    if is_api_key_found(request_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
 
     if order_id == None:
         orders=list(Order.objects.filter(user__pk=user_id).order_by('-updated_at'))
@@ -143,7 +174,12 @@ def get_user_order_json(request, user_id, order_id=None):
          }
         return JsonResponse(data)
 
+@require_api_key
 def get_user_sale_json(request, user_id):
+
+    request_api_key = request.META['HTTP_API_KEY']
+    if is_api_key_found(request_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
 
     user = get_object_or_404(User, pk=user_id)
     sales=list(Purchase.objects.filter(game__created_by=user_id, user__pk=user_id))
@@ -161,7 +197,13 @@ def get_user_sale_json(request, user_id):
 
     return JsonResponse(sale_list, safe=False)
 
+@require_api_key
 def get_user_purchased_json(request, user_id):
+
+    request_api_key = request.META['HTTP_API_KEY']
+    if is_api_key_found(request_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
+
     user = get_object_or_404(User, pk=user_id)
     purchased=list(Purchase.objects.filter(game__owned_by=user_id, user__pk=user_id))
     purchased_dict = {}
@@ -178,27 +220,22 @@ def get_user_purchased_json(request, user_id):
 
     return JsonResponse(purchased_list, safe=False)
 
-
-@require_POST
+#Add game to inventory or get games from inventory
 @require_api_key
 def user_inventory(request, user_id):
 
     user = User.objects.get(pk=user_id)
 
-    #for testing with user1
-    #user_api_key = 'dXNlcjE6OitVKDOu4D2Q2wht0ojtyo+QkYzKM8NqY+XJtr5l2tKS'
     request_api_key = request.META['HTTP_API_KEY']
     user_api_key = user.api_key
 
+    if does_api_key_match(request_api_key, user_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
 
-    if does_api_key_match(request_api_key, user_api_key):
-        print('matches')
-        pass
-    if host_is_allowed(request, user):
-        print('is allowed')
-        pass
+    if host_is_allowed(request, user) == False:
+        return HttpResponse('Unauthorized', status=401)
 
-    # TODO: remove all get checks
+
     if request.method == 'GET':
 
         inventory = Game.objects.filter(owned_by__pk=user_id).order_by('-name')
@@ -221,7 +258,14 @@ def user_inventory(request, user_id):
         return HttpResponse('', content_type="application/json")
 
 #Get all users
+@require_api_key
 def get_users_json(request):
+
+    request_api_key = request.META['HTTP_API_KEY']
+    if is_api_key_found(request_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
+
+
     filters = User.objects
     username = request.GET.get('username')
     public_name = request.GET.get('public_name')
@@ -248,7 +292,12 @@ def get_users_json(request):
     return JsonResponse(user_list, safe=False)
 
 #Get single user
+@require_api_key
 def get_user_single_json(request, user_id):
+
+    request_api_key = request.META['HTTP_API_KEY']
+    if is_api_key_found(request_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
 
     user = get_object_or_404(User, pk=user_id)
     data = {
@@ -262,7 +311,12 @@ def get_user_single_json(request, user_id):
     return JsonResponse(data)
 
 #Get score list of a single game
+@require_api_key
 def get_game_score_json(request, game_id):
+
+    request_api_key = request.META['HTTP_API_KEY']
+    if is_api_key_found(request_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
 
     scores=list(Score.objects.filter(game__pk=game_id).order_by('-score'))
     score_dict = {}
@@ -280,7 +334,12 @@ def get_game_score_json(request, game_id):
     return JsonResponse(score_list, safe=False)
 
 #Returns all games with given parameters
+@require_api_key
 def get_games(filter_dict):
+
+    request_api_key = request.META['HTTP_API_KEY']
+    if is_api_key_found(request_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
 
     filters = Game.objects
 
@@ -305,7 +364,12 @@ def get_games(filter_dict):
 
     return data
 
+@require_api_key
 def get_games_json(request, game_id=None):
+
+    request_api_key = request.META['HTTP_API_KEY']
+    if is_api_key_found(request_api_key) == False:
+        return HttpResponse('Unauthorized', status=401)
 
     if request.method == 'GET':
         filter_dict={}
@@ -345,7 +409,6 @@ def host_is_allowed(request, user):
 # Check if api_key matches to the one got from database
 def does_api_key_match(request_api_key, user_api_key):
 
-    # TODO In what format are api_key and user_api_key?
     decoded_key = base64.b64decode(request_api_key)
     api_key_parts = decoded_key.split(bytes('::','utf-8'))
 
@@ -354,5 +417,12 @@ def does_api_key_match(request_api_key, user_api_key):
     if user != None:
         if request_username == user.username and request_api_key == user_api_key:
             return True
+    else:
+        return False
+
+def is_api_key_found(request_api_key):
+    user = User.objects.get(api_key=request_api_key)
+    if user != None:
+        return True
     else:
         return False
