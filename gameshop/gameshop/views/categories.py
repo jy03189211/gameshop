@@ -18,6 +18,9 @@ class CategoriesView(View):
 
         first_letters = list(category_groups.keys())
 
+        import pprint
+        pprint.pprint(category_groups)
+
         # lowercase English alphabet
         alphabet = list(string.ascii_lowercase)
 
