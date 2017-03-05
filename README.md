@@ -1,9 +1,15 @@
 # Final submission
 ## Team
+- 464989 Jin Jin
+- 84143N Eppu Halmesaari
+- 240938 Roope Palomäki
 
-464989 Jin Jin
-84143N Eppu Halmesaari
-240938 Roope Palomäki
+## Work division
+- While the commit statistics in the repository give an indication of the 
+    workload division, the amount of research/learning done for the features
+    varies, which is not always shown in the commits. Thus, we have also listed 
+    below in the "Implented features" section who implemented which feature.
+- (Commit statistics in GitLab -> Graphs -> Contributors)
 
 ## Implemented features
 
@@ -18,7 +24,10 @@
 	this at the time of registration, but can also become a developer later in the
 	profile settings (which is under "Your games and profile").
 - Users can also change their password in the profile settings
+- Views are protected and restricted where needed by utilizing Django 
+    decorators such as `@login_required`
 - **Points given to self: 200/200**
+- **Implemented by: Jin, Roope**
 
 #### Basic player functionalities
 - All basic functionalities listed have been implemented and payments are handled
@@ -34,6 +43,7 @@
 	- The game frame can optionally be scaled to fit the screen, which allows for
 	 	a much better experience for smaller screen sizes
 - **Points given to self: 300/300**
+- **Implemented by: Roope**
 
 #### Basic developer functionalities
 - All basic functionalities listed have been implemented
@@ -50,6 +60,7 @@
 	game information in various places in the store. Defaults to the username, and
 	can be changed during registration or in the settings.
 - **Points given to self: 200/200**
+- **Implemented by: Roope**
 
 #### Game/service interaction
 - We implemented all 6 message types as described in the project description
@@ -65,6 +76,7 @@
 	- Shows incoming messages
 - **Points given to self: 195/200**
 	- highscores only showing after page reload
+- **Implemented by: Roope**
 
 #### Quality of work
 - Code commented where needed for understanding, while the aim is for the code
@@ -89,6 +101,8 @@
 		essentially helpers that are merely separated to improve modularity
 		and separation of concerns.
 - **Points given to self: 100/100**
+- **Layout and styles implemented by: Roope**
+- **Unit testing implemented by: Eppu**
 
 #### Non-functional requirements
 - Git used extensively throughout the project
@@ -102,11 +116,12 @@
 	useful especially for smaller screens
 	- (used with the "Toggle scaling" button above the game frame)
 - **Points given to self: 100/100**
-
+- **Implemented by: Roope**
 
 #### 3rd party login
 - Facebook login implemented
 - **Points given to self: ???/100**
+- **Implemented by: Jin**
 
 #### RESTful API
 - RESTful API implemented with a variety of endpoints
@@ -118,10 +133,7 @@
 - In addition, developers can restrict the domains where requests are allowed
 	from with their API key, can be changed in the profile settings
 - **Points given to self: ???/100**
-
-#### 3rd party login
-- ???
-- **Points given to self: ???/100**
+- **Implemented by: Eppu**
 
 #### Own game
 - We implemented a "Flappy Bird" copy where the player tries to guide the bird
@@ -136,6 +148,7 @@
 - The game is located in the "static" folder for serving it with the store. The
 	message tester is also in the same folder.
 - **Points given to self: 100/100**
+- **Implemented by: Roope**
 
 #### Mobile-friendly
 - Mobile layout implemented with Bootstrap and custom media queries where
@@ -144,11 +157,17 @@
 - Optional game scaling implemented so that games can be played more comfortably
 	on a mobile screen
 - **Points given to self: 50/50**
+- **Implemented by: Roope**
 
 #### Social media sharing
 - Facebook sharing implemented
 - On the game page above the game frame
 - **Points given to self: ???/50**
+- **Implemented by: Jin**
+
+#### Deployment
+- Project deployed to Heroku (at https://boiling-gorge-94597.herokuapp.com/)
+- **Implemented by: Eppu**
 
 ## Successes and failures
 - We somewhat fully succeeded in our plan of implementing all the features in
@@ -156,9 +175,6 @@
 - Being new to Django, everything too quite a while in the beginning and the
 	actual schedule was thus slightly lagging behind, but we still managed to get
 	everything done well in time
-- ???
-
-## Work division
 - ???
 
 ## Instructions
@@ -195,7 +211,16 @@
 	under "Your games and profile"
 - Sales can be viewed for all games or per game using the dropdown at the top
 	of the "Sales" page
-
+- About our own game "Flappy"
+    - Pressing the space key or left clicking the mouse starts the game and 
+        makes the bird flap to guide it through the pipes 
+    - When the game is not started yet or in the game over state (i.e. when 
+        there is text over the game), pressing "S" will save the current score 
+        to the service, and pressing "L" will load the saved points from 
+        the service
+    - The score is automatically submitted to the service at game over, 
+        assuming that the score that would be sent is over 0
+    
 
 ---
 # Project plan
