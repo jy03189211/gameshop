@@ -103,6 +103,11 @@
 		outside. Thus, we have included them in such a nested way since they are
 		essentially helpers that are merely separated to improve modularity
 		and separation of concerns.
+	- Based on the discussion in Piazza, we recognize that our project structure
+		is slightly unorthodox and for example the project name is the same as the
+		main app name ("gameshop"). However, since really only learned this
+		unusuality some half a day before the deadline, we did not risk breaking the
+		project by changing the project name as the current structure works as well.
 - **Points given to self: 100/100**
 - **Layout and styles implemented by: Roope**
 - **Unit testing implemented by: Eppu**
