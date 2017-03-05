@@ -18,14 +18,12 @@ class CategoriesView(View):
 
         first_letters = list(category_groups.keys())
 
-        import pprint
-        pprint.pprint(category_groups)
+        # make all lowercase to ignore case when compared to alphabet
+        category_groups = dict((k.lower(), v) for k, v in category_groups.items())
+        first_letters = [l.lower() for l in first_letters]
 
         # lowercase English alphabet
         alphabet = list(string.ascii_lowercase)
-
-        pprint.pprint(first_letters)
-        pprint.pprint(alphabet)
 
         return render(request, "categories.html", {
             'category_groups': category_groups,
