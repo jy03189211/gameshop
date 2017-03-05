@@ -108,7 +108,8 @@
 		main app name ("gameshop"). However, since really only learned this
 		unusuality some half a day before the deadline, we did not risk breaking the
 		project by changing the project name as the current structure works as well.
-- **Points given to self: 100/100**
+- **Points given to self: 95/100**
+	- project structure not perfect
 - **Layout and styles implemented by: Roope**
 - **Unit testing implemented by: Eppu**
 
