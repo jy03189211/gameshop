@@ -4,7 +4,9 @@ from gameshop.models import Game, Category
 
 class NewGameForm(forms.Form):
     name = forms.CharField(label="Name", required=True, max_length=50)
-    url = forms.CharField(label="URL", required=True, max_length=200)
+    url = forms.CharField(label="URL", required=True, max_length=200,
+        help_text="Support for insecure HTTP URLs is not guaranteed due to security \
+            restrictions in modern browsers. Please use HTTPS.")
     description = forms.CharField(label="Description",
         required=True, max_length=500, widget=forms.Textarea)
     price = forms.DecimalField(
