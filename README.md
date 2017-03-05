@@ -54,7 +54,7 @@
 	- Sales lists and statistics can be seen for all games or for a single game
 - Games have an image that is shown in various places in the store. The image is
 	stored in the database as binary data (in Base64) and is injected into
-  the `img` tags, but can also be requested with by adding `/image/` to the game 
+  the `img` tags, but can also be requested with by adding `/image/` to the game
   URL, e.g. `example.com/game/1/image/`
 - Developers can have a public name that is shown instead of the username in the
 	game information in various places in the store. Defaults to the username, and
@@ -124,11 +124,10 @@
 - **Implemented by: Jin**
 
 #### RESTful API
-- RESTful API implemented with a variety of endpoints
-- ???
-- The API also utilizes an API key system to authenticate every requested
+- RESTful API implemented with a variety of endpoints (listed in below)
+- The API also utilizes an API key system to authorize every request
 	- A user is generated an API key at registration time, and that key/token
-		must be given in the POST data of every request in the `api_key`
+		must be given in the GET/POST data of every request in the `api_key`
 		attribute
 - In addition, developers can restrict the domains where requests are allowed
 	from with their API key, can be changed in the profile settings
@@ -175,7 +174,7 @@
 - Being new to Django, everything too quite a while in the beginning and the
 	actual schedule was thus slightly lagging behind, but we still managed to get
 	everything done well in time
-- ???
+- Managed to create the project by communicating mainly through Slack.
 
 ## Instructions
 - Application available at: https://boiling-gorge-94597.herokuapp.com/
@@ -183,11 +182,11 @@
 ##### Test accounts
 - There are 4 pre-created test accounts that can be used for testing the store
 - 2 normal players
-	- ???
-	- ???
+	- username: user1, password: testuser1
+	- username: user2, password: testuser2
 - 2 developers
-	- ???
-	- ???
+	- username: user3, password: testuser3
+	- username: user4, password: testuser4
 
 ##### General instructions
 - Login and registration happen on the "Login/Register" page that can be
