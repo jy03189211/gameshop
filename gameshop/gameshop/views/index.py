@@ -12,8 +12,7 @@ class IndexView(View):
         # get the n latest available games
         latest_games = Game.objects.filter(available=True)
         latest_games = latest_games.order_by('-created_at')[:n]
-        print(len(latest_games))
-        
+
         if len(latest_games) == 0:
             jumbo_game = None
             featured_games = None
