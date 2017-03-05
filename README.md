@@ -111,7 +111,6 @@
 - **Points given to self: 95/100**
 	- project structure not perfect
 - **Layout and styles implemented by: Roope**
-- **Unit testing implemented by: Eppu**
 
 #### Non-functional requirements
 - Git used extensively throughout the project
