@@ -25,6 +25,8 @@
 	this at the time of registration, but can also become a developer later in the
 	profile settings (which is under "Your games and profile").
 - Users can also change their password in the profile settings
+- Views are protected and restricted where needed by utilizing Django 
+    decorators such as `@login_required`
 - **Points given to self: 200/200**
 - **Implemented by: Jin, Roope**
 
