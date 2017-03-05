@@ -1,9 +1,8 @@
 # Final submission
 ## Team
-
-464989 Jin Jin
-84143N Eppu Halmesaari
-240938 Roope Palomäki
+- 464989 Jin Jin
+- 84143N Eppu Halmesaari
+- 240938 Roope Palomäki
 
 ## Work division
 - While the commit statistics in the repository give an indication of the 
