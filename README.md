@@ -5,9 +5,9 @@
 - 240938 Roope Palomäki
 
 ## Work division
-- While the commit statistics in the repository give an indication of the 
+- While the commit statistics in the repository give an indication of the
     workload division, the amount of research/learning done for the features
-    varies, which is not always shown in the commits. Thus, we have also listed 
+    varies, which is not always shown in the commits. Thus, we have also listed
     below in the "Implented features" section who implemented which feature.
 - (Commit statistics in GitLab -> Graphs -> Contributors)
 
@@ -24,7 +24,7 @@
 	this at the time of registration, but can also become a developer later in the
 	profile settings (which is under "Your games and profile").
 - Users can also change their password in the profile settings
-- Views are protected and restricted where needed by utilizing Django 
+- Views are protected and restricted where needed by utilizing Django
     decorators such as `@login_required`
 - **Points given to self: 200/200**
 - **Implemented by: Jin, Roope**
@@ -53,9 +53,9 @@
 	profile" section
 	- Sales lists and statistics can be seen for all games or for a single game
 - Games have an image that is shown in various places in the store. The image is
-	stored in the database as binary data and is injected into the `img` tags,
-	but can also be requested with by adding `/image/` to the game URL,
-	e.g. `example.com/game/1/image/`
+	stored in the database as binary data (in Base64) and is injected into
+  the `img` tags, but can also be requested with by adding `/image/` to the game 
+  URL, e.g. `example.com/game/1/image/`
 - Developers can have a public name that is shown instead of the username in the
 	game information in various places in the store. Defaults to the username, and
 	can be changed during registration or in the settings.
@@ -212,15 +212,15 @@
 - Sales can be viewed for all games or per game using the dropdown at the top
 	of the "Sales" page
 - About our own game "Flappy"
-    - Pressing the space key or left clicking the mouse starts the game and 
-        makes the bird flap to guide it through the pipes 
-    - When the game is not started yet or in the game over state (i.e. when 
-        there is text over the game), pressing "S" will save the current score 
-        to the service, and pressing "L" will load the saved points from 
+    - Pressing the space key or left clicking the mouse starts the game and
+        makes the bird flap to guide it through the pipes
+    - When the game is not started yet or in the game over state (i.e. when
+        there is text over the game), pressing "S" will save the current score
+        to the service, and pressing "L" will load the saved points from
         the service
-    - The score is automatically submitted to the service at game over, 
+    - The score is automatically submitted to the service at game over,
         assuming that the score that would be sent is over 0
-    
+
 
 ---
 # Project plan
