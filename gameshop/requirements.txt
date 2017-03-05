@@ -8,6 +8,7 @@ django-allauth==0.30.0
 django-cors-headers==2.0.1
 django-livereload-server==0.2.3
 gunicorn==19.6.0
+itsdangerous==0.24
 livereload==2.5.1
 oauth2-provider==0.0
 oauthlib==2.0.1
@@ -21,3 +22,4 @@ six==1.10.0
 static3==0.7.0
 tornado==4.4.2
 whitenoise==3.3.0
+
