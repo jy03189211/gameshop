@@ -50,8 +50,13 @@ def prepare_payment_form(request):
         payment_form = PaymentForm(initial_form_data)
 
         # store payment stub in the db for success handling
+        # allow anonymous if no logged in user
+        user = None
+        if request.user.is_authenticated:
+            user = request.user
+
         stub = PaymentStub(
-            user=request.user,
+            user=user,
             pid=pid,
             cart_str=json.dumps(cart)
         )
