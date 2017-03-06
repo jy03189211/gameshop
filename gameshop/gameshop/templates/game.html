@@ -95,9 +95,8 @@
         </div>
         <div class="game-wrap" id="game-wrap">
           {% if game.url %}
-          <div class="iframe-wrap" id="iframe-wrap">
-            <iframe class="" src="{{ game.url }}" id="game-iframe" frameborder="0"></iframe>
-          </div>
+          {# The iframe is created in game-loader.js after the parent document has loaded to ensure that the message service is ready for the game #}
+          <div class="iframe-wrap" id="iframe-wrap" data-game-url="{{ game.url }}"></div>
           {% else %}
           <div class="game-error">Game URL not found</div>
           {% endif %}
@@ -160,7 +159,7 @@
 {% block js %}
   {{ block.super }}
   <script src="{% static "js/cart.js" %}"></script>
-  <script src="{% static "js/message.js" %}"></script>
   <script src="{% static "js/social-media.js" %}"></script>
-
+  <script src="{% static "js/message.js" %}"></script>
+  <script src="{% static "js/game-loader.js" %}"></script>
 {% endblock %}
