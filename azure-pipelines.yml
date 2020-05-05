@@ -56,3 +56,12 @@ steps:
     testResultsFiles: "**/TEST-*.xml"
     testRunTitle: 'Python $(PYTHON_VERSION)'
   condition: succeededOrFailed()
+
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'MAIC - Wicresoft - Azure - 03(586cff84-887b-4df8-8f10-53840eb89a1a)'
+    appType: 'webApp'
+    WebAppName: 'Jimmylab-winapp'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
